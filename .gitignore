@@ -5,3 +5,4 @@ __pychache__
 */__pychache__/
 romashka/settings.py
 *.pyc
+geckodriver.log

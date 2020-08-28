@@ -1,0 +1,17 @@
+html,h1,h2,h3,h4,h5,h6,a{
+ font-family: Verdana, Geneva, sans-serif;
+}
+A{
+ color: orange;
+}
+A:hover{
+ color: yellow;
+}
+.navbar-nav {
+float: none;
+text-align: center;
+}
+.navbar-nav li {
+float: none;
+display: inline-block;
+}
