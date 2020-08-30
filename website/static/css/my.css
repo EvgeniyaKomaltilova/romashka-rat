@@ -10,6 +10,6 @@ A:hover{
 body{
  background-color: #fff0da;
 }
-p{
- color: #2b1e0d
+p,span,h1,h2,h3,h4,h5,h6{
+ color: #2b1e0d;
 }

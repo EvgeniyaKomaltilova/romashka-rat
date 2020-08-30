@@ -14,12 +14,16 @@
     <body>
         <div class="row" style="height: 14em; background: radial-gradient(ellipse, yellow, orange 70%);
             text-align: center">
-            <div class="col-lg-4 col-md-4 col-sm-12" >
+            <div class="col-lg-4 col-md-4 col-sm-12 d-none d-sm-block" >
+                <img src="{% static 'images/logo.png' %}" alt="logo" align="middle"
+                style="position: relative; z-index: 9999; height: 280px">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 d-block d-sm-none" >
                 <img src="{% static 'images/logo.png' %}" alt="logo" align="middle">
             </div>
-            <div class="col-lg-4 col-md-6 d-none d-sm-none d-md-block" style="padding-top: 4em">
-                <p style="color: #fffdd0; font-size: 1em; text-shadow: #503112 1px 1px 3px;">ПИТОМНИК ДЕКОРАТИВНЫХ КРЫС</p>
-                <p style="color: #fffdd0; font-size: 4em; text-shadow: #503112 1px 1px 8px;; margin-top: -30px">РОМАШКА</p>
+            <div class="col-lg-4 col-md-6 d-none d-sm-none d-md-block" style="padding-top: 3em">
+                <p style="color: #fffdd0; font-size: 155%; text-shadow: #503112 1px 1px 3px;">ПИТОМНИК ДЕКОРАТИВНЫХ КРЫС</p>
+                <p style="color: #fffdd0; font-size: 550%; text-shadow: #503112 1px 1px 8px;; margin-top: -30px">РОМАШКА</p>
             </div>
             <div class="col-lg-4 col-md-2 d-none d-sm-none d-md-block"></div>
         </div>

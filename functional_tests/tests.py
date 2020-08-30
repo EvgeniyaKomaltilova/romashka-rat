@@ -20,7 +20,7 @@ class NewVisitorTest(LiveServerTestCase):
         # title корректный
         assert 'Ромашка' in self.browser.title
         # проверка заголовка
-        header_text = self.browser.find_element_by_tag_name('h1').text
+        header_text = self.browser.find_element_by_class_name('header').text
         self.assertIn('Ромашка', header_text)
         # меню -> главная
         # главная -> свободные крысята
