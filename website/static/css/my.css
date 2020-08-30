@@ -5,13 +5,11 @@ A{
  color: orange;
 }
 A:hover{
- color: yellow;
+ color: #513612;
 }
-.navbar-nav {
-float: none;
-text-align: center;
+body{
+ background-color: #fff0da;
 }
-.navbar-nav li {
-float: none;
-display: inline-block;
+p{
+ color: #2b1e0d
 }
