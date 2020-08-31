@@ -4,6 +4,7 @@ from django.db import models
 
 
 class New(models.Model):
+    public = models.BooleanField(default=False)
     date = models.DateTimeField(default=datetime.now)
     text = models.CharField(max_length=255)
 

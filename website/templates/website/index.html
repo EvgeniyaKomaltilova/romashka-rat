@@ -26,8 +26,8 @@
         <div class="container"
              style="margin-bottom: 1em; padding-top: 1em">
             <p>
-                <b>{{ new.date }}</b><br />
-                <span>{{ new.text }}</span>
+                <b>{{ new.date|date:"d.m.Y" }}</b><br />
+                <span>{{ new.text|safe }}</span>
             </p>
         </div>
         {% endfor %}
