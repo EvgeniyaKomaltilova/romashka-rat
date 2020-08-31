@@ -18,6 +18,7 @@ class New(models.Model):
 
 class Image(models.Model):
     public = models.BooleanField('опубликовать', default=False)
+    date = models.DateTimeField('дата публикации', default=datetime.now)
     name = models.CharField('название', max_length=127)
     picture = models.ImageField('фото', upload_to='images')
 

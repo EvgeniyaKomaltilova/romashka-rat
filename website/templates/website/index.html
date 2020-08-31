@@ -12,8 +12,11 @@
 
 <div class="row">
     <div class="col-md-7">
-        <img src="http://www.romashka-rat.ru/img/news/76/76_4006744268.jpg" alt=""
-             style="max-width: 600px; width: 100%">
+        {% if image %}
+            <img src="/static{{ image.picture.url }}" alt="" style="max-width: 600px; width: 100%">
+        {% else %}
+            <p>здесь будет фото</p>
+        {% endif %}
     </div>
 
     <div class="col-md-5" style="border-left-color: #503112; border-left-style: solid; border-left-width: 2px;">

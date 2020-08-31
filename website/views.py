@@ -1,8 +1,11 @@
+from random import randint
+
 from django.shortcuts import render
-from website.models import New
+from website.models import New, Image
 
 
 def index(request):
     news = New.objects.filter(public='True').order_by('-date')[:3]
-    context = {'news': news}
+    image = Image.objects.filter(public='True').order_by('-date').first
+    context = {'news': news, 'image': image}
     return render(request, 'website/index.html', context)
