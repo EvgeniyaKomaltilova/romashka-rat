@@ -42,3 +42,28 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 1598782893339	Marionette	INFO	Listening on port 56663
 1598782893415	Marionette	WARN	TLS certificate errors will be ignored for this session
 1598782896282	Marionette	INFO	Stopped listening on port 56663
+1598872414220	geckodriver	INFO	Listening on 127.0.0.1:58666
+1598872415228	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofilevq76ib"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1598872424950	Marionette	INFO	Listening on port 58673
+1598872425045	Marionette	WARN	TLS certificate errors will be ignored for this session
+1598872426823	Marionette	INFO	Stopped listening on port 58673
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 343))
+console.error: services.settings: 
+  main/cfr Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1598872469424	geckodriver	INFO	Listening on 127.0.0.1:58777
+1598872470424	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofileHaWeEi"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1598872476279	Marionette	INFO	Listening on port 58784
+1598872476323	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new AbortError("The operation was aborted. ", (void 0), 689))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 343))
+1598872480993	Marionette	INFO	Stopped listening on port 58784
+console.error: services.settings: 
+  main/partitioning-exempt-urls Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/message-groups Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/messaging-experiments Signature failed  TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: AbortError: A request was aborted, for example through a call to IDBTransaction.abort.
