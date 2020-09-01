@@ -78,7 +78,10 @@ class Rat(models.Model):
         verbose_name_plural = 'Крысы'
 
     def __str__(self):
-        return self.name
+        string = f'{self.name} {self.prefix}'
+        if not self.prefix.suffix:
+            string = f'{self.prefix} {self.name} '
+        return string
 
 
 class Prefix(models.Model):
