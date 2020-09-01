@@ -77,10 +77,20 @@ class Rat(models.Model):
         verbose_name = 'крысу'
         verbose_name_plural = 'Крысы'
 
+    def main_photo(self):
+        return self.photos[0].name
+
     def __str__(self):
-        string = f'{self.name} {self.prefix}'
-        if not self.prefix.suffix:
-            string = f'{self.prefix} {self.name} '
+        string = self.name
+        if self.prefix:
+            if self.gender == 'самец':
+                string = f'{self.name} {self.prefix.male_name}'
+                if not self.prefix.suffix:
+                    string = f'{self.prefix.male_name} {self.name}'
+            else:
+                string = f'{self.name} {self.prefix.male_name}'
+                if not self.prefix.suffix:
+                    string = f'{self.prefix.male_name} {self.name}'
         return string
 
 
@@ -94,7 +104,7 @@ class Prefix(models.Model):
         verbose_name_plural = 'Приставки питомников'
 
     def __str__(self):
-        return f'{self.m_name}/{self.f_name}'
+        return f'{self.male_name}/{self.female_name}'
 
 
 class Person(models.Model):

@@ -1,0 +1,27 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    {% for rat in rats %}
+        <div class="col-sm-6">
+            <div class="row container" style="margin-top: 2em; border-radius: 1em; background-color: #fffff0;
+                                                box-shadow: #795014 1px 1px 20px -8px">
+                <div class="col-sm-4"  style="border: black solid 1px">
+                    <img src="" alt="photo">
+                </div>
+
+                <div class="col-sm-8">
+                    <p>
+                        <span><b>{{ rat.name }}</b> ({{ rat.gender }})</span><br />
+                        <span>{{ rat.variety }}</span><br />
+                        <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
