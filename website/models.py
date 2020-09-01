@@ -8,7 +8,7 @@ class New(models.Model):
     text = models.CharField(verbose_name='текст новости', max_length=256)
 
     class Meta:
-        verbose_name = 'Новость'
+        verbose_name = 'новость'
         verbose_name_plural = 'Новости'
 
     def __str__(self):
@@ -24,7 +24,7 @@ class Image(models.Model):
     picture = models.ImageField(verbose_name='фото', upload_to='images')
 
     class Meta:
-        verbose_name = 'Фото'
+        verbose_name = 'фото'
         verbose_name_plural = 'Фото'
 
     def __str__(self):
@@ -74,7 +74,7 @@ class Rat(models.Model):
     information = models.TextField(verbose_name='информация', max_length=1024)
 
     class Meta:
-        verbose_name = 'Крыса'
+        verbose_name = 'крысу'
         verbose_name_plural = 'Крысы'
 
     def __str__(self):
@@ -90,7 +90,7 @@ class Prefix(models.Model):
     suffix = models.BooleanField(verbose_name='после клички', default=True)
 
     class Meta:
-        verbose_name = 'Приставка питомника'
+        verbose_name = 'приставку'
         verbose_name_plural = 'Приставки питомников'
 
     def __str__(self):
@@ -105,8 +105,8 @@ class Person(models.Model):
                                  on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        verbose_name = 'Персона'
-        verbose_name_plural = 'Персоны'
+        verbose_name = 'личность'
+        verbose_name_plural = 'Заводчики и владельцы'
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -117,7 +117,7 @@ class Location(models.Model):
     city = models.CharField(verbose_name='город', max_length=32)
 
     class Meta:
-        verbose_name = 'Локация'
+        verbose_name = 'локацию'
         verbose_name_plural = 'Локации'
 
     def __str__(self):
@@ -138,7 +138,7 @@ class Litter(models.Model):
                                 null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Литера'
+        verbose_name = 'литеру'
         verbose_name_plural = 'Литеры'
 
     def __str__(self):
