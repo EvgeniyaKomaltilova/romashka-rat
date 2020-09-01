@@ -1,0 +1,20 @@
+{% extends 'website/base.html' %}
+
+
+{% block content %}
+
+    {% for new in news %}
+        <div class="container"
+             style="margin-bottom: 1em; padding-top: 1em">
+            <p>
+                <b>{{ new.date|date:"d.m.Y" }}</b><br />
+                <span>{{ new.text|safe }}</span>
+            </p>
+        </div>
+    {% empty %}
+        <div>
+            <p>В архиве нет новостей.</p>
+        </div>
+    {% endfor %}
+
+{% endblock content%}

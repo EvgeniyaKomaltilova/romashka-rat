@@ -35,6 +35,11 @@
         </div>
         {% endfor %}
 
+        {% if news %}
+        <div class="container">
+            <p><a href="{% url 'archive' %}">архив новостей</a></p>
+        </div>
+        {% endif %}
     </div>
 
 </div>
