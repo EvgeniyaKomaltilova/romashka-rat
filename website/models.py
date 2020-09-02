@@ -78,7 +78,19 @@ class Rat(models.Model):
         verbose_name_plural = 'Крысы'
 
     def main_photo(self):
-        return self.photos.all().last().picture.url
+        try:
+            return self.photos.all().last().picture.url
+        except AttributeError:
+            return None
+
+    def status_based_on_gender(self):
+        if self.gender == 'самка':
+            if self.status == 'свободен':
+                return 'свободна'
+            elif self.status == 'зарезервирован':
+                return 'зарезервирована'
+        else:
+            return self.status
 
     def __str__(self):
         string = self.name

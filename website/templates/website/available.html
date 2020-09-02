@@ -2,26 +2,47 @@
 
 {% block content %}
 
+{% if rats %}
+<p style="margin-top: 2em; text-align: center">В питомнике есть крысята!</p>
+{% else %}
+<p style="margin-top: 2em; text-align: center">В данный момент в питомнике нет свободных крысят.</p>
+{% endif %}
+
 <div class="row">
 
     {% for rat in rats %}
-        <div class="col-sm-6">
-            <div class="row container" style="margin-top: 2em; border-radius: 1em; background-color: #fffff0;
-                                                box-shadow: #795014 1px 1px 20px -15px">
-                <div class="col-sm-4"  style="border: black solid 1px">
-                    <img src="" alt="photo">
+        <div class="col-md-6">
+            <div class="row container" style="margin-top: 1em; background-color: #fffff0;
+                                                box-shadow: #795014 1px 1px 20px -15px; padding: 20px">
+                <div class="col-sm-5 col-md-4">
+                    {% if rat.main_photo %}
+                    <img src="/static{{ rat.main_photo }}" alt="photo" width="100%">
+                    {% else %}
+                    <img src="/static/images/default.png" alt="photo" width="80%">
+                    {% endif %}
                 </div>
 
-                <div class="col-sm-8">
+                <div class="col-xs-12 d-block d-sm-none" style="margin: 5px"></div>
+
+                <div class="col-sm-7 col-md-8">
                     <p>
                         <span><b><a href="">{{ rat.name }}</a></b> ({{ rat.gender }})</span><br />
                         <span>{{ rat.variety }}</span><br />
-                        <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span>
+                        <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
+                        {% if rat.status == 'свободен' %}
+                        <span style="color: green">{{ rat.status_based_on_gender }}</span>
+                        {% elif rat.status == 'зарезервирован' %}
+                        <span style="color: red">{{ rat.status_based_on_gender }}</span>
+                        {% endif %}
                     </p>
                 </div>
             </div>
-
         </div>
     {% endfor %}
 </div>
+
+<p style="margin-top: 2em">* <span style="color: green">свободен</span> - крысенка можно бронировать<br />
+    * <span style="color: red">зарезервирован</span> - крысенок забронирован (но может и освободиться)
+</p>
+
 {% endblock content %}

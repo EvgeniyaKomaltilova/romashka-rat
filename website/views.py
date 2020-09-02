@@ -7,7 +7,10 @@ from itertools import chain
 def index(request):
     news = New.objects.filter(public='True').order_by('-date')[:3]
     image = Image.objects.filter(public='True').order_by('-date').first
-    context = {'news': news, 'image': image}
+    available_rats = Rat.objects.filter(public='True').filter(status='свободен')
+    reserved_rats = Rat.objects.filter(public='True').filter(status='зарезервирован')
+    all_rats = chain(available_rats, reserved_rats)
+    context = {'news': news, 'image': image, 'rats': all_rats}
     return render(request, 'website/index.html', context)
 
 

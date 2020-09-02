@@ -20,10 +20,12 @@
     </div>
 
     <div class="col-md-5" style="border-left-color: #503112; border-left-style: solid; border-left-width: 2px;">
+        {% if rats %}
         <div class="container"
              style="margin-bottom: 1em; padding-top: 1em">
         <p>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</p>
         </div>
+        {% endif %}
 
         {% for new in news %}
         <div class="container"
