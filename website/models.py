@@ -78,7 +78,7 @@ class Rat(models.Model):
         verbose_name_plural = 'Крысы'
 
     def main_photo(self):
-        return self.photos[0].name
+        return self.photos.all().last().picture.url
 
     def __str__(self):
         string = self.name

@@ -14,10 +14,20 @@ class IndexPageTest(TestCase):
 class ArchivePageTest(TestCase):
     """Тестирование отображения страницы архива новостей"""
 
-    def test_index_returns_correct_html(self):
+    def test_archive_returns_correct_html(self):
         """тест: используется шаблон archive"""
         response = self.client.get('/archive/')
         self.assertTemplateUsed(response, 'website/archive.html')
+
+
+class RatPageTest(TestCase):
+    """Тестирование отображения страницы конкретной крысы"""
+
+    def test_rat_returns_correct_html(self):
+        """тест: используется шаблон rat"""
+        Rat.objects.create()
+        response = self.client.get('/rats/1/')
+        self.assertTemplateUsed(response, 'website/rat.html')
 
 
 class NewModelTest(TestCase):

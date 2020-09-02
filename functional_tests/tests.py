@@ -23,6 +23,7 @@ class NewVisitorTest(LiveServerTestCase):
         header_text = self.browser.find_element_by_class_name('header').text
         self.assertIn('Ромашка', header_text)
         # меню -> главная
+        self.browser.find_element_by_id('main').click()
         # главная -> свободные крысята
         # меню -> информация
         # меню -> крысы

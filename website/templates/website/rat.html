@@ -1,0 +1,15 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+<p>
+{{ rat.name }}
+</p>
+<img src="/static{{ rat.main_photo }}" alt="" width="300">
+
+<div>
+<p>фотоальбом</p>
+{% for photo in rat.photos.all %}
+<img src="/static{{ photo.picture.url }}" alt="" width="300">
+{% endfor %}
+</div>
+{% endblock content %}

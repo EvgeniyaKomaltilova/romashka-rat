@@ -23,3 +23,9 @@ def available(request):
     all_rats = chain(available_rats, reserved_rats)
     context = {'rats': all_rats}
     return render(request, 'website/available.html', context)
+
+
+def rat(request, rat_id):
+    this_rat = Rat.objects.get(id=rat_id)
+    context = {'rat': this_rat}
+    return render(request, 'website/rat.html', context)
