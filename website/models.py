@@ -16,7 +16,6 @@ class New(models.Model):
 
 
 class Image(models.Model):
-    public = models.BooleanField(verbose_name='опубликовать', default=False)
     date = models.DateTimeField(verbose_name='дата публикации', default=datetime.now)
     name = models.CharField(verbose_name='название', max_length=128)
     rat = models.ForeignKey(verbose_name='крыса', to='Rat', related_name='photos', on_delete=models.CASCADE,
@@ -71,7 +70,7 @@ class Rat(models.Model):
                                null=True, blank=True)
     mother = models.ForeignKey(verbose_name='мать', to='self', related_name='mothers_children', on_delete=models.SET_NULL,
                                null=True, blank=True)
-    information = models.TextField(verbose_name='информация', max_length=1024)
+    information = models.TextField(verbose_name='информация', max_length=2048)
 
     class Meta:
         verbose_name = 'крысу'
@@ -168,9 +167,16 @@ class Litter(models.Model):
 
 
 class Entry(models.Model):
+
+    TOPICS = [
+        ('about', 'о питомнике'),
+        ('varieties', 'разновидности')
+    ]
+
     public = models.BooleanField(verbose_name='опубликовать', default=False)
     date = models.DateTimeField(verbose_name='дата добавления', auto_now_add=True)
-    text = models.CharField(verbose_name='текст записи', max_length=256)
+    topic = models.CharField(verbose_name='назначение', max_length=16, choices=TOPICS, null=True)
+    text = models.TextField(verbose_name='текст записи', max_length=2048)
 
     class Meta:
         verbose_name = 'запись'

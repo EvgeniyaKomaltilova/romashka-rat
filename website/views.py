@@ -1,17 +1,24 @@
 from django.shortcuts import render
-from website.models import New, Image, Rat
+from website.models import New, Image, Rat, Entry
 
 from itertools import chain
 
 
 def index(request):
     news = New.objects.filter(public='True').order_by('-date')[:3]
-    image = Image.objects.filter(public='True').order_by('-date').first
+    image = Image.objects.order_by('-date').first
     available_rats = Rat.objects.filter(public='True').filter(status='свободен')
     reserved_rats = Rat.objects.filter(public='True').filter(status='зарезервирован')
     all_rats = chain(available_rats, reserved_rats)
     context = {'news': news, 'image': image, 'rats': all_rats}
     return render(request, 'website/index.html', context)
+
+
+def about(request):
+    entries = Entry.objects.filter(public=True).filter(topic='about')
+    context = {'entries': entries}
+    return render(request, 'website/about.html', context)
+
 
 
 def archive(request):
