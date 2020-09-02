@@ -165,3 +165,16 @@ class Litter(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Entry(models.Model):
+    public = models.BooleanField(verbose_name='опубликовать', default=False)
+    date = models.DateTimeField(verbose_name='дата добавления', auto_now_add=True)
+    text = models.CharField(verbose_name='текст записи', max_length=256)
+
+    class Meta:
+        verbose_name = 'запись'
+        verbose_name_plural = 'Записи'
+
+    def __str__(self):
+        return self.text[:50]

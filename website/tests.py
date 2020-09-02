@@ -1,5 +1,5 @@
 from django.test import TestCase
-from website.models import New, Image, Rat, Prefix, Person, Location, Litter
+from website.models import New, Image, Rat, Prefix, Person, Location, Litter, Entry
 
 
 class IndexPageTest(TestCase):
@@ -112,3 +112,15 @@ class LitterModelTest(TestCase):
         self.assertEqual(litters.count(), 2)
         self.assertEqual(litters[0].name, 'first')
         self.assertEqual(litters[1].name, 'second')
+
+
+class EntryModelTest(TestCase):
+    """Тестирование модели New"""
+
+    def test_can_saving_and_retrieving_entries(self):
+        Entry.objects.create(text='first')
+        Entry.objects.create(text='second')
+        entries = Entry.objects.all()
+        self.assertEqual(entries.count(), 2)
+        self.assertEqual(entries[0].text, 'first')
+        self.assertEqual(entries[1].text, 'second')
