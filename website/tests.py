@@ -1,5 +1,5 @@
 from django.test import TestCase
-from website.models import New, Image, Rat, Prefix, Person, Location, Litter, Entry
+from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry
 
 
 class IndexPageTest(TestCase):
@@ -37,18 +37,6 @@ class RatPageTest(TestCase):
         Rat.objects.create()
         response = self.client.get('/rats/1/')
         self.assertTemplateUsed(response, 'website/rat.html')
-
-
-class NewModelTest(TestCase):
-    """Тестирование модели New"""
-
-    def test_can_saving_and_retrieving_news(self):
-        New.objects.create(text='first')
-        New.objects.create(text='second')
-        news = New.objects.all()
-        self.assertEqual(news.count(), 2)
-        self.assertEqual(news[0].text, 'first')
-        self.assertEqual(news[1].text, 'second')
 
 
 class ImageModelTest(TestCase):
@@ -124,7 +112,7 @@ class LitterModelTest(TestCase):
 
 
 class EntryModelTest(TestCase):
-    """Тестирование модели New"""
+    """Тестирование модели Entry"""
 
     def test_can_saving_and_retrieving_entries(self):
         Entry.objects.create(text='first')

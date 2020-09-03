@@ -20,8 +20,8 @@ class Image(models.Model):
 class Rat(models.Model):
 
     GENDER = [
-        ('самец', 'самец'),
-        ('самка', 'самка')
+        ('male', 'самец'),
+        ('female', 'самка')
     ]
 
     TITLE = [
@@ -36,8 +36,8 @@ class Rat(models.Model):
         ('у владельца', 'у владельца')
     ]
 
-    public = models.BooleanField(verbose_name='опубликовать', default=False)
-    status = models.CharField(verbose_name='статус', max_length=14, choices=STATUS, default='у владельца')
+    public = models.BooleanField(verbose_name='опубликовать', default=True)
+    status = models.CharField(verbose_name='статус', max_length=16, choices=STATUS, default='у владельца')
     litter = models.ForeignKey(verbose_name='литера', to='Litter', related_name='babies', on_delete=models.SET_NULL,
                                null=True, blank=True)
     date_of_add = models.DateTimeField(verbose_name='дата добавления', auto_now_add=True)
@@ -45,8 +45,8 @@ class Rat(models.Model):
     prefix = models.ForeignKey(verbose_name='приставка', to='Prefix', related_name='rats',
                                on_delete=models.SET_NULL, null=True, blank=True)
     variety = models.CharField(verbose_name='разновидность', max_length=128)
-    gender = models.CharField(verbose_name='пол', max_length=5, choices=GENDER, default='самец')
-    title = models.CharField(verbose_name='титул', max_length=12, choices=TITLE, default='нет')
+    gender = models.CharField(verbose_name='пол', max_length=8, choices=GENDER, default='самец')
+    title = models.CharField(verbose_name='титул', max_length=16, choices=TITLE, default='нет')
     date_of_birth = models.DateField(verbose_name='дата рождения', default=date.today)
     date_of_death = models.DateField(verbose_name='дата смерти', default=None, null=True, blank=True)
     breeder = models.ForeignKey(verbose_name='заводчик', to='Person', related_name='rats_bred', on_delete=models.SET_NULL,
@@ -70,7 +70,7 @@ class Rat(models.Model):
             return None
 
     def status_based_on_gender(self):
-        if self.gender == 'самка':
+        if self.gender == 'female':
             if self.status == 'свободен':
                 return 'свободна'
             elif self.status == 'зарезервирован':
@@ -81,7 +81,7 @@ class Rat(models.Model):
     def __str__(self):
         string = self.name
         if self.prefix:
-            if self.gender == 'самец':
+            if self.gender == 'male':
                 string = f'{self.name} {self.prefix.male_name}'
                 if not self.prefix.suffix:
                     string = f'{self.prefix.male_name} {self.name}'
@@ -133,6 +133,7 @@ class Location(models.Model):
 
 
 class Litter(models.Model):
+    public = models.BooleanField(verbose_name='опубликовать', default=True)
     name = models.CharField(verbose_name='название', max_length=8)
     prefix = models.ForeignKey(verbose_name='приставка', to='Prefix', related_name='litters',
                                on_delete=models.SET_NULL, null=True, blank=True)
@@ -161,9 +162,10 @@ class Entry(models.Model):
         ('varieties', 'разновидности')
     ]
 
-    public = models.BooleanField(verbose_name='опубликовать', default=False)
+    public = models.BooleanField(verbose_name='опубликовать', default=True)
     date = models.DateTimeField(verbose_name='дата добавления', default=datetime.now)
     topic = models.CharField(verbose_name='назначение', max_length=16, choices=TOPICS, null=True)
+    title = models.CharField(verbose_name='заголовок', max_length=64, null=True)
     text = models.TextField(verbose_name='текст записи', max_length=2048)
 
     class Meta:
@@ -171,4 +173,4 @@ class Entry(models.Model):
         verbose_name_plural = 'Новости и контент'
 
     def __str__(self):
-        return self.text[:50]
+        return f'{self.topic}: {self.title}'
