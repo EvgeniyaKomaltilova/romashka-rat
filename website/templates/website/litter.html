@@ -3,24 +3,38 @@
 {% block content %}
 
 <div class="container">
-    <h3>Литера {{ litter.name }} {{ litter.prefix.male_name }}</h3>
+    <h3 style="text-align: center">Литера {{ litter.name }} {{ litter.prefix.male_name }}</h3>
 
-    <div>
-        {% if litter.father %}
-        <img src="/static{{ litter.father.main_photo }}" alt="фото отца" width="300">
-        <p>Отец: {{ litter.father.full_name }} ({{ litter.father.variety }})</p>
-        {% else %}
-        <p>Отец: неизвестен</p>
-        {% endif %}
-        {% if litter.mother %}
-        <img src="/static{{ litter.mother.main_photo }}" alt="фото матери" width="300">
-        <p>Мать: {{ litter.mother.full_name }} ({{ litter.mother.variety }})</p>
-        {% else %}
-        <p>Мать: неизвестна</p>
-        {% endif %}
+    <div class="row" style="margin: 1em; margin-top: 2em">
+        <div class="col-md-5 center" style="text-align: center;">
+            {% if litter.father %}
+            <img src="/static{{ litter.father.main_photo }}" alt="фото отца" style="width: 100%; max-width: 400px">
+            <p class="center">
+                <b style="color: darkblue">{{ litter.father.full_name }}</b><br />
+                <span>{{ litter.father.variety }}</span>
+            </p>
+            {% else %}
+            <p>отец неизвестен</p>
+            {% endif %}
+        </div>
+        <div class="col-md-2 d-none d-md-block" style="text-align: center; padding-top: 2em; font-size: 50px; color: orange">
+            ♡
+        </div>
+        <div class="col-md-5" style="text-align: center;">
+            {% if litter.mother %}
+            <img src="/static{{ litter.mother.main_photo }}" alt="фото матери" style="width: 100%; max-width: 400px">
+            <p>
+                <b style="color: darkred">{{ litter.mother.full_name }} </b><br />
+                <span>{{ litter.mother.variety }}</span>
+            </p>
+            {% else %}
+            <p>мать неизвестна</p>
+            {% endif %}
+        </div>
     </div>
 
-    <div>
+    <div class="container" style="background-color: #fffff0; padding-left: 30px; padding-right: 20px; padding-top: 20px;
+            padding-bottom: 5px; margin-bottom: 2em; box-shadow: #795014 1px 1px 20px -15px;">
         <p>Дата рождения: {{ litter.date_of_birth|date:'d.m.Y' }}</p>
         <p>Заводчик: {{ litter.breeder.short_name }}, г. {{ litter.breeder.location.city }}</p>
         {% if litter.number %}
@@ -28,20 +42,69 @@
         {% endif %}
     </div>
 
-    <div>
-        {% for child in children %}
-        <div>
-            <p>{{ child.full_name }}</p>
-            <p>{{ child.variety }}</p>
-            {% if not child.status == 'у владельца' %}
-            <p>{{ child.status }}</p>
-            {% endif %}
-            {% if child.owner %}
-            <p>Владелец: {{ child.owner.short_name }}</p>
-            {% endif %}
+    {% if males or females %}
+    <div class="row">
+        <div class="col-md-6">
+            {% for child in males %}
+            <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
+            padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px;
+            margin: 0px; margin-bottom: 1em;">
+                <div class="col-md-4" style="padding-bottom: 1em">
+                    {% if child.main_photo %}
+                    <img src="/static{{ child.main_photo }}" alt="photo" width="100%">
+                    {% else %}
+                    <img src="/static/images/default.png" alt="photo" width="60%">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <p><b style="color: darkblue">{{ child.full_name }}</b></p>
+                    <p><span>{{ child.variety }}</span></p>
+                    </p>
+                    {% if child.status == 'свободен' %}
+                    <p style="color: green">{{ child.status_based_on_gender }}</p>
+                    {% elif child.status == 'зарезервирован' %}
+                    <p style="color: red">{{ child.status_based_on_gender }}</p>
+                    {% endif %}
+                    {% if child.owner %}
+                    <p>Владелец: {{ child.owner.short_name }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="col-md-6">
+        {% for child in females %}
+            <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
+            padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px;
+            margin: 0px; margin-bottom: 1em;">
+                <div class="col-md-4" style="padding-bottom: 1em">
+                    {% if child.main_photo %}
+                    <img src="/static{{ child.main_photo }}" alt="photo" width="100%">
+                    {% else %}
+                    <img src="/static/images/default.png" alt="photo" width="60%">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <p><b style="color: darkred">{{ child.full_name }}</b></p>
+                    <p><span>{{ child.variety }}</span></p>
+                    {% if child.status == 'свободен' %}
+                    <p style="color: green">{{ child.status_based_on_gender }}</p>
+                    {% elif child.status == 'зарезервирован' %}
+                    <p style="color: red">{{ child.status_based_on_gender }}</p>
+                    {% endif %}
+                    {% if child.owner %}
+                    <p>Владелец: {{ child.owner.short_name }}</p>
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
+    {% endif %}
         </div>
     </div>
+
 </div>
 
 {% endblock content %}

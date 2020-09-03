@@ -42,7 +42,7 @@ class RatPageTest(TestCase):
 class LittersPageTest(TestCase):
     """Тестирование отображения списка литер"""
 
-    def test_litter_returns_correct_html(self):
+    def test_litters_returns_correct_html(self):
         """тест: используется шаблон litters"""
         response = self.client.get('/litters/')
         self.assertTemplateUsed(response, 'website/litters.html')

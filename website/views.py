@@ -47,6 +47,7 @@ def litters(request):
 
 def litter(request, litter_id):
     litter_object = Litter.objects.get(id=litter_id)
-    children = litter_object.children.all()
-    context = {'litter': litter_object, 'children': children}
+    males = litter_object.children.filter(gender='male')
+    females = litter_object.children.filter(gender='female')
+    context = {'litter': litter_object, 'males': males, 'females': females}
     return render(request, 'website/litter.html', context)
