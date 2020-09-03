@@ -123,3 +123,9 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 console.error: Region.jsm: "Error fetching region" (new AbortError("The operation was aborted. ", (void 0), 689))
 console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 343))
 1599047460968	Marionette	INFO	Stopped listening on port 65533
+1599053993407	geckodriver	INFO	Listening on 127.0.0.1:50043
+1599053994415	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofile5gyQhD"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1599054001552	Marionette	INFO	Listening on port 50050
+1599054001613	Marionette	WARN	TLS certificate errors will be ignored for this session
+1599054002663	Marionette	INFO	Stopped listening on port 50050

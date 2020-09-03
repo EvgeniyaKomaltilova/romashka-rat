@@ -1,7 +1,6 @@
 from django.contrib import admin
-from website.models import New, Image, Rat, Prefix, Person, Location, Litter, Entry
+from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry
 
-admin.site.register(New)
 admin.site.register(Image)
 admin.site.register(Rat)
 admin.site.register(Prefix)

@@ -2,19 +2,6 @@ from datetime import datetime, date
 from django.db import models
 
 
-class New(models.Model):
-    public = models.BooleanField(verbose_name='опубликовать', default=False)
-    date = models.DateTimeField(verbose_name='дата публикации', default=datetime.now)
-    text = models.CharField(verbose_name='текст новости', max_length=256)
-
-    class Meta:
-        verbose_name = 'новость'
-        verbose_name_plural = 'Новости'
-
-    def __str__(self):
-        return self.text[:50]
-
-
 class Image(models.Model):
     date = models.DateTimeField(verbose_name='дата публикации', default=datetime.now)
     name = models.CharField(verbose_name='название', max_length=128)
@@ -169,18 +156,19 @@ class Litter(models.Model):
 class Entry(models.Model):
 
     TOPICS = [
+        ('news', 'новости'),
         ('about', 'о питомнике'),
         ('varieties', 'разновидности')
     ]
 
     public = models.BooleanField(verbose_name='опубликовать', default=False)
-    date = models.DateTimeField(verbose_name='дата добавления', auto_now_add=True)
+    date = models.DateTimeField(verbose_name='дата добавления', default=datetime.now)
     topic = models.CharField(verbose_name='назначение', max_length=16, choices=TOPICS, null=True)
     text = models.TextField(verbose_name='текст записи', max_length=2048)
 
     class Meta:
         verbose_name = 'запись'
-        verbose_name_plural = 'Записи'
+        verbose_name_plural = 'Новости и контент'
 
     def __str__(self):
         return self.text[:50]
