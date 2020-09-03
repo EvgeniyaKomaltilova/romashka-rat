@@ -37,6 +37,8 @@ class Rat(models.Model):
     ]
 
     public = models.BooleanField(verbose_name='опубликовать', default=True)
+    in_rattery = models.BooleanField(verbose_name='производитель', default=False)
+    castrate = models.BooleanField(verbose_name='кастрирован(а)', default=False)
     status = models.CharField(verbose_name='статус', max_length=16, choices=STATUS, default='у владельца')
     litter = models.ForeignKey(verbose_name='литера', to='Litter', related_name='children', on_delete=models.SET_NULL,
                                null=True, blank=True)

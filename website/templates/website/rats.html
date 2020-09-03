@@ -2,6 +2,84 @@
 
 {% block content %}
 
+<div class="container" style="text-align: center; margin-bottom: 2em">
+    <h4>КРЫСЫ ПИТОМНИКА</h4>
+</div>
 
+{% if rats %}
+<div class="row">
+    <div class="col-md-6">
+        {% for rat in males %}
+        <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
+            padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px; margin: 0px; margin-bottom: 1em;">
+
+            <div class="col-md-4" style="padding-bottom: 1em">
+                {% if rat.main_photo %}
+                <img src="/static{{ rat.main_photo }}" alt="фото" style="width: 100%; max-width: 400px">
+                {% else %}
+                <img src="/static/images/default.png" alt="фото" width="60%">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <p>
+                    <b><a style="color: darkblue" href="{% url 'rat' rat.id %}">{{ rat.full_name }}</a></b><br />
+                    <span>{{ rat.variety }}</span><br />
+                    {% if rat.date_of_death %}
+                    <span>{{ rat.date_of_birth|date:'d.m.Y' }} - {{ rat.date_of_death|date:'d.m.Y' }}</span>
+                    {% else %}
+                    <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span>
+                    {% endif %}
+                    {% if rat.father_litters.all %}
+                    <br /><span>Дети: </span>
+                    {% for litter in rat.father_litters.all %}
+                    <span><a href="{% url 'litter' litter.id %}">{{litter.name}}</a>, </span>
+                    {% endfor %}
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-6">
+        {% for rat in females %}
+        <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
+            padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px; margin: 0px; margin-bottom: 1em;">
+
+            <div class="col-md-4" style="padding-bottom: 1em">
+                {% if rat.main_photo %}
+                <img src="/static{{ rat.main_photo }}" alt="фото" style="width: 100%; max-width: 400px">
+                {% else %}
+                <img src="/static/images/default.png" alt="фото" width="60%">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <p>
+                    <b><a style="color: darkred" href="{% url 'rat' rat.id %}">{{ rat.full_name }}</a></b><br />
+                    <span>{{ rat.variety }}</span><br />
+                    {% if rat.date_of_death %}
+                    <span>{{ rat.date_of_birth|date:'d.m.Y' }} - {{ rat.date_of_death|date:'d.m.Y' }}</span>
+                    {% else %}
+                    <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span>
+                    {% endif %}
+                    {% if rat.mother_litters.all %}
+                    <br /><span>Дети: </span>
+                    {% for litter in rat.mother_litters.all %}
+                    <span><a href="{% url 'litter' litter.id %}">{{litter.name}}</a>, </span>
+                    {% endfor %}
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+</div>
+{% else %}
+<p>Ни одной крысы еще не добавлено.</p>
+{% endif %}
 
 {% endblock content %}

@@ -34,8 +34,10 @@ def available(request):
 
 
 def rats(request):
-    rats_list = Rat.objects.filter(public=True)
-    context = {'rats': rats_list}
+    rats_list = Rat.objects.filter(public=True).filter(in_rattery=True)
+    males = rats_list.filter(gender='male').order_by('-date_of_birth')
+    females = rats_list.filter(gender='female').order_by('-date_of_birth')
+    context = {'rats': rats_list, 'males': males, 'females': females}
     return render(request, 'website/rats.html', context)
 
 

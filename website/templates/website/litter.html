@@ -67,7 +67,6 @@
                 <div class="col-md-8">
                     <p><b style="color: darkblue">{{ child.full_name }}</b></p>
                     <p><span>{{ child.variety }}</span></p>
-                    </p>
                     {% if child.status == 'свободен' %}
                     <p style="color: green">{{ child.status_based_on_gender }}</p>
                     {% elif child.status == 'зарезервирован' %}
