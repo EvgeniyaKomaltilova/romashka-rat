@@ -33,6 +33,12 @@ def available(request):
     return render(request, 'website/available.html', context)
 
 
+def rats(request):
+    rats_list = Rat.objects.filter(public=True)
+    context = {'rats': rats_list}
+    return render(request, 'website/rats.html', context)
+
+
 def rat(request, rat_id):
     rat_object = Rat.objects.get(id=rat_id)
     context = {'rat': rat_object}

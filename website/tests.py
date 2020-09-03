@@ -29,6 +29,15 @@ class ArchivePageTest(TestCase):
         self.assertTemplateUsed(response, 'website/archive.html')
 
 
+class RatsPageTest(TestCase):
+    """Тестирование отображения списка крыс"""
+
+    def test_rats_returns_correct_html(self):
+        """тест: используется шаблон rats"""
+        response = self.client.get('/rats/')
+        self.assertTemplateUsed(response, 'website/rats.html')
+
+
 class RatPageTest(TestCase):
     """Тестирование отображения страницы конкретной крысы"""
 
