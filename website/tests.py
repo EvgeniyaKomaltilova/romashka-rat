@@ -39,6 +39,25 @@ class RatPageTest(TestCase):
         self.assertTemplateUsed(response, 'website/rat.html')
 
 
+class LittersPageTest(TestCase):
+    """Тестирование отображения списка литер"""
+
+    def test_litter_returns_correct_html(self):
+        """тест: используется шаблон litters"""
+        response = self.client.get('/litters/')
+        self.assertTemplateUsed(response, 'website/litters.html')
+
+
+class LitterPageTest(TestCase):
+    """Тестирование отображения страницы конкретной литеры"""
+
+    def test_litter_returns_correct_html(self):
+        """тест: используется шаблон litter"""
+        Litter.objects.create()
+        response = self.client.get('/litters/1/')
+        self.assertTemplateUsed(response, 'website/litter.html')
+
+
 class ImageModelTest(TestCase):
     """Тестирование модели Image"""
 

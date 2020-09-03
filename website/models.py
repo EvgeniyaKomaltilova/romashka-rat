@@ -38,7 +38,7 @@ class Rat(models.Model):
 
     public = models.BooleanField(verbose_name='опубликовать', default=True)
     status = models.CharField(verbose_name='статус', max_length=16, choices=STATUS, default='у владельца')
-    litter = models.ForeignKey(verbose_name='литера', to='Litter', related_name='babies', on_delete=models.SET_NULL,
+    litter = models.ForeignKey(verbose_name='литера', to='Litter', related_name='children', on_delete=models.SET_NULL,
                                null=True, blank=True)
     date_of_add = models.DateTimeField(verbose_name='дата добавления', auto_now_add=True)
     name = models.CharField(verbose_name='кличка', max_length=32)
@@ -57,7 +57,7 @@ class Rat(models.Model):
                                null=True, blank=True)
     mother = models.ForeignKey(verbose_name='мать', to='self', related_name='mothers_children', on_delete=models.SET_NULL,
                                null=True, blank=True)
-    information = models.TextField(verbose_name='информация', max_length=2048)
+    information = models.TextField(verbose_name='информация', max_length=2048, null=True, blank=True)
 
     class Meta:
         verbose_name = 'крысу'
@@ -78,7 +78,7 @@ class Rat(models.Model):
         else:
             return self.status
 
-    def __str__(self):
+    def full_name(self):
         string = self.name
         if self.prefix:
             if self.gender == 'male':
@@ -90,6 +90,9 @@ class Rat(models.Model):
                 if not self.prefix.suffix:
                     string = f'{self.prefix.male_name} {self.name}'
         return string
+
+    def __str__(self):
+        return self.full_name()
 
 
 class Prefix(models.Model):
@@ -116,6 +119,14 @@ class Person(models.Model):
         verbose_name = 'личность'
         verbose_name_plural = 'Заводчики и владельцы'
 
+    def short_name(self):
+        if self.second_name:
+            string = f'{self.last_name} {self.first_name[0]}. {self.second_name[0]}.'
+        else:
+            string = f'{self.last_name} {self.first_name[0]}.'
+
+        return string
+
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
@@ -137,7 +148,7 @@ class Litter(models.Model):
     name = models.CharField(verbose_name='название', max_length=8)
     prefix = models.ForeignKey(verbose_name='приставка', to='Prefix', related_name='litters',
                                on_delete=models.SET_NULL, null=True, blank=True)
-    number = models.CharField(verbose_name='номер', max_length=16)
+    number = models.CharField(verbose_name='номер', max_length=16, null=True, blank=True)
     date_of_birth = models.DateField(verbose_name='дата рождения', default=date.today)
     father = models.ForeignKey(verbose_name='отец', to='Rat', related_name='father_litters', on_delete=models.SET_NULL,
                                null=True, blank=True)
@@ -151,7 +162,16 @@ class Litter(models.Model):
         verbose_name_plural = 'Литеры'
 
     def __str__(self):
-        return self.name
+        if self.father:
+            father_name = self.father.name
+        else:
+            father_name = 'мать неизвестна'
+        if self.mother:
+            mother_name = self.mother.name
+        else:
+            mother_name = 'отец неизвестен'
+
+        return f'{self.name} ({father_name} x {mother_name})'
 
 
 class Entry(models.Model):

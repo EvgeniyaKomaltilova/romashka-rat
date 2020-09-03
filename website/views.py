@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from website.models import Image, Rat, Entry
+from website.models import Image, Rat, Entry, Litter
 from itertools import chain
 
 
@@ -34,6 +34,19 @@ def available(request):
 
 
 def rat(request, rat_id):
-    this_rat = Rat.objects.get(id=rat_id)
-    context = {'rat': this_rat}
+    rat_object = Rat.objects.get(id=rat_id)
+    context = {'rat': rat_object}
     return render(request, 'website/rat.html', context)
+
+
+def litters(request):
+    litters_list = Litter.objects.filter(public=True).order_by('-date_of_birth')
+    context = {'litters': litters_list}
+    return render(request, 'website/litters.html', context)
+
+
+def litter(request, litter_id):
+    litter_object = Litter.objects.get(id=litter_id)
+    children = litter_object.children.all()
+    context = {'litter': litter_object, 'children': children}
+    return render(request, 'website/litter.html', context)

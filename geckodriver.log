@@ -141,3 +141,21 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 1599108713729	Marionette	INFO	Listening on port 50921
 1599108713806	Marionette	WARN	TLS certificate errors will be ignored for this session
 1599108714728	Marionette	INFO	Stopped listening on port 50921
+1599112285849	geckodriver	INFO	Listening on 127.0.0.1:51571
+1599112286865	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofileSo1HWW"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1599112293449	Marionette	INFO	Listening on port 51578
+1599112293507	Marionette	WARN	TLS certificate errors will be ignored for this session
+1599112294593	Marionette	INFO	Stopped listening on port 51578
+1599112402997	geckodriver	INFO	Listening on 127.0.0.1:51678
+1599112404015	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofileDCnGki"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1599112410080	Marionette	INFO	Listening on port 51685
+1599112410186	Marionette	WARN	TLS certificate errors will be ignored for this session
+1599112411144	Marionette	INFO	Stopped listening on port 51685
+1599112512697	geckodriver	INFO	Listening on 127.0.0.1:51829
+1599112513711	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofilenmW8eR"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1599112520980	Marionette	INFO	Listening on port 51836
+1599112520996	Marionette	WARN	TLS certificate errors will be ignored for this session
+1599112522240	Marionette	INFO	Stopped listening on port 51836
