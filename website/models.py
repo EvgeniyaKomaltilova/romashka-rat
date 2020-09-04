@@ -1,5 +1,8 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from django.db import models
+
+
+now = date.today()
 
 
 class Image(models.Model):
@@ -20,8 +23,8 @@ class Image(models.Model):
 class Rat(models.Model):
 
     GENDER = [
-        ('male', 'самец'),
-        ('female', 'самка')
+        ('самец', 'самец'),
+        ('самка', 'самка')
     ]
 
     TITLE = [
@@ -37,6 +40,7 @@ class Rat(models.Model):
     ]
 
     public = models.BooleanField(verbose_name='опубликовать', default=True)
+    alive = models.BooleanField(verbose_name='жив(а)', default=True)
     in_rattery = models.BooleanField(verbose_name='производитель', default=False)
     castrate = models.BooleanField(verbose_name='кастрирован(а)', default=False)
     status = models.CharField(verbose_name='статус', max_length=16, choices=STATUS, default='у владельца')
@@ -55,9 +59,9 @@ class Rat(models.Model):
                                 null=True, blank=True)
     owner = models.ForeignKey(verbose_name='владелец', to='Person', related_name='rats_own', on_delete=models.SET_NULL,
                               null=True, blank=True)
-    father = models.ForeignKey(verbose_name='отец', to='self', related_name='fathers_children', on_delete=models.SET_NULL,
+    father = models.ForeignKey(verbose_name='отец', to='self', related_name='father_children', on_delete=models.SET_NULL,
                                null=True, blank=True)
-    mother = models.ForeignKey(verbose_name='мать', to='self', related_name='mothers_children', on_delete=models.SET_NULL,
+    mother = models.ForeignKey(verbose_name='мать', to='self', related_name='mother_children', on_delete=models.SET_NULL,
                                null=True, blank=True)
     information = models.TextField(verbose_name='информация', max_length=2048, null=True, blank=True)
 
@@ -72,7 +76,7 @@ class Rat(models.Model):
             return None
 
     def status_based_on_gender(self):
-        if self.gender == 'female':
+        if self.gender == 'самка':
             if self.status == 'свободен':
                 return 'свободна'
             elif self.status == 'зарезервирован':
@@ -83,15 +87,25 @@ class Rat(models.Model):
     def full_name(self):
         string = self.name
         if self.prefix:
-            if self.gender == 'male':
+            if self.gender == 'самец':
                 string = f'{self.name} {self.prefix.male_name}'
                 if not self.prefix.suffix:
                     string = f'{self.prefix.male_name} {self.name}'
             else:
-                string = f'{self.name} {self.prefix.male_name}'
+                string = f'{self.name} {self.prefix.female_name}'
                 if not self.prefix.suffix:
-                    string = f'{self.prefix.male_name} {self.name}'
+                    string = f'{self.prefix.female_name} {self.name}'
         return string
+
+    def lifespan(self):
+        lifespan = self.date_of_death - self.date_of_birth
+        seconds = lifespan.total_seconds()
+        return _timedelta_to_string(seconds)
+
+    def current_age(self):
+        lifespan = now - self.date_of_birth
+        seconds = lifespan.total_seconds()
+        return _timedelta_to_string(seconds)
 
     def __str__(self):
         return self.full_name()
@@ -163,6 +177,15 @@ class Litter(models.Model):
         verbose_name = 'литеру'
         verbose_name_plural = 'Литеры'
 
+    def full_name(self):
+        string = self.name
+        if self.prefix:
+            string = f'{self.name} {self.prefix.male_name}'
+            if not self.prefix.suffix:
+                string = f'{self.prefix.male_name} {self.name}'
+
+        return string
+
     def __str__(self):
         if self.father:
             father_name = self.father.name
@@ -196,3 +219,45 @@ class Entry(models.Model):
 
     def __str__(self):
         return f'{self.topic}: {self.title}'
+
+
+def _timedelta_to_string(seconds):
+    years = seconds // 31_518_720
+    months = (seconds - int(years) * 31_518_720) // 2_626_560
+    if int(years) == 0:
+        if int(months) == 0:
+            string = 'меньше месяца'
+        elif int(months) == 1:
+            string = f'{int(months)} месяц'
+        elif int(months) >= 2 and int(months) <= 4:
+            string = f'{int(months)} месяца'
+        else:
+            string = f'{int(months)} месяцев'
+    elif int(years) == 1:
+        if int(months) == 0:
+            string = f'{int(years)} год'
+        elif int(months) == 1:
+            string = f'{int(years)} год {int(months)} месяц'
+        elif int(months) >= 2 and int(months) <= 4:
+            string = f'{int(years)} год {int(months)} месяца'
+        else:
+            string = f'{int(years)} год {int(months)} месяцев'
+    elif int(years) >= 2 and int(years) <=4:
+        if int(months) == 0:
+            string = f'{int(years)} года'
+        elif int(months) == 1:
+            string = f'{int(years)} года {int(months)} месяц'
+        elif int(months) >= 2 and int(months) <= 4:
+            string = f'{int(years)} года {int(months)} месяца'
+        else:
+            string = f'{int(years)} года {int(months)} месяцев'
+    else:
+        if int(months) == 0:
+            string = f'{int(years)} лет'
+        elif int(months) == 1:
+            string = f'{int(years)} лет {int(months)} месяц'
+        elif int(months) >= 2 and int(months) <= 4:
+            string = f'{int(years)} лет {int(months)} месяца'
+        else:
+            string = f'{int(years)} лет {int(months)} месяцев'
+    return string

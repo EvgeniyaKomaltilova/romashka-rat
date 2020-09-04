@@ -1,15 +1,112 @@
 {% extends 'website/base.html' %}
 
 {% block content %}
-<p>
-{{ rat.name }}
-</p>
-<img src="/static{{ rat.main_photo }}" alt="" width="300">
 
-<div>
-<p>фотоальбом</p>
-{% for photo in rat.photos.all %}
-<img src="/static{{ photo.picture.url }}" alt="" width="300">
-{% endfor %}
+<div class="row" style="background-color: #fffff0; box-shadow: #795014 1px 1px 20px -15px; padding-top: 15px;
+                        padding-bottom: 15px">
+    <div class="col-md-4">
+        <img src="/static{{ rat.main_photo }}" alt="" style="max-width: 600px; width: 100%; text-align: center;">
+    </div>
+    <div class="d-block d-md-none" style="margin: 5px"></div>
+    <div class="col-md-8">
+        <h4 style="color: darkblue; margin: 5px; margin-left: 0px;">{{ rat.full_name }}</h4>
+        <p>
+            <span>Тип: {{ rat.variety }}</span><br />
+            <span>Пол: {{ rat.gender }}</span>
+            {% if rat.castrate %}
+            {% if rat.gender == 'самец' %}
+            <span> (кастрирован)</span>
+            {% else %}
+            <span> (кастрирована)</span>
+            {% endif %}
+            {% endif %}
+            <br />
+            <span>Дата рождения: {{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
+            {% if not rat.alive %}
+            {% if rat.date_of_death %}
+            <span>Дата смерти: {{ rat.date_of_death|date:'d.m.Y' }}</span><br />
+            <span>Продолжительность жизни: {{ rat.lifespan }}</span><br />
+            {% else %}
+            <span>Дата смерти: неизвестна</span><br />
+            {% endif %}
+            {% else %}
+            {% if not date_of_death %}
+            <span>Возраст: {{ rat.current_age }}</span><br />
+            {% endif %}
+            {% endif %}
+            {% if rat.breeder %}
+            <span>Заводчик: {{ rat.breeder.short_name }}, {{ rat.breeder.location.city }}</span><br />
+            {% else %}
+            <span>Заводчик: неизвестен</span><br />
+            {% endif %}
+            {% if rat.owner %}
+            <span>Владелец: {{ rat.owner.short_name }}, {{ rat.owner.location.city }}</span><br />
+            {% else %}
+            {% if not rat.status == 'у владельца' %}
+            <span>Владелец: пока нет</span><br />
+            {% else %}
+            <span>Владелец: неизвестен</span><br />
+            {% endif %}
+            {% endif %}
+            {% if rat.father and rat.mother %}
+            <span>Отец: <a href="{% url 'rat' rat.father.id %}">{{ rat.father.full_name }}</a> </span>
+            <span>({{ rat.father.variety }})</span><br />
+            <span>Мать: <a href="{% url 'rat' rat.mother.id %}">{{ rat.mother.full_name }}</a> </span>
+            <span>({{ rat.mother.variety }})</span><br />
+            {% elif rat.father and not rat.mother %}
+            <span>Отец: <a href="{% url 'rat' rat.father.id %}">{{ rat.father.full_name }}</a> </span>
+            <span>({{ rat.father.variety }})</span><br />
+            <span>Мать: неизвестна</span>
+            {% elif not rat.father and rat.mother %}
+            <span>Отец: неизвестен</span><br />
+            <span>Мать: <a href="{% url 'rat' rat.mother.id %}">{{ rat.mother.full_name }}</a> </span>
+            <span>({{ rat.mother.variety }})</span><br />
+            {% else %}
+            <span>Происхождение неизвестно.</span>
+
+            {% endif %}
+        </p>
+    </div>
 </div>
+
+<div class="row" style="margin-top: 1em;">
+    {% if rat.information %}
+    <div class="col-md-7" style="padding: 5px">
+        <div class="container" style="background-color: #fffff0; box-shadow: #795014 1px 1px 20px -15px;
+                                            margin-bottom: 1em; padding-top: 5px; padding-bottom: 5px">
+            <p>{{ rat.information|safe }}</p>
+        </div>
+    </div>
+    {% endif %}
+    {% if rat.father_litters.exists or rat.mother_litters.exists %}
+    <div class="col-md-5" style="padding: 5px">
+        <div class="container" style="background-color: #fffff0; box-shadow: #795014 1px 1px 20px -15px; margin-bottom: 1em;
+                                 padding-top: 5px; padding-bottom: 5px">
+            <p align="middle">Потомство</p>
+            <ul>
+            {% for litter in rat.father_litters.all %}
+            <li><a href="{% url 'litter' litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
+            {% endfor %}
+            {% for litter in rat.mother_litters.all %}
+            <li>{{ litter.full_name }} ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% if rat.photos.exists %}
+<div class="d-none d-sm-block">
+    <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px; padding-top: 20px;
+                padding-bottom: 20px; box-shadow: #795014 1px 1px 20px -15px;">
+            {% for photo in rat.photos.all %}
+        <div class="col-md-2 col-sm-4">
+            <img src="/static{{ photo.picture.url }}" alt="" style="width: 100%">
+        </div>
+            {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 {% endblock content %}
