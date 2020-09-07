@@ -24,12 +24,10 @@ SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'website',
 
@@ -50,9 +48,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'romashka.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -68,7 +64,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'romashka.wsgi.application'
 
 

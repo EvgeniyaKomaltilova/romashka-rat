@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from website.models import Image, Rat, Entry, Litter
+from website.models.Image import Image
+from website.models.Rat import Rat
+from website.models.Entry import Entry
+from website.models.Litter import Litter
 from itertools import chain
 
 
