@@ -32,7 +32,7 @@
                     {% if rat.father_litters.all %}
                     <br /><span>Дети: </span>
                     {% for litter in rat.father_litters.all %}
-                    <span><a href="{% url 'litter' litter.id %}">{{litter.name}}</a>, </span>
+                    <span><a href="{% url 'litter' litter.year litter.id %}">{{litter.name}}</a>, </span>
                     {% endfor %}
                     {% endif %}
                 </p>

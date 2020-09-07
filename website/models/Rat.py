@@ -10,27 +10,27 @@ from ..services.naming import get_full_rat_name
 class Rat(models.Model):
 
     GENDER = [
-        ('самец', 'самец'),
-        ('самка', 'самка')
+        ('male', 'самец'),
+        ('female', 'самка')
     ]
 
     TITLE = [
-        ('нет', 'без титула'),
-        ('чемпион', 'чемпион'),
-        ('грандчемпион', 'грандчемпион')
+        ('none', 'без титула'),
+        ('champion', 'чемпион'),
+        ('grandchampion', 'грандчемпион')
     ]
 
     STATUS = [
-        ('свободен', 'свободен'),
-        ('зарезервирован', 'зарезервирован'),
-        ('у владельца', 'у владельца')
+        ('available', 'свободен'),
+        ('reserved', 'зарезервирован'),
+        ('owned', 'у владельца')
     ]
 
     public = models.BooleanField(verbose_name='опубликовать', default=True)
     alive = models.BooleanField(verbose_name='жив(а)', default=True)
     in_rattery = models.BooleanField(verbose_name='производитель', default=False)
     castrate = models.BooleanField(verbose_name='кастрирован(а)', default=False)
-    status = models.CharField(verbose_name='статус', max_length=16, choices=STATUS, default='у владельца')
+    status = models.CharField(verbose_name='статус', max_length=16, choices=STATUS, default='owned')
     litter = models.ForeignKey(verbose_name='литера', to='Litter', related_name='children', on_delete=models.SET_NULL,
                                null=True, blank=True)
     date_of_add = models.DateTimeField(verbose_name='дата добавления', auto_now_add=True)
@@ -38,8 +38,8 @@ class Rat(models.Model):
     prefix = models.ForeignKey(verbose_name='приставка', to='Prefix', related_name='rats',
                                on_delete=models.SET_NULL, null=True, blank=True)
     variety = models.CharField(verbose_name='разновидность', max_length=128)
-    gender = models.CharField(verbose_name='пол', max_length=8, choices=GENDER, default='самец')
-    title = models.CharField(verbose_name='титул', max_length=16, choices=TITLE, default='нет')
+    gender = models.CharField(verbose_name='пол', max_length=8, choices=GENDER, default='male')
+    title = models.CharField(verbose_name='титул', max_length=16, choices=TITLE, default='none')
     date_of_birth = models.DateField(verbose_name='дата рождения', default=date.today)
     date_of_death = models.DateField(verbose_name='дата смерти', default=None, null=True, blank=True)
     breeder = models.ForeignKey(verbose_name='заводчик', to='Person', related_name='rats_bred', on_delete=models.SET_NULL,

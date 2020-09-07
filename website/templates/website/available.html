@@ -29,9 +29,9 @@
                         <span><b><a href="">{{ rat.name }}</a></b> ({{ rat.gender }})</span><br />
                         <span>{{ rat.variety }}</span><br />
                         <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
-                        {% if rat.status == 'свободен' %}
+                        {% if rat.status == 'available' %}
                         <span style="color: green">{{ rat.status_based_on_gender }}</span>
-                        {% elif rat.status == 'зарезервирован' %}
+                        {% elif rat.status == 'reserved' %}
                         <span style="color: red">{{ rat.status_based_on_gender }}</span>
                         {% endif %}
                     </p>

@@ -21,6 +21,9 @@
             {% endif %}
             {% endif %}
             <br />
+            {% if rat.title %}
+            <span>Титул: {{ rat.title }}</span><br />
+            {% endif %}
             <span>Дата рождения: {{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
             {% if not rat.alive %}
             {% if rat.date_of_death %}
@@ -85,7 +88,7 @@
             <p align="middle">Потомство</p>
             <ul>
             {% for litter in rat.father_litters.all %}
-            <li><a href="{% url 'litter' litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
+            <li><a href="{% url 'litter' litter.year litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
             {% endfor %}
             {% for litter in rat.mother_litters.all %}
             <li>{{ litter.full_name }} ({{ litter.date_of_birth|date:'d.m.Y' }})</li>

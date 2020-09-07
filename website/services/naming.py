@@ -3,7 +3,7 @@ def get_full_rat_name(obj):
     result = obj.name
 
     if obj.prefix:
-        if obj.gender == 'самец':
+        if obj.gender == 'male':
             result = f'{obj.name} {obj.prefix.male_name}'
             if not obj.prefix.suffix:
                 result = f'{obj.prefix.male_name} {obj.name}'

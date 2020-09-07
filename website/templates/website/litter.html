@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container">
-    <h3 style="text-align: center">Литера {{ litter.name }} {{ litter.prefix.male_name }}</h3>
+    <h3 style="text-align: center">Литера {{ litter.full_name }}</h3>
 
     <div class="row" style="margin: 1em; margin-top: 2em">
         <div class="col-md-5 center" style="text-align: center;">
@@ -44,7 +44,7 @@
     <div class="container" style="background-color: #fffff0; padding-left: 30px; padding-right: 20px; padding-top: 20px;
             padding-bottom: 5px; margin-bottom: 2em; box-shadow: #795014 1px 1px 20px -15px;">
         <p>Дата рождения: {{ litter.date_of_birth|date:'d.m.Y' }}</p>
-        {% if breeder %}
+        {% if litter.breeder %}
         <p>Заводчик: {{ litter.breeder.short_name }}, г. {{ litter.breeder.location.city }}</p>
         {% endif %}
         {% if litter.number %}
@@ -69,12 +69,12 @@
                 <div class="col-md-8">
                     <p><b style="color: darkblue">{{ child.full_name }}</b></p>
                     <p><span>{{ child.variety }}</span></p>
-                    {% if child.status == 'свободен' %}
+                    {% if child.status == 'available' %}
                     <p style="color: green">{{ child.status_based_on_gender }}</p>
-                    {% elif child.status == 'зарезервирован' %}
+                    {% elif child.status == 'reserved' %}
                     <p style="color: red">{{ child.status_based_on_gender }}</p>
                     {% endif %}
-                    {% if child.owner %}
+                    {% if child.status == 'owned' and child.owner %}
                     <p>Владелец: {{ child.owner.short_name }}</p>
                     {% endif %}
                 </div>
@@ -99,12 +99,12 @@
                 <div class="col-md-8">
                     <p><b style="color: darkred">{{ child.full_name }}</b></p>
                     <p><span>{{ child.variety }}</span></p>
-                    {% if child.status == 'свободен' %}
+                    {% if child.status == 'available' %}
                     <p style="color: green">{{ child.status_based_on_gender }}</p>
-                    {% elif child.status == 'зарезервирован' %}
+                    {% elif child.status == 'reserved' %}
                     <p style="color: red">{{ child.status_based_on_gender }}</p>
                     {% endif %}
-                    {% if child.owner %}
+                    {% if child.status == 'owned' and child.owner %}
                     <p>Владелец: {{ child.owner.short_name }}</p>
                     {% endif %}
                 </div>
