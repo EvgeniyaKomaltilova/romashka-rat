@@ -1,3 +1,4 @@
+from datetime import date
 from django.test import TestCase
 from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry
 
@@ -89,6 +90,14 @@ class RatModelTest(TestCase):
         self.assertEqual(rats.count(), 2)
         self.assertEqual(rats[0].name, 'first')
         self.assertEqual(rats[1].name, 'second')
+
+    def test_lifespan_returns_right_time_string(self):
+        Rat.objects.create(name='first', date_of_birth=date(2015, 9, 1), date_of_death=date(2015, 10, 15))
+        rat = Rat.objects.first()
+        self.assertEqual(rat.lifespan(), '1 месяц')
+
+    def test_current_age_returns_right_time_string(self):
+        pass
 
 
 class PrefixModelTest(TestCase):

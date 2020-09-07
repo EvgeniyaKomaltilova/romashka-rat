@@ -1,5 +1,6 @@
 from datetime import datetime, date, timedelta
 from django.db import models
+from website.services.get_timedelta_as_string import get_timedelta_as_string
 
 
 now = date.today()
@@ -100,12 +101,12 @@ class Rat(models.Model):
     def lifespan(self):
         lifespan = self.date_of_death - self.date_of_birth
         seconds = lifespan.total_seconds()
-        return _timedelta_to_string(seconds)
+        return get_timedelta_as_string(seconds)
 
     def current_age(self):
         lifespan = now - self.date_of_birth
         seconds = lifespan.total_seconds()
-        return _timedelta_to_string(seconds)
+        return get_timedelta_as_string(seconds)
 
     def __str__(self):
         return self.full_name()
@@ -221,43 +222,3 @@ class Entry(models.Model):
         return f'{self.topic}: {self.title}'
 
 
-def _timedelta_to_string(seconds):
-    years = seconds // 31_518_720
-    months = (seconds - int(years) * 31_518_720) // 2_626_560
-    if int(years) == 0:
-        if int(months) == 0:
-            string = 'меньше месяца'
-        elif int(months) == 1:
-            string = f'{int(months)} месяц'
-        elif int(months) >= 2 and int(months) <= 4:
-            string = f'{int(months)} месяца'
-        else:
-            string = f'{int(months)} месяцев'
-    elif int(years) == 1:
-        if int(months) == 0:
-            string = f'{int(years)} год'
-        elif int(months) == 1:
-            string = f'{int(years)} год {int(months)} месяц'
-        elif int(months) >= 2 and int(months) <= 4:
-            string = f'{int(years)} год {int(months)} месяца'
-        else:
-            string = f'{int(years)} год {int(months)} месяцев'
-    elif int(years) >= 2 and int(years) <=4:
-        if int(months) == 0:
-            string = f'{int(years)} года'
-        elif int(months) == 1:
-            string = f'{int(years)} года {int(months)} месяц'
-        elif int(months) >= 2 and int(months) <= 4:
-            string = f'{int(years)} года {int(months)} месяца'
-        else:
-            string = f'{int(years)} года {int(months)} месяцев'
-    else:
-        if int(months) == 0:
-            string = f'{int(years)} лет'
-        elif int(months) == 1:
-            string = f'{int(years)} лет {int(months)} месяц'
-        elif int(months) >= 2 and int(months) <= 4:
-            string = f'{int(years)} лет {int(months)} месяца'
-        else:
-            string = f'{int(years)} лет {int(months)} месяцев'
-    return string
