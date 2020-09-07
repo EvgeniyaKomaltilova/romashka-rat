@@ -1,4 +1,5 @@
 def get_full_rat_name(obj):
+    """Возвращает имя крысы с приставкой питомника"""
     result = obj.name
 
     if obj.prefix:
@@ -16,6 +17,7 @@ def get_full_rat_name(obj):
 
 
 def get_full_litter_name(obj):
+    """Возвращает название литеры с приставкой питомника"""
     result = obj.name
 
     if obj.prefix:
@@ -27,7 +29,7 @@ def get_full_litter_name(obj):
 
 
 def get_litter_name_for_admin(obj):
-
+    """Возвращает название литеры с указанием отца и матери"""
     if obj.father:
         father_name = obj.father.name
     else:
@@ -42,7 +44,7 @@ def get_litter_name_for_admin(obj):
 
 
 def get_person_short_name(self):
-
+    """Возвращает фамилию и инициалы"""
     if self.second_name:
         result = f'{self.last_name} {self.first_name[0]}. {self.second_name[0]}.'
     else:

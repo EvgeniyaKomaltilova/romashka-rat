@@ -1,5 +1,6 @@
-def get_main_photo(self):
+def get_main_photo(obj):
+    """Возвращает последнее добавленное фото в качестве 'главного'"""
     try:
-        return self.photos.all().last().picture.url
+        return obj.photos.all().last().picture.url
     except AttributeError:
         return None

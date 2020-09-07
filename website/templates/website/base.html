@@ -57,6 +57,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'litters' %}">крысята</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          стандарт
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: lightyellow">
+                          <a class="dropdown-item" href="{% url 'varieties' %}" style="color: orange">разновидности</a>
+                          <a class="dropdown-item" href="{% url 'colors' %}" style="color: orange">окрасы</a>
+                          <a class="dropdown-item" href="{% url 'markings' %}" style="color: orange">маркировки</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>

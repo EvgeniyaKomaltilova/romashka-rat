@@ -1,6 +1,12 @@
 from datetime import date
 from django.test import TestCase
-from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry
+from website.models.Image import Image
+from website.models.Rat import Rat
+from website.models.Prefix import Prefix
+from website.models.Person import Person
+from website.models.Location import Location
+from website.models.Litter import Litter
+from website.models.Entry import Entry
 
 
 class ImageModelTest(TestCase):
