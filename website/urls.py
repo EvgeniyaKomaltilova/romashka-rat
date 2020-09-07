@@ -11,8 +11,9 @@ urlpatterns = [
     path('colors/', entries.colors, name='colors'),
     path('markings/', entries.markings, name='markings'),
     path('available/', rats.available, name='available'),
-    path('litters/', rats.litters, name='litters'),
-    path('litters/<int:litter_id>/', rats.litter, name='litter'),
-    path('rats/', rats.rats, name='rats'),
+    path('litters/<int:litter_year>/', rats.litters, name='litters'),
+    path('litters/<int:litter_year>/<int:litter_id>/', rats.litter, name='litter'),
+    path('rats/male/', rats.male_rats, name='male_rats'),
+    path('rats/female/', rats.female_rats, name='female_rats'),
     path('rats/<int:rat_id>/', rats.rat, name='rat'),
 ]

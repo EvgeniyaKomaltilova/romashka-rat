@@ -44,7 +44,9 @@
     <div class="container" style="background-color: #fffff0; padding-left: 30px; padding-right: 20px; padding-top: 20px;
             padding-bottom: 5px; margin-bottom: 2em; box-shadow: #795014 1px 1px 20px -15px;">
         <p>Дата рождения: {{ litter.date_of_birth|date:'d.m.Y' }}</p>
+        {% if breeder %}
         <p>Заводчик: {{ litter.breeder.short_name }}, г. {{ litter.breeder.location.city }}</p>
+        {% endif %}
         {% if litter.number %}
         <p>№ помета: {{ litter.number }}</p>
         {% endif %}

@@ -3,13 +3,13 @@
 {% block content %}
 
 <div class="container" style="text-align: center; margin-bottom: 2em">
-    <h4>КРЫСЫ ПИТОМНИКА</h4>
+    <h4>КРЫСЫ ПИТОМНИКА - САМЦЫ</h4>
 </div>
 
-{% if rats %}
 <div class="row">
+    {% for rat in alive_rats %}
     <div class="col-md-6">
-        {% for rat in males %}
+
         <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
             padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px; margin: 0px; margin-bottom: 1em;">
 
@@ -39,11 +39,20 @@
             </div>
 
         </div>
-        {% endfor %}
-    </div>
 
+    </div>
+    {% empty %}
+    <p>Ни одной крысы еще не добавлено.</p>
+    {% endfor %}
+</div>
+
+{% if dead_rats %}
+<h4 align="center" style="margin: 1em">--- за радугой ---</h4>
+
+<div class="row">
+    {% for rat in dead_rats %}
     <div class="col-md-6">
-        {% for rat in females %}
+
         <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
             padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px; margin: 0px; margin-bottom: 1em;">
 
@@ -56,30 +65,28 @@
             </div>
             <div class="col-md-8">
                 <p>
-                    <b><a style="color: darkred" href="{% url 'rat' rat.id %}">{{ rat.full_name }}</a></b><br />
+                    <b><a style="color: darkblue" href="{% url 'rat' rat.id %}">{{ rat.full_name }}</a></b><br />
                     <span>{{ rat.variety }}</span><br />
                     {% if rat.date_of_death %}
                     <span>{{ rat.date_of_birth|date:'d.m.Y' }} - {{ rat.date_of_death|date:'d.m.Y' }}</span>
                     {% else %}
                     <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span>
                     {% endif %}
-                    {% if rat.mother_litters.all %}
+                    {% if rat.father_litters.all %}
                     <br /><span>Дети: </span>
-                    {% for litter in rat.mother_litters.all %}
-                    <span><a href="{% url 'litter' litter.id %}">{{litter.name}}</a>, </span>
+                    {% for litter in rat.father_litters.all %}
+                    <span><a href="{% url 'litter' litter.year litter.id %}">{{litter.name}}</a>, </span>
                     {% endfor %}
                     {% endif %}
                 </p>
             </div>
 
         </div>
-        {% endfor %}
-    </div>
-    </div>
 
+    </div>
+    {% endfor %}
 </div>
-{% else %}
-<p>Ни одной крысы еще не добавлено.</p>
+
 {% endif %}
 
 {% endblock content %}

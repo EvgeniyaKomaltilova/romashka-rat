@@ -6,10 +6,16 @@
     <h4>РОЖДЕННЫЕ ПОМЕТЫ</h4>
 </div>
 
+<p align="center">
+{% for year in years %}
+    <a href="{% url 'litters' year %}" style="margin: 1em">{{ year }}</a>
+{% endfor %}
+</p>
+
 {% for litter in litters %}
 <div class="container" style="background-color: #fffff0; padding-left: 40px; padding-right: 20px; padding-top: 15px;
             padding-bottom: 5px; margin-bottom: 2em; box-shadow: #795014 1px 1px 20px -15px;">
-    <p><a href="{% url 'litter' litter.id %}">{{ litter.name }} {{litter.prefix.male_name }}</a>
+    <p><a href="{% url 'litter' litter.year litter.id %}">{{ litter.name }} {{litter.prefix.male_name }}</a>
         ({{ litter.date_of_birth|date:'d.m.Y' }})</p>
     {% if litter.father %}
     <p>Отец: {{ litter.father.full_name }} ({{ litter.father.variety }})</p>

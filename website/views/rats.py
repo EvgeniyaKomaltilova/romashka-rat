@@ -13,13 +13,24 @@ def available(request):
     return render(request, 'website/available.html', context)
 
 
-def rats(request):
-    """Список всех крыс питомника"""
-    rats_list = Rat.objects.filter(public=True).filter(in_rattery=True)
-    males = rats_list.filter(gender='самец').order_by('-date_of_birth')
-    females = rats_list.filter(gender='самка').order_by('-date_of_birth')
-    context = {'rats': rats_list, 'males': males, 'females': females}
-    return render(request, 'website/rats.html', context)
+def male_rats(request):
+    """Список всех крыс-самцов питомника"""
+    rats = Rat.objects.filter(public=True).filter(in_rattery=True).filter(gender='самец')\
+        .order_by('-date_of_birth')
+    alive_rats = rats.filter(alive=True)
+    dead_rats = rats.filter(alive=False)
+    context = {'alive_rats': alive_rats, 'dead_rats': dead_rats}
+    return render(request, 'website/male_rats.html', context)
+
+
+def female_rats(request):
+    """Список всех крыс-самок питомника"""
+    rats = Rat.objects.filter(public=True).filter(in_rattery=True).filter(gender='самка')\
+        .order_by('-date_of_birth')
+    alive_rats = rats.filter(alive=True)
+    dead_rats = rats.filter(alive=False)
+    context = {'alive_rats': alive_rats, 'dead_rats': dead_rats}
+    return render(request, 'website/female_rats.html', context)
 
 
 def rat(request, rat_id):
@@ -29,16 +40,20 @@ def rat(request, rat_id):
     return render(request, 'website/rat.html', context)
 
 
-def litters(request):
+def litters(request, litter_year):
     """Список всех пометов питомника"""
-    litters_list = Litter.objects.filter(public=True).order_by('-date_of_birth')
-    context = {'litters': litters_list}
+    litters_list = Litter.objects.filter(public=True).filter(year=litter_year).order_by('-date_of_birth')
+    litter_years = []
+    for litter in Litter.objects.order_by('date_of_birth'):
+        if litter.year not in litter_years:
+            litter_years.append(litter.year)
+    context = {'litters': litters_list, 'years': litter_years}
     return render(request, 'website/litters.html', context)
 
 
-def litter(request, litter_id):
+def litter(request, litter_year, litter_id):
     """Страница конкретной литеры"""
-    litter_object = Litter.objects.get(id=litter_id)
+    litter_object = Litter.objects.get(year=litter_year, id=litter_id)
     males = litter_object.children.filter(gender='самец')
     females = litter_object.children.filter(gender='самка')
     context = {'litter': litter_object, 'males': males, 'females': females}

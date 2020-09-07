@@ -57,13 +57,22 @@ class ArchivePageTest(TestCase):
         self.assertTemplateUsed(response, 'website/archive.html')
 
 
-class RatsPageTest(TestCase):
-    """Тестирование отображения списка крыс"""
+class MaleRatsPageTest(TestCase):
+    """Тестирование отображения списка крыс-самцов"""
 
-    def test_rats_returns_correct_html(self):
-        """тест: используется шаблон rats"""
-        response = self.client.get('/rats/')
-        self.assertTemplateUsed(response, 'website/rats.html')
+    def test_male_rats_returns_correct_html(self):
+        """тест: используется шаблон male_rats"""
+        response = self.client.get('/rats/male/')
+        self.assertTemplateUsed(response, 'website/male_rats.html')
+
+
+class FemaleRatsPageTest(TestCase):
+    """Тестирование отображения списка крыс-самок"""
+
+    def test_female_rats_returns_correct_html(self):
+        """тест: используется шаблон female_rats"""
+        response = self.client.get('/rats/female/')
+        self.assertTemplateUsed(response, 'website/female_rats.html')
 
 
 class RatPageTest(TestCase):
