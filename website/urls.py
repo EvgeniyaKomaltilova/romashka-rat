@@ -2,6 +2,7 @@ from django.urls import path
 from website.views import entries
 from website.views import rats
 
+
 urlpatterns = [
     path('', entries.main_page, name='index'),
     path('about/', entries.about, name='about'),
