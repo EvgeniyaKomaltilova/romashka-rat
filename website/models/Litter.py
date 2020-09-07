@@ -1,6 +1,6 @@
 from datetime import date
 from django.db import models
-from . import Prefix, Person, Rat
+from ..services.naming import get_full_litter_name, get_litter_name_for_admin
 
 
 class Litter(models.Model):
@@ -22,22 +22,7 @@ class Litter(models.Model):
         verbose_name_plural = 'Литеры'
 
     def full_name(self):
-        string = self.name
-        if self.prefix:
-            string = f'{self.name} {self.prefix.male_name}'
-            if not self.prefix.suffix:
-                string = f'{self.prefix.male_name} {self.name}'
-
-        return string
+        return get_full_litter_name(self)
 
     def __str__(self):
-        if self.father:
-            father_name = self.father.name
-        else:
-            father_name = 'мать неизвестна'
-        if self.mother:
-            mother_name = self.mother.name
-        else:
-            mother_name = 'отец неизвестен'
-
-        return f'{self.name} ({father_name} x {mother_name})'
+        return get_litter_name_for_admin(self)

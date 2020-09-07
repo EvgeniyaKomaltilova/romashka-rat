@@ -1,4 +1,4 @@
-from website.services.get_timedelta_as_string import get_timedelta_as_string
+from website.services.timedelta import get_timedelta_as_string
 from unittest import TestCase
 from datetime import date
 

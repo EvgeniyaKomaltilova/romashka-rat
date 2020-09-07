@@ -1,4 +1,19 @@
-def get_timedelta_as_string(seconds):
+from datetime import date
+
+
+def get_rat_current_age(obj):
+    current_age = date.today() - obj.date_of_birth
+    seconds = current_age.total_seconds()
+    return _get_timedelta_as_string(seconds)
+
+
+def get_rat_lifespan(obj):
+    lifespan = obj.date_of_death - obj.date_of_birth
+    seconds = lifespan.total_seconds()
+    return _get_timedelta_as_string(seconds)
+
+
+def _get_timedelta_as_string(seconds):
     years = _count_years(seconds)
     months = _count_months(seconds)
 

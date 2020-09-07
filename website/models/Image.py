@@ -1,6 +1,5 @@
 from datetime import datetime
 from django.db import models
-from . import Rat
 
 
 class Image(models.Model):

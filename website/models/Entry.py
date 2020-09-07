@@ -7,7 +7,9 @@ class Entry(models.Model):
     TOPICS = [
         ('news', 'новости'),
         ('about', 'о питомнике'),
-        ('varieties', 'разновидности')
+        ('varieties', 'разновидности'),
+        ('colors', 'окрасы'),
+        ('markings', 'маркировки')
     ]
 
     public = models.BooleanField(verbose_name='опубликовать', default=True)
@@ -22,5 +24,3 @@ class Entry(models.Model):
 
     def __str__(self):
         return f'{self.topic}: {self.title}'
-
-

@@ -1,5 +1,5 @@
 from django.db import models
-from . import Location
+from ..services.naming import get_person_short_name
 
 
 class Person(models.Model):
@@ -14,12 +14,7 @@ class Person(models.Model):
         verbose_name_plural = 'Заводчики и владельцы'
 
     def short_name(self):
-        if self.second_name:
-            string = f'{self.last_name} {self.first_name[0]}. {self.second_name[0]}.'
-        else:
-            string = f'{self.last_name} {self.first_name[0]}.'
-
-        return string
+        return get_person_short_name(self)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

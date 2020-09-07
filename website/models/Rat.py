@@ -1,7 +1,10 @@
-from datetime import datetime, date, timedelta
+from datetime import date
 from django.db import models
-from website.services.get_timedelta_as_string import get_timedelta_as_string
-from . import Prefix, Person, Litter
+
+from ..services.photo import get_main_photo
+from ..services.status import get_status_based_on_gender
+from ..services.timedelta import get_rat_lifespan, get_rat_current_age
+from ..services.naming import get_full_rat_name
 
 
 class Rat(models.Model):
@@ -54,42 +57,19 @@ class Rat(models.Model):
         verbose_name_plural = 'Крысы'
 
     def main_photo(self):
-        try:
-            return self.photos.all().last().picture.url
-        except AttributeError:
-            return None
+        return get_main_photo(self)
 
     def status_based_on_gender(self):
-        if self.gender == 'самка':
-            if self.status == 'свободен':
-                return 'свободна'
-            elif self.status == 'зарезервирован':
-                return 'зарезервирована'
-        else:
-            return self.status
+        return get_status_based_on_gender(self)
 
     def full_name(self):
-        string = self.name
-        if self.prefix:
-            if self.gender == 'самец':
-                string = f'{self.name} {self.prefix.male_name}'
-                if not self.prefix.suffix:
-                    string = f'{self.prefix.male_name} {self.name}'
-            else:
-                string = f'{self.name} {self.prefix.female_name}'
-                if not self.prefix.suffix:
-                    string = f'{self.prefix.female_name} {self.name}'
-        return string
+        return get_full_rat_name(self)
 
     def lifespan(self):
-        lifespan = self.date_of_death - self.date_of_birth
-        seconds = lifespan.total_seconds()
-        return get_timedelta_as_string(seconds)
+        return get_rat_lifespan(self)
 
     def current_age(self):
-        lifespan = date.today() - self.date_of_birth
-        seconds = lifespan.total_seconds()
-        return get_timedelta_as_string(seconds)
+        return get_rat_current_age(self)
 
     def __str__(self):
         return self.full_name()
