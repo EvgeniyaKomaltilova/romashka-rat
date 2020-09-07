@@ -7,4 +7,7 @@ def get_status_based_on_gender(obj):
         elif obj.status == 'reserved':
             return 'зарезервирована'
     else:
-        return obj.status
+        if obj.status == 'available':
+            return 'свободен'
+        elif obj.status == 'reserved':
+            return 'зарезервирован'
