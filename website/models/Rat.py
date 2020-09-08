@@ -1,6 +1,7 @@
 from datetime import date
 from django.db import models
 
+from ..services.litters_string import get_litters_as_string
 from ..services.photo import get_main_photo
 from ..services.status import get_status_based_on_gender
 from ..services.timedelta import get_rat_lifespan, get_rat_current_age
@@ -70,6 +71,9 @@ class Rat(models.Model):
 
     def current_age(self):
         return get_rat_current_age(self)
+
+    def litters(self):
+        return get_litters_as_string(self)
 
     def __str__(self):
         return self.full_name()

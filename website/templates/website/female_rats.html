@@ -30,10 +30,7 @@
                     <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span>
                     {% endif %}
                     {% if rat.mother_litters.all %}
-                    <br /><span>Дети: </span>
-                    {% for litter in rat.mother_litters.all %}
-                    <span><a href="{% url 'litter' litter.year litter.id %}">{{litter.name}}</a>, </span>
-                    {% endfor %}
+                    <br /><span>Дети: {{ rat.litters }}</span>
                     {% endif %}
                 </p>
             </div>

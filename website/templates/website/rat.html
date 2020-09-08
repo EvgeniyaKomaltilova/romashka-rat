@@ -12,7 +12,11 @@
         <h4 style="color: darkblue; margin: 5px; margin-left: 0px;">{{ rat.full_name }}</h4>
         <p>
             <span>Тип: {{ rat.variety }}</span><br />
-            <span>Пол: {{ rat.gender }}</span>
+            {% if rat.gender == 'male' %}
+            <span>Пол: самец</span>
+            {% else %}
+            <span>Пол: самка</span>
+            {% endif %}
             {% if rat.castrate %}
             {% if rat.gender == 'самец' %}
             <span> (кастрирован)</span>
@@ -21,8 +25,10 @@
             {% endif %}
             {% endif %}
             <br />
-            {% if rat.title %}
-            <span>Титул: {{ rat.title }}</span><br />
+            {% if rat.title == 'champion' %}
+            <span>Титул: чемпион</span><br />
+            {% elif rat.title == 'grandchampion' %}
+            <span>Титул: грандчемпион</span><br />
             {% endif %}
             <span>Дата рождения: {{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
             {% if not rat.alive %}
@@ -91,7 +97,7 @@
             <li><a href="{% url 'litter' litter.year litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
             {% endfor %}
             {% for litter in rat.mother_litters.all %}
-            <li>{{ litter.full_name }} ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
+            <li><a href="{% url 'litter' litter.year litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
             {% endfor %}
             </ul>
         </div>
