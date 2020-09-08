@@ -6,6 +6,7 @@ from ..services.photo import get_main_photo
 from ..services.status import get_status_based_on_gender
 from ..services.timedelta import get_rat_lifespan, get_rat_current_age
 from ..services.naming import get_full_rat_name
+from ..services.absolute_urls import get_rat_url
 
 
 class Rat(models.Model):
@@ -74,6 +75,9 @@ class Rat(models.Model):
 
     def litters(self):
         return get_litters_as_string(self)
+
+    def url(self):
+        return get_rat_url(self)
 
     def __str__(self):
         return self.full_name()

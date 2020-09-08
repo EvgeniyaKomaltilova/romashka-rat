@@ -1,6 +1,7 @@
 from datetime import date
 from django.db import models
 from ..services.naming import get_full_litter_name, get_litter_name_for_admin
+from ..services.absolute_urls import get_litter_url
 
 
 class Litter(models.Model):
@@ -24,6 +25,9 @@ class Litter(models.Model):
 
     def full_name(self):
         return get_full_litter_name(self)
+
+    def url(self):
+        return get_litter_url(self)
 
     def __str__(self):
         return get_litter_name_for_admin(self)

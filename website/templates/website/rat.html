@@ -58,17 +58,17 @@
             {% endif %}
             {% endif %}
             {% if rat.father and rat.mother %}
-            <span>Отец: <a href="{% url 'rat' rat.father.id %}">{{ rat.father.full_name }}</a> </span>
+            <span>Отец: <a href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
             <span>({{ rat.father.variety }})</span><br />
-            <span>Мать: <a href="{% url 'rat' rat.mother.id %}">{{ rat.mother.full_name }}</a> </span>
+            <span>Мать: <a href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
             <span>({{ rat.mother.variety }})</span><br />
             {% elif rat.father and not rat.mother %}
-            <span>Отец: <a href="{% url 'rat' rat.father.id %}">{{ rat.father.full_name }}</a> </span>
+            <span>Отец: <a href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
             <span>({{ rat.father.variety }})</span><br />
             <span>Мать: неизвестна</span>
             {% elif not rat.father and rat.mother %}
             <span>Отец: неизвестен</span><br />
-            <span>Мать: <a href="{% url 'rat' rat.mother.id %}">{{ rat.mother.full_name }}</a> </span>
+            <span>Мать: <a href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
             <span>({{ rat.mother.variety }})</span><br />
             {% else %}
             <span>Происхождение неизвестно.</span>
@@ -94,10 +94,10 @@
             <p align="middle">Потомство</p>
             <ul>
             {% for litter in rat.father_litters.all %}
-            <li><a href="{% url 'litter' litter.year litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
+            <li><a href="{{ litter.url }}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
             {% endfor %}
             {% for litter in rat.mother_litters.all %}
-            <li><a href="{% url 'litter' litter.year litter.id %}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
+            <li><a href="{{ litter.url }}">{{ litter.full_name }}</a> ({{ litter.date_of_birth|date:'d.m.Y' }})</li>
             {% endfor %}
             </ul>
         </div>
