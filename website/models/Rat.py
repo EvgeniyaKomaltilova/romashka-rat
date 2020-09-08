@@ -44,8 +44,8 @@ class Rat(models.Model):
     title = models.CharField(verbose_name='титул', max_length=16, choices=TITLE, default='none')
     date_of_birth = models.DateField(verbose_name='дата рождения', default=date.today)
     date_of_death = models.DateField(verbose_name='дата смерти', default=None, null=True, blank=True)
-    breeder = models.ForeignKey(verbose_name='заводчик', to='Person', related_name='rats_bred', on_delete=models.SET_NULL,
-                                null=True, blank=True)
+    breeder = models.ForeignKey(verbose_name='заводчик', to='Person', related_name='rats_bred',
+                                on_delete=models.SET_NULL, null=True, blank=True)
     owner = models.ForeignKey(verbose_name='владелец', to='Person', related_name='rats_own', on_delete=models.SET_NULL,
                               null=True, blank=True)
     father = models.ForeignKey(verbose_name='отец', to='self', related_name='father_children', on_delete=models.SET_NULL,

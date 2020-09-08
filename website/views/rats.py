@@ -6,8 +6,8 @@ from itertools import chain
 
 def available(request):
     """Страница со свободными крысятами"""
-    available_rats = Rat.objects.filter(public='True').filter(status='available')
-    reserved_rats = Rat.objects.filter(public='True').filter(status='reserved')
+    available_rats = Rat.objects.filter(public='True', status='available')
+    reserved_rats = Rat.objects.filter(public='True', status='reserved')
     all_rats = chain(available_rats, reserved_rats)
     context = {'rats': all_rats}
     return render(request, 'website/available.html', context)
@@ -15,8 +15,7 @@ def available(request):
 
 def male_rats(request):
     """Список всех крыс-самцов питомника"""
-    rats = Rat.objects.filter(public=True).filter(in_rattery=True).filter(gender='male')\
-        .order_by('-date_of_birth')
+    rats = Rat.objects.filter(public=True, in_rattery=True, gender='male').order_by('-date_of_birth')
     alive_rats = rats.filter(alive=True)
     dead_rats = rats.filter(alive=False)
     context = {'alive_rats': alive_rats, 'dead_rats': dead_rats}
@@ -25,8 +24,7 @@ def male_rats(request):
 
 def female_rats(request):
     """Список всех крыс-самок питомника"""
-    rats = Rat.objects.filter(public=True).filter(in_rattery=True).filter(gender='female')\
-        .order_by('-date_of_birth')
+    rats = Rat.objects.filter(public=True, in_rattery=True, gender='female').order_by('-date_of_birth')
     alive_rats = rats.filter(alive=True)
     dead_rats = rats.filter(alive=False)
     context = {'alive_rats': alive_rats, 'dead_rats': dead_rats}
@@ -42,7 +40,7 @@ def rat(request, rat_id):
 
 def litters(request, litter_year):
     """Список всех пометов питомника"""
-    litters_list = Litter.objects.filter(public=True).filter(year=litter_year).order_by('-date_of_birth')
+    litters_list = Litter.objects.filter(public=True, year=litter_year).order_by('-date_of_birth')
     litter_years = []
     for litter in Litter.objects.order_by('date_of_birth'):
         if litter.year not in litter_years:

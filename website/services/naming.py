@@ -43,6 +43,16 @@ def get_litter_name_for_admin(obj):
     return f'{obj.name} ({father_name} x {mother_name})'
 
 
+def get_person_full_name(self):
+    """Возвращает фамилию, имя и отчество (если есть)"""
+    if self.second_name:
+        result = f'{self.last_name} {self.first_name} {self.second_name}'
+    else:
+        result = f'{self.last_name} {self.first_name}'
+
+    return result
+
+
 def get_person_short_name(self):
     """Возвращает фамилию и инициалы"""
     if self.second_name:
@@ -51,3 +61,10 @@ def get_person_short_name(self):
         result = f'{self.last_name} {self.first_name[0]}.'
 
     return result
+
+
+def get_prefix_name(obj):
+    if obj.male_name == obj.female_name:
+        return obj.male_name
+    else:
+        return f'{obj.male_name}/{obj.female_name}'

@@ -1,5 +1,5 @@
 from django.db import models
-from ..services.naming import get_person_short_name
+from ..services.naming import get_person_short_name, get_person_full_name
 
 
 class Person(models.Model):
@@ -12,6 +12,9 @@ class Person(models.Model):
     class Meta:
         verbose_name = 'личность'
         verbose_name_plural = 'Заводчики и владельцы'
+
+    def full_name(self):
+        return get_person_full_name(self)
 
     def short_name(self):
         return get_person_short_name(self)

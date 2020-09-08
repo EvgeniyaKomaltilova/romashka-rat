@@ -1,5 +1,7 @@
 from django.db import models
 
+from website.services.naming import get_prefix_name
+
 
 class Prefix(models.Model):
     female_name = models.CharField(verbose_name='приставка для самки', max_length=32)
@@ -10,5 +12,8 @@ class Prefix(models.Model):
         verbose_name = 'приставку'
         verbose_name_plural = 'Приставки питомников'
 
+    def name(self):
+        return get_prefix_name(self)
+
     def __str__(self):
-        return f'{self.male_name}/{self.female_name}'
+        return self.name()
