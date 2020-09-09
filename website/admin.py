@@ -1,5 +1,21 @@
 from django.contrib import admin
 from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry, Questionnaire
+from website.services.photo import get_image_to_admin
+
+admin.site.site_title = 'Панель администратора'
+admin.site.site_header = 'Панель администратора'
+
+
+class ImageInline(admin.TabularInline):
+    model = Image.Image
+    extra = 0
+    fields = ('name', 'picture', 'get_image')
+    readonly_fields = ('get_image',)
+
+    def get_image(self, obj):
+        return get_image_to_admin(obj)
+
+    get_image.short_description = 'изображение'
 
 
 @admin.register(Rat.Rat)
@@ -9,6 +25,7 @@ class RatAdmin(admin.ModelAdmin):
     list_filter = ('alive', 'gender', 'in_rattery', 'status', 'title', 'castrate')
     search_fields = ('name', 'variety', 'owner__last_name')
     readonly_fields = ('date_of_add',)
+    inlines = [ImageInline]
     save_on_top = True
     fieldsets = (
         (None, {
@@ -71,6 +88,12 @@ class ImageAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     search_fields = ('name', 'rat__name',)
     save_on_top = True
+    readonly_fields = ('get_image',)
+
+    def get_image(self, obj):
+        return get_image_to_admin(obj)
+
+    get_image.short_description = 'изображение'
 
 
 @admin.register(Location.Location)
@@ -127,5 +150,4 @@ class QuestionnaireAdmin(admin.ModelAdmin):
             )
         }
          ),
-
     )
