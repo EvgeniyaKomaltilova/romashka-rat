@@ -57,6 +57,24 @@ class ArchivePageTest(TestCase):
         self.assertTemplateUsed(response, 'website/archive.html')
 
 
+class QuestionnaireFormPageTest(TestCase):
+    """Тестирование отображения формы"""
+
+    def test_questionnaire_returns_correct_html(self):
+        """тест: используется шаблон questionnaire"""
+        response = self.client.get('/questionnaire/')
+        self.assertTemplateUsed(response, 'website/questionnaire.html')
+
+
+class QuestionnaireSuccessPageTest(TestCase):
+    """Тестирование отображения страницы успешного заполнения формы"""
+
+    def test_questionnaire_success_returns_correct_html(self):
+        """тест: используется шаблон success"""
+        response = self.client.get('/questionnaire/success/')
+        self.assertTemplateUsed(response, 'website/success.html')
+
+
 class MaleRatsPageTest(TestCase):
     """Тестирование отображения списка крыс-самцов"""
 
@@ -90,7 +108,7 @@ class LittersPageTest(TestCase):
 
     def test_litters_returns_correct_html(self):
         """тест: используется шаблон litters"""
-        response = self.client.get('/litters/')
+        response = self.client.get('/litters/2020/')
         self.assertTemplateUsed(response, 'website/litters.html')
 
 
@@ -99,6 +117,6 @@ class LitterPageTest(TestCase):
 
     def test_litter_returns_correct_html(self):
         """тест: используется шаблон litter"""
-        Litter.objects.create()
-        response = self.client.get('/litters/1/')
+        Litter.objects.create(year=2020)
+        response = self.client.get('/litters/2020/1/')
         self.assertTemplateUsed(response, 'website/litter.html')

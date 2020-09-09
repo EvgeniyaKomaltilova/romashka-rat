@@ -1,6 +1,7 @@
 from datetime import date
 from django.test import TestCase
 from website.models.Image import Image
+from website.models.Questionnaire import Questionnaire
 from website.models.Rat import Rat
 from website.models.Prefix import Prefix
 from website.models.Person import Person
@@ -99,3 +100,15 @@ class EntryModelTest(TestCase):
         self.assertEqual(entries.count(), 2)
         self.assertEqual(entries[0].text, 'first')
         self.assertEqual(entries[1].text, 'second')
+
+
+class QuestionnaireModelTest(TestCase):
+    """Тестирование модели Questionnaire"""
+
+    def test_can_saving_and_retrieving_questionnaires(self):
+        Questionnaire.objects.create(name='first')
+        Questionnaire.objects.create(name='second')
+        questionnaires = Questionnaire.objects.all()
+        self.assertEqual(questionnaires.count(), 2)
+        self.assertEqual(questionnaires[0].name, 'first')
+        self.assertEqual(questionnaires[1].name, 'second')

@@ -1,6 +1,5 @@
 from django.urls import path
-from website.views import entries
-from website.views import rats
+from website.views import rats, entries, questionnaire
 
 
 urlpatterns = [
@@ -10,6 +9,8 @@ urlpatterns = [
     path('varieties/', entries.varieties, name='varieties'),
     path('colors/', entries.colors, name='colors'),
     path('markings/', entries.markings, name='markings'),
+    path('questionnaire/', questionnaire.questionnaire_form, name='questionnaire_form'),
+    path('questionnaire/success/', questionnaire.questionnaire_success, name='questionnaire_success'),
     path('available/', rats.available, name='available'),
     path('litters/<int:litter_year>/', rats.litters, name='litters'),
     path('litters/<int:litter_year>/<int:litter_id>/', rats.litter, name='litter'),

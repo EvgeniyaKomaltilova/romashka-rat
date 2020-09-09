@@ -1,0 +1,47 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+<h5 align="center" style="margin-bottom: 2em">Анкета для желающих приобрести крысенка</h5>
+
+<div class="row">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+        <form action="{% url 'questionnaire_form' %}" method="post">
+            {% csrf_token %}
+
+            {% for hidden in hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+            <ul>
+                {% for error in form.non_field_errors %}
+                <li><em>{{ error|escape }}</em></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% for field in form.visible_fields %}
+                {% if form.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                    <li><em>{{ error|escape }}</em></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+            <p>{{ field.label_tag }}<br>{{ field }}</p>
+            {% endfor %}
+
+            <button name="submit">отправить</button>
+        </form>
+        <p style="margin-top: 2em">* <a href="">ссылка на договор</a></p>
+    </div>
+
+    <div class="col-md-2"></div>
+
+</div>
+
+{% endblock content %}

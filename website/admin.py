@@ -1,5 +1,5 @@
 from django.contrib import admin
-from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry
+from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry, Questionnaire
 
 
 @admin.register(Rat.Rat)
@@ -25,10 +25,8 @@ class RatAdmin(admin.ModelAdmin):
                 ('father', 'breeder',),
                 ('mother', 'owner',),
                 ('information',),
-
             )
         }
-
         ),
     )
 
@@ -89,4 +87,45 @@ class PrefixAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+@admin.register(Questionnaire.Questionnaire)
+class QuestionnaireAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'age', 'location', 'email', 'date', 'read', 'approved',)
+    list_display_links = ('name',)
+    list_filter = ('read', 'approved')
+    search_fields = ('name',)
+    save_on_top = True
+    list_editable = ('read', 'approved',)
+    readonly_fields = ('date', 'name', 'email', 'age', 'location', 'which_baby_rat', 'allergy', 'know_how',
+                       'pet_or_breed', 'friend', 'contract', 'recommendation', 'additionally')
+    fieldsets = (
+        (None, {
+            'fields': (
+                ('read', 'approved'),
+                ('date',),
+            )
+        }
+         ),
+        ('личные данные', {
+            'fields': (
+                ('name',),
+                ('age',),
+                ('location',),
+                ('email',),
+            )
+        }
+         ),
+        ('ответы', {
+            'fields': (
+                ('which_baby_rat',),
+                ('allergy',),
+                ('know_how',),
+                ('pet_or_breed',),
+                ('friend',),
+                ('contract',),
+                ('recommendation',),
+                ('additionally',),
+            )
+        }
+         ),
 
+    )
