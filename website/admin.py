@@ -1,6 +1,8 @@
 from django.contrib import admin
 from website.models import Image, Rat, Prefix, Person, Location, Litter, Entry, Questionnaire
 from website.services.photo import get_image_to_admin
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django import forms
 
 admin.site.site_title = 'Панель администратора'
 admin.site.site_header = 'Панель администратора'
@@ -72,11 +74,20 @@ class PersonAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+class EntryAdminForm(forms.ModelForm):
+    text = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Entry.Entry
+        fields = '__all__'
+
+
 @admin.register(Entry.Entry)
 class EntryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'topic', 'date', 'public')
     list_display_links = ('title',)
     search_fields = ('title',)
+    form = EntryAdminForm
     save_on_top = True
     save_as = True
     list_editable = ('public',)
@@ -151,3 +162,9 @@ class QuestionnaireAdmin(admin.ModelAdmin):
         }
          ),
     )
+
+
+
+
+
+

@@ -1,6 +1,5 @@
 from django.urls import path
-from website.views import rats, entries, questionnaire
-
+from website.views import rats, entries, questionnaire, pdf
 
 urlpatterns = [
     path('', entries.main_page, name='index'),
@@ -17,4 +16,6 @@ urlpatterns = [
     path('rats/male/', rats.male_rats, name='male_rats'),
     path('rats/female/', rats.female_rats, name='female_rats'),
     path('rats/<int:rat_id>/', rats.rat, name='rat'),
+
+    path('pdf/<int:data>/', pdf.some_view, name='pdf'),
 ]
