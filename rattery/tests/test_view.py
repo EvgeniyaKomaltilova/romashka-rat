@@ -1,6 +1,7 @@
 from django.test import TestCase
-from functional_tests.rattery import Rat
-from functional_tests.rattery import Litter
+
+from rattery.models.Litter import Litter
+from rattery.models.Rat import Rat
 
 
 class QuestionnaireFormPageTest(TestCase):
@@ -8,7 +9,7 @@ class QuestionnaireFormPageTest(TestCase):
 
     def test_questionnaire_returns_correct_html(self):
         """тест: используется шаблон questionnaire"""
-        response = self.client.get('/questionnaire/')
+        response = self.client.get('/rats/questionnaire/')
         self.assertTemplateUsed(response, 'rattery/questionnaire.html')
 
 
@@ -17,8 +18,8 @@ class QuestionnaireSuccessPageTest(TestCase):
 
     def test_questionnaire_success_returns_correct_html(self):
         """тест: используется шаблон success"""
-        response = self.client.get('/questionnaire/success/')
-        self.assertTemplateUsed(response, 'rattery/success.html')
+        response = self.client.get('/rats/questionnaire/success/')
+        self.assertTemplateUsed(response, 'rattery/questionnaire_success.html')
 
 
 class MaleRatsPageTest(TestCase):
@@ -54,7 +55,7 @@ class LittersPageTest(TestCase):
 
     def test_litters_returns_correct_html(self):
         """тест: используется шаблон litters"""
-        response = self.client.get('/litters/2020/')
+        response = self.client.get('/rats/litters/2020/')
         self.assertTemplateUsed(response, 'rattery/litters.html')
 
 
@@ -64,5 +65,5 @@ class LitterPageTest(TestCase):
     def test_litter_returns_correct_html(self):
         """тест: используется шаблон litter"""
         Litter.objects.create(year=2020)
-        response = self.client.get('/litters/2020/1/')
+        response = self.client.get('/rats/litters/2020/1/')
         self.assertTemplateUsed(response, 'rattery/litter.html')

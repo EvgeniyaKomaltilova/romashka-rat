@@ -7,7 +7,7 @@ class IndexPageTest(TestCase):
     def test_index_returns_correct_html(self):
         """тест: используется шаблон index"""
         response = self.client.get('/')
-        self.assertTemplateUsed(response, 'rattery/index.html')
+        self.assertTemplateUsed(response, 'website/index.html')
 
 
 class AboutPageTest(TestCase):
@@ -16,7 +16,7 @@ class AboutPageTest(TestCase):
     def test_archive_returns_correct_html(self):
         """тест: используется шаблон about"""
         response = self.client.get('/about/')
-        self.assertTemplateUsed(response, 'rattery/about.html')
+        self.assertTemplateUsed(response, 'website/about.html')
 
 
 class VarietiesPageTest(TestCase):
@@ -25,7 +25,7 @@ class VarietiesPageTest(TestCase):
     def test_varieties_returns_correct_html(self):
         """тест: используется шаблон varieties"""
         response = self.client.get('/varieties/')
-        self.assertTemplateUsed(response, 'rattery/varieties.html')
+        self.assertTemplateUsed(response, 'website/varieties.html')
 
 
 class ColorsPageTest(TestCase):
@@ -34,7 +34,7 @@ class ColorsPageTest(TestCase):
     def test_colors_returns_correct_html(self):
         """тест: используется шаблон colors"""
         response = self.client.get('/colors/')
-        self.assertTemplateUsed(response, 'rattery/colors.html')
+        self.assertTemplateUsed(response, 'website/colors.html')
 
 
 class MarkingsPageTest(TestCase):
@@ -43,7 +43,7 @@ class MarkingsPageTest(TestCase):
     def test_markings_returns_correct_html(self):
         """тест: используется шаблон markings"""
         response = self.client.get('/markings/')
-        self.assertTemplateUsed(response, 'rattery/markings.html')
+        self.assertTemplateUsed(response, 'website/markings.html')
 
 
 class ArchivePageTest(TestCase):
@@ -52,4 +52,4 @@ class ArchivePageTest(TestCase):
     def test_archive_returns_correct_html(self):
         """тест: используется шаблон archive"""
         response = self.client.get('/archive/')
-        self.assertTemplateUsed(response, 'rattery/archive.html')
+        self.assertTemplateUsed(response, 'website/archive.html')

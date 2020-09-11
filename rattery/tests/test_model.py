@@ -1,13 +1,13 @@
 from datetime import date
 from django.test import TestCase
 
-from functional_tests.rattery import Photo
-from functional_tests.rattery import Questionnaire
-from functional_tests.rattery import Rat
-from functional_tests.rattery import Prefix
-from functional_tests.rattery import Person
-from functional_tests.rattery import Location
-from functional_tests.rattery import Litter
+from rattery.models.Litter import Litter
+from rattery.models.Location import Location
+from rattery.models.Person import Person
+from rattery.models.Photo import Photo
+from rattery.models.Prefix import Prefix
+from rattery.models.Questionnaire import Questionnaire
+from rattery.models.Rat import Rat
 
 
 class PhotoModelTest(TestCase):

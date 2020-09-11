@@ -15,4 +15,4 @@ def questionnaire_form(request):
 
 
 def questionnaire_success(request):
-    return render(request, 'rattery/success.html')
+    return render(request, 'rattery/questionnaire_success.html')
