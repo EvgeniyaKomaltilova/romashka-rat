@@ -7,3 +7,4 @@ sqlparse==0.3.1
 urllib3==1.25.10
 
 reportlab~=3.5.49
+django-ckeditor~=6.0.0

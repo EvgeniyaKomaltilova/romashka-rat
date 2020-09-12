@@ -64,7 +64,22 @@ def get_person_short_name(self):
 
 
 def get_prefix_name(obj):
+    """Возвращает название префикса для отображение в админке"""
     if obj.male_name == obj.female_name:
         return obj.male_name
     else:
         return f'{obj.male_name}/{obj.female_name}'
+
+
+def get_entry_name(obj):
+    """Возвращает название записи для отображения в админке"""
+    if obj.topic == 'news':
+        return f'Новости: {obj.title}'
+    elif obj.topic == 'about':
+        return f'О питомнике: {obj.title}'
+    elif obj.topic == 'varieties':
+        return f'Разновидности: {obj.title}'
+    elif obj.topic == 'colors':
+        return f'Окрасы: {obj.title}'
+    elif obj.topic == 'markings':
+        return f'Маркировки: {obj.title}'

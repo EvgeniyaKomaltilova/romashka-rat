@@ -1,6 +1,8 @@
 from datetime import datetime
 from django.db import models
 
+from romashka.services.naming import get_entry_name
+
 
 class Entry(models.Model):
 
@@ -23,4 +25,4 @@ class Entry(models.Model):
         verbose_name_plural = 'Новости и контент'
 
     def __str__(self):
-        return f'{self.topic}: {self.title}'
+        return get_entry_name(self)

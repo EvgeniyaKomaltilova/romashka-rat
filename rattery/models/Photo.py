@@ -7,7 +7,7 @@ class Photo(models.Model):
     name = models.CharField(verbose_name='название', max_length=128)
     rat = models.ForeignKey(verbose_name='крыса', to='Rat', related_name='photos', on_delete=models.CASCADE,
                             null=True, blank=True)
-    picture = models.ImageField(verbose_name='фото', upload_to='images')
+    picture = models.ImageField(verbose_name='фото', upload_to='photos')
 
     class Meta:
         verbose_name = 'фото'

@@ -1,14 +1,16 @@
 from io import BytesIO
-
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
-
 from rattery.models.Rat import Rat
 
 
-def some_view(request, data):
+def litter_pedigree_view(request, data):
+    pass
+
+
+def rat_pedigree_view(request, data):
     pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
 
     rat = Rat.objects.get(id=data)
@@ -17,7 +19,7 @@ def some_view(request, data):
     # файл для скачивания
     # response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
     # файл для чтения
-    response['Content-Disposition'] = 'filename="somefilename.pdf"'
+    response['Content-Disposition'] = 'filename="rat_pedigree.pdf"'
 
     buffer = BytesIO()
 
