@@ -8,9 +8,7 @@ from rattery.models.Rat import Rat
 def available(request):
     """Страница со свободными крысятами"""
     available_rats = Rat.objects.filter(public='True', status='available')
-    reserved_rats = Rat.objects.filter(public='True', status='reserved')
-    all_rats = chain(available_rats, reserved_rats)
-    context = {'rats': all_rats}
+    context = {'rats': available_rats}
     return render(request, 'rattery/available.html', context)
 
 

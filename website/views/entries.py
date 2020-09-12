@@ -11,9 +11,7 @@ def main_page(request):
     news = Entry.objects.filter(public='True').filter(topic='news').order_by('-date')[:3]
     image = Image.objects.filter(main_page=True).first
     available_rats = Rat.objects.filter(public='True').filter(status='available')
-    reserved_rats = Rat.objects.filter(public='True').filter(status='reserved')
-    all_rats = chain(available_rats, reserved_rats)
-    context = {'news': news, 'image': image, 'rats': all_rats}
+    context = {'news': news, 'image': image, 'rats': available_rats}
     return render(request, 'website/index.html', context)
 
 

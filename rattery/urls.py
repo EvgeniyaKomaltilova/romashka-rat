@@ -1,5 +1,5 @@
 from django.urls import path
-from rattery.views import rats, pdf, questionnaire
+from rattery.views import rats, questionnaire
 
 urlpatterns = [
     path('available/', rats.available, name='available'),
@@ -12,6 +12,4 @@ urlpatterns = [
 
     path('questionnaire/', questionnaire.questionnaire_form, name='questionnaire_form'),
     path('questionnaire/success/', questionnaire.questionnaire_success, name='questionnaire_success'),
-
-    path('pdf/<int:data>/', pdf.some_view, name='pdf'),
 ]
