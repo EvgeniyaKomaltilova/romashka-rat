@@ -41,10 +41,11 @@ class RatAdmin(admin.ModelAdmin):
                 ('litter',),
                 ('prefix',),
                 ('variety',),
+                ('gender',),
                 ('date_of_birth',),
                 ('date_of_death',),
-                ('father', 'breeder',),
-                ('mother', 'owner',),
+                ('mother', 'breeder',),
+                ('father', 'owner',),
                 ('information',),
             )
         }
@@ -55,7 +56,7 @@ class RatAdmin(admin.ModelAdmin):
 class RatInline(admin.TabularInline):
     model = Rat
     extra = 0
-    fields = ('status', 'name', 'variety', 'owner')
+    fields = ('status', 'name', 'gender', 'variety', 'owner')
 
 
 @admin.register(Litter)

@@ -58,18 +58,18 @@
             {% endif %}
             {% endif %}
             {% if rat.father and rat.mother %}
-            <span>Отец: <a href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
-            <span>({{ rat.father.variety }})</span><br />
             <span>Мать: <a href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
             <span>({{ rat.mother.variety }})</span><br />
+            <span>Отец: <a href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
+            <span>({{ rat.father.variety }})</span><br />
             {% elif rat.father and not rat.mother %}
+            <span>Мать: неизвестна</span>
             <span>Отец: <a href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
             <span>({{ rat.father.variety }})</span><br />
-            <span>Мать: неизвестна</span>
             {% elif not rat.father and rat.mother %}
-            <span>Отец: неизвестен</span><br />
             <span>Мать: <a href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
             <span>({{ rat.mother.variety }})</span><br />
+            <span>Отец: неизвестен</span><br />
             {% else %}
             <span>Происхождение неизвестно.</span>
 

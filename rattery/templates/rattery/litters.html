@@ -17,15 +17,15 @@
             padding-bottom: 5px; margin-bottom: 2em; box-shadow: #795014 1px 1px 20px -15px;">
     <p><a href="{{ litter.url }}">{{ litter.full_name }}</a>
         ({{ litter.date_of_birth|date:'d.m.Y' }})</p>
+        {% if litter.mother %}
+    <p>Мать: {{ litter.mother.full_name }} ({{ litter.mother.variety }})</p>
+    {% else %}
+    <p>Мать: неизвестна</p>
+    {% endif %}
     {% if litter.father %}
     <p>Отец: {{ litter.father.full_name }} ({{ litter.father.variety }})</p>
     {% else %}
     <p>Отец: неизвестен</p>
-    {% endif %}
-    {% if litter.mother %}
-    <p>Мать: {{ litter.mother.full_name }} ({{ litter.mother.variety }})</p>
-    {% else %}
-    <p>Мать: неизвестна</p>
     {% endif %}
 </div>
 {% empty %}
