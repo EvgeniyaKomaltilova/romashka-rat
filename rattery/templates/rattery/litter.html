@@ -87,34 +87,35 @@
             {% endfor %}
         </div>
 
-    <div class="col-md-6">
-        {% for child in males %}
-        <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
-            padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px;
-            margin: 0px; margin-bottom: 1em;">
-            <div class="col-md-4" style="padding-bottom: 1em">
-                {% if child.main_photo %}
-                <img src="/static{{ child.main_photo }}" alt="photo" width="100%">
-                {% else %}
-                <img src="/static/images/default.png" alt="photo" width="60%">
-                {% endif %}
+        <div class="col-md-6">
+            {% for child in males %}
+            <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
+                padding-top: 20px; padding-bottom: 5px; box-shadow: #795014 1px 1px 20px -15px;
+                margin: 0px; margin-bottom: 1em;">
+                <div class="col-md-4" style="padding-bottom: 1em">
+                    {% if child.main_photo %}
+                    <img src="/static{{ child.main_photo }}" alt="photo" width="100%">
+                    {% else %}
+                    <img src="/static/images/default.png" alt="photo" width="60%">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <p><b style="color: darkblue"><a href="{{ child.url }}">{{ child.full_name }}</a></b></p>
+                    <p><span>{{ child.variety }}</span></p>
+                    {% if child.status == 'available' %}
+                    <p style="color: green">{{ child.status_based_on_gender }}</p>
+                    {% elif child.status == 'reserved' %}
+                    <p style="color: red">{{ child.status_based_on_gender }}</p>
+                    {% endif %}
+                    {% if child.status == 'owned' and child.owner %}
+                    <p>Владелец: {{ child.owner.short_name }}</p>
+                    {% endif %}
+                </div>
             </div>
-            <div class="col-md-8">
-                <p><b style="color: darkblue"><a href="{{ child.url }}">{{ child.full_name }}</a></b></p>
-                <p><span>{{ child.variety }}</span></p>
-                {% if child.status == 'available' %}
-                <p style="color: green">{{ child.status_based_on_gender }}</p>
-                {% elif child.status == 'reserved' %}
-                <p style="color: red">{{ child.status_based_on_gender }}</p>
-                {% endif %}
-                {% if child.status == 'owned' and child.owner %}
-                <p>Владелец: {{ child.owner.short_name }}</p>
-                {% endif %}
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
         {% endif %}
+    </div>
 </div>
 
 <div style="background-color: #fffff0; padding: 16px; padding-bottom: 1px;  margin-top: 2em;
@@ -134,8 +135,11 @@
                 <span>- {{ litter.mother.date_of_death|date:"d.m.Y" }}</span>
                 {% endif %}
                 {% endif %}
+                {% if litter.mother.breeder %}
+                <br/><span>Заводчик: {{ litter.father.breeder.short_name }}</span>
+                {% endif %}
                 {% if litter.mother.owner %}
-                <br/><span>владелец: {{ litter.mother.owner.short_name }}</span>
+                <br/><span>Владелец: {{ litter.father.owner.short_name }}</span>
                 {% endif %}
                 {% else %}
                 <span>нет данных</span>
@@ -239,8 +243,11 @@
                 <span>- {{ litter.father.date_of_death|date:"d.m.Y" }}</span>
                 {% endif %}
                 {% endif %}
+                {% if litter.father.breeder %}
+                <br/><span>Заводчик: {{ litter.father.breeder.short_name }}</span>
+                {% endif %}
                 {% if litter.father.owner %}
-                <br/><span>владелец: {{ litter.father.owner.short_name }}</span>
+                <br/><span>Владелец: {{ litter.father.owner.short_name }}</span>
                 {% endif %}
                 {% else %}
                 <span>нет данных</span>
