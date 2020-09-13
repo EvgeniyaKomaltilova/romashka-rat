@@ -72,7 +72,7 @@
                     {% endif %}
                 </div>
                 <div class="col-md-8">
-                    <p><b style="color: darkred"><a href="{{ child.url }}">{{ child.full_name }}</a></b></p>
+                    <p><b style="color: darkred"><a style="color: darkred" href="{{ child.url }}">{{ child.full_name }}</a></b></p>
                     <p><span>{{ child.variety }}</span></p>
                     {% if child.status == 'available' %}
                     <p style="color: green">{{ child.status_based_on_gender }}</p>
@@ -100,7 +100,7 @@
                     {% endif %}
                 </div>
                 <div class="col-md-8">
-                    <p><b style="color: darkblue"><a href="{{ child.url }}">{{ child.full_name }}</a></b></p>
+                    <p><b><a style="color: darkblue" href="{{ child.url }}">{{ child.full_name }}</a></b></p>
                     <p><span>{{ child.variety }}</span></p>
                     {% if child.status == 'available' %}
                     <p style="color: green">{{ child.status_based_on_gender }}</p>
@@ -166,14 +166,14 @@
             </td>
 
             <td>
-                            {% if litter.mother.father.mother and litter.mother.father.mother.public %}
-                            <a href="{% url 'rat' litter.mother.father.mother.id %}" style="color: DarkRed">
-                                {{ litter.mother.father.mother.full_name }}</a><br/>
-                            <span>{{ litter.mother.father.mother.variety }}</span>
-                            {% else %}
-                            <span>нет данных</span>
-                            {% endif %}
-                        </td>
+                {% if litter.mother.father.mother and litter.mother.father.mother.public %}
+                <a href="{% url 'rat' litter.mother.father.mother.id %}" style="color: DarkRed">
+                    {{ litter.mother.father.mother.full_name }}</a><br/>
+                <span>{{ litter.mother.father.mother.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
         </tr>
 
         <tr>

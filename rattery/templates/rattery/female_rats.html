@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-8">
                 <p>
-                    <b><a style="color: darkred" href="{% url 'rat' rat.id %}">{{ rat.full_name }}</a></b><br />
+                    <b><a style="color: darkred" href="{{ rat.url }}">{{ rat.full_name }}</a></b><br />
                     <span>{{ rat.variety }}</span><br />
                     {% if rat.date_of_death %}
                     <span>{{ rat.date_of_birth|date:'d.m.Y' }} - {{ rat.date_of_death|date:'d.m.Y' }}</span>

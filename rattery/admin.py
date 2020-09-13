@@ -44,8 +44,10 @@ class RatAdmin(admin.ModelAdmin):
                 ('gender',),
                 ('date_of_birth',),
                 ('date_of_death',),
-                ('mother', 'breeder',),
-                ('father', 'owner',),
+                ('mother',),
+                ('father',),
+                ('breeder',),
+                ('owner',),
                 ('information',),
             )
         }
