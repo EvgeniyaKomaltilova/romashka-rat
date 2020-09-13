@@ -135,11 +135,11 @@
                 <span>- {{ litter.mother.date_of_death|date:"d.m.Y" }}</span>
                 {% endif %}
                 {% endif %}
-                {% if litter.mother.breeder %}
-                <br/><span>Заводчик: {{ litter.father.breeder.short_name }}</span>
-                {% endif %}
                 {% if litter.mother.owner %}
                 <br/><span>Владелец: {{ litter.father.owner.short_name }}</span>
+                {% endif %}
+                {% if litter.mother.breeder %}
+                <br/><span>Заводчик: {{ litter.father.breeder.short_name }}</span>
                 {% endif %}
                 {% else %}
                 <span>нет данных</span>
@@ -243,11 +243,11 @@
                 <span>- {{ litter.father.date_of_death|date:"d.m.Y" }}</span>
                 {% endif %}
                 {% endif %}
-                {% if litter.father.breeder %}
-                <br/><span>Заводчик: {{ litter.father.breeder.short_name }}</span>
-                {% endif %}
                 {% if litter.father.owner %}
                 <br/><span>Владелец: {{ litter.father.owner.short_name }}</span>
+                {% endif %}
+                {% if litter.father.breeder %}
+                <br/><span>Заводчик: {{ litter.father.breeder.short_name }}</span>
                 {% endif %}
                 {% else %}
                 <span>нет данных</span>
