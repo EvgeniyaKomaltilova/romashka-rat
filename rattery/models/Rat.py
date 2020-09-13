@@ -58,6 +58,15 @@ class Rat(models.Model):
         verbose_name = 'крысу'
         verbose_name_plural = 'Крысы'
 
+    def save(self, *args, **kwargs):
+        if self.litter:
+            self.date_of_birth = self.litter.date_of_birth
+            self.prefix = self.litter.prefix
+            self.mother = self.litter.mother
+            self.father = self.litter.father
+            self.breeder = self.litter.breeder
+        super(Rat, self).save(*args, **kwargs)
+
     def main_photo(self):
         return get_main_photo(self)
 

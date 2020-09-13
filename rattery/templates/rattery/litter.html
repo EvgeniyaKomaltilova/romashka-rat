@@ -71,7 +71,7 @@
                     {% endif %}
                 </div>
                 <div class="col-md-8">
-                    <p><b style="color: darkred">{{ child.full_name }}</b></p>
+                    <p><b style="color: darkred"><a href="{{ rat.url }}">{{ child.full_name }}</a></b></p>
                     <p><span>{{ child.variety }}</span></p>
                     {% if child.status == 'available' %}
                     <p style="color: green">{{ child.status_based_on_gender }}</p>
@@ -100,7 +100,7 @@
                 {% endif %}
             </div>
             <div class="col-md-8">
-                <p><b style="color: darkblue">{{ child.full_name }}</b></p>
+                <p><b style="color: darkblue"><a href="{{ rat.url }}">{{ child.full_name }}</a></b></p>
                 <p><span>{{ child.variety }}</span></p>
                 {% if child.status == 'available' %}
                 <p style="color: green">{{ child.status_based_on_gender }}</p>

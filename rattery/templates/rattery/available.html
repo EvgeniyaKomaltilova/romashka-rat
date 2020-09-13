@@ -26,7 +26,8 @@
 
                 <div class="col-sm-7 col-md-8">
                     <p>
-                        <span><b><a href="">{{ rat.name }}</a></b> ({{ rat.gender }})</span><br />
+                        <span class="{{rat.gender}}"><b><a href="{{ rat.url }}">{{ rat.name }}</a></b></span>
+                        <span>({{ rat.gender }})</span><br />
                         <span>{{ rat.variety }}</span><br />
                         <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
                         {% if rat.status == 'available' %}
