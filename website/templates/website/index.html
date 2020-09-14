@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="d-none d-sm-block">
-    <h2 class="header" align="center" style="margin: 1em; color: #2b1e0d">Добро пожаловать на сайт<br />
-    питомника декоративных крыс "Ромашка"!</h2>
+    <h2 class="header" align="center" style="margin: 1em; color: orange">Добро пожаловать на сайт<br />
+    питомника "Ромашка"!</h2>
 </div>
 <div class="d-block d-sm-none">
-    <h5 class="header" align="center" style="margin: 1em; color: #2b1e0d">Добро пожаловать на сайт<br />
-    питомника декоративных крыс "Ромашка"!</h5>
+    <h5 class="header" align="center" style="margin: 1em; color: orange">Добро пожаловать на сайт<br />
+    питомника "Ромашка"!</h5>
 </div>
 
 <div class="row">
@@ -19,12 +19,43 @@
         {% endif %}
     </div>
 
-    <div class="col-md-5" style="border-left-color: #503112; border-left-style: solid; border-left-width: 2px;">
+    <div class="col-md-5 d-none d-sm-block" style="border-left-color: #503112; border-left-style: solid; border-left-width: 2px;">
         {% if rats %}
+        <div class="container d-none d-sm-block" style="margin-bottom: 1em; padding-top: 1em">
+        <h4>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</h4>
+        </div>
+        <div class="container d-block d-sm-none" style="margin-bottom: 1em; padding-top: 1em">
+            <p><b>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</b></p>
+        </div>
+
+        {% endif %}
+
+        {% for new in news %}
         <div class="container"
              style="margin-bottom: 1em; padding-top: 1em">
-        <p>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</p>
+            <p>
+                <b>{{ new.date|date:"d.m.Y" }}</b><br />
+                <span>{{ new.text|safe }}</span>
+            </p>
         </div>
+        {% endfor %}
+
+        {% if news %}
+        <div class="container">
+            <p><a href="{% url 'archive' %}">архив новостей</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-5 d-block d-sm-none">
+        {% if rats %}
+        <div class="container d-none d-sm-block" style="margin-bottom: 1em; padding-top: 1em">
+        <h4>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</h4>
+        </div>
+        <div class="container d-block d-sm-none" style="margin-bottom: 1em; padding-top: 1em">
+            <p><b>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</b></p>
+        </div>
+
         {% endif %}
 
         {% for new in news %}

@@ -29,6 +29,13 @@ def archive(request):
     return render(request, 'website/archive.html', context)
 
 
+def contract(request):
+    """Страница с договором на продажу крысенка"""
+    entries = Entry.objects.filter(public=True).filter(topic='contract')
+    context = {'entries': entries}
+    return render(request, 'website/contract.html', context)
+
+
 def varieties(request):
     """Страница с информацией о разновидностях крыс"""
     entries = Entry.objects.filter(public=True).filter(topic='varieties')

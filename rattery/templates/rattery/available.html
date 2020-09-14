@@ -3,10 +3,15 @@
 {% block content %}
 
 {% if rats %}
-<p style="margin-top: 1em; text-align: center">В питомнике есть крысята!</p>
+<p style="margin-top: 5px; text-align: center">В питомнике есть крысята!</p>
 {% else %}
-<p style="margin-top: 1em; text-align: center">В данный момент в питомнике нет свободных крысят.</p>
+<p style="margin-top: 5px; text-align: center">В данный момент в питомнике нет свободных крысят.</p>
 {% endif %}
+
+<div align="center">
+<a href="{% url 'questionnaire_form' %}" style="margin-right: 1em">Анкета будущего владельца</a>
+<a href="{% url 'contract' %}">Договор</a>
+</div>
 
 <div class="row">
 
@@ -18,7 +23,7 @@
                     {% if rat.main_photo %}
                     <img src="/static{{ rat.main_photo }}" alt="photo" width="100%">
                     {% else %}
-                    <img src="/static/images/default.png" alt="photo" width="80%">
+                    <img src="/static/images/default.jpg" alt="photo" width="100%">
                     {% endif %}
                 </div>
 

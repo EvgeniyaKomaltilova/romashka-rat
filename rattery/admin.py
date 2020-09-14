@@ -46,8 +46,8 @@ class RatAdmin(admin.ModelAdmin):
                 ('date_of_death',),
                 ('mother',),
                 ('father',),
-                ('breeder',),
                 ('owner',),
+                ('breeder',),
                 ('information',),
             )
         }
@@ -148,9 +148,3 @@ class QuestionnaireAdmin(admin.ModelAdmin):
         }
          ),
     )
-
-
-
-
-
-

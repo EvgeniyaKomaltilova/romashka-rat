@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from itertools import chain
-
 from rattery.models.Litter import Litter
 from rattery.models.Rat import Rat
 

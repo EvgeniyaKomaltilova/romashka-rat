@@ -9,6 +9,7 @@ class Entry(models.Model):
     TOPICS = [
         ('news', 'новости'),
         ('about', 'о питомнике'),
+        ('contract', 'договор'),
         ('varieties', 'разновидности'),
         ('colors', 'окрасы'),
         ('markings', 'маркировки')

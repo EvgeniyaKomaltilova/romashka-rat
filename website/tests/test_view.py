@@ -19,6 +19,16 @@ class AboutPageTest(TestCase):
         self.assertTemplateUsed(response, 'website/about.html')
 
 
+class ContractPageTest(TestCase):
+    """Тестирование отображения страницы с договором на продажу крысенка"""
+
+    def test_contract_returns_correct_html(self):
+        """тест: используется шаблон contract"""
+        response = self.client.get('/contract/')
+        self.assertTemplateUsed(response, 'website/contract.html')
+
+
+
 class VarietiesPageTest(TestCase):
     """Тестирование отображения страницы информации о разновидностях крыс"""
 
