@@ -5,6 +5,8 @@
 <div class="container">
     <h3 style="text-align: center">Литера {{ litter.full_name }}</h3>
 
+                                       {# РОДИТЕЛИ #}
+
     <div class="row" style="margin: 1em; margin-top: 2em">
 
         <div class="col-md-5" style="text-align: center;">
@@ -44,6 +46,8 @@
         </div>
     </div>
 
+                                    {# ИНФОРМАЦИЯ #}
+
     <div class="container" style="background-color: #fffff0; padding-left: 30px; padding-right: 20px; padding-top: 20px;
             padding-bottom: 5px; margin-bottom: 2em; box-shadow: #795014 1px 1px 20px -15px;">
         <p>Дата рождения: {{ litter.date_of_birth|date:'d.m.Y' }}</p>
@@ -55,10 +59,13 @@
         {% endif %}
     </div>
 
+                                      {# ДЕТИ #}
+
     {% if males or females %}
     <div class="row">
 
         <div class="col-md-6">
+                                      {# САМКИ #}
 
             {% for child in females %}
             <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px;
@@ -86,6 +93,7 @@
             </div>
             {% endfor %}
         </div>
+                                      {# САМЦЫ #}
 
         <div class="col-md-6">
             {% for child in males %}
@@ -118,12 +126,14 @@
     </div>
 </div>
 
+                               {# РОДОСЛОВНАЯ #}
 <div style="background-color: #fffff0; padding: 16px; padding-bottom: 1px;  margin-top: 2em;
             box-shadow: #795014 1px 1px 20px -15px;">
     <table class="table table-bordered">
         <thead></thead>
         <tbody>
         <tr>
+            {# мать #}
             <td rowspan="4">
                 {% if litter.mother and litter.mother.public %}
                 <a href="{% url 'rat' litter.mother.id %}" style="color: DarkRed">
@@ -146,6 +156,7 @@
                 {% endif %}
             </td>
 
+            {# мать матери (бабушка) #}
             <td rowspan="2">
                 {% if litter.mother.mother and litter.mother.mother.public %}
                 <a href="{% url 'rat' litter.mother.mother.id %}" style="color: DarkRed">
@@ -165,11 +176,12 @@
                 {% endif %}
             </td>
 
+            {# мать матери матери (прабабушка) #}
             <td>
-                {% if litter.mother.father.mother and litter.mother.father.mother.public %}
-                <a href="{% url 'rat' litter.mother.father.mother.id %}" style="color: DarkRed">
-                    {{ litter.mother.father.mother.full_name }}</a><br/>
-                <span>{{ litter.mother.father.mother.variety }}</span>
+                {% if litter.mother.mother.mother and litter.mother.mother.mother.public %}
+                <a href="{% url 'rat' litter.mother.mother.mother.id %}" style="color: DarkRed">
+                    {{ litter.mother.mother.mother.full_name }}</a><br/>
+                <span>{{ litter.mother.mother.mother.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
@@ -177,11 +189,13 @@
         </tr>
 
         <tr>
+
+            {# отец матери матери (прадедушка) #}
             <td>
-                {% if litter.mother.father.father and litter.mother.father.father.public %}
-                <a href="{% url 'rat' litter.mother.father.father.id %}" style="color: DarkBlue">
-                    {{ litter.mother.father.father.full_name }}</a><br/>
-                <span>{{ litter.mother.father.father.variety }}</span>
+                {% if litter.mother.mother.father and litter.mother.mother.father.public %}
+                <a href="{% url 'rat' litter.mother.mother.father.id %}" style="color: DarkBlue">
+                    {{ litter.mother.mother.father.full_name }}</a><br/>
+                <span>{{ litter.mother.mother.father.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
@@ -189,6 +203,7 @@
         </tr>
 
         <tr>
+            {# отец матери (дедушка) #}
             <td rowspan="2">
                 {% if litter.mother.father and litter.mother.father.public %}
                 <a href="{% url 'rat' litter.mother.father.id %}" style="color: DarkBlue">
@@ -208,30 +223,35 @@
                 {% endif %}
             </td>
 
+            {# мать отца матери (прабабушка) #}
             <td>
-                {% if litter.mother.mother.mother and litter.mother.mother.mother.public %}
-                <a href="{% url 'rat' litter.mother.mother.mother.id %}" style="color: DarkRed">
-                    {{ litter.mother.mother.mother.full_name }}</a><br/>
-                <span>{{ litter.mother.mother.mother.variety }}</span>
+                {% if litter.mother.father.mother and litter.mother.father.mother.public %}
+                <a href="{% url 'rat' litter.mother.father.mother.id %}" style="color: DarkRed">
+                    {{ litter.mother.father.mother.full_name }}</a><br/>
+                <span>{{ litter.mother.father.mother.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
             </td>
+
         </tr>
 
         <tr>
+            {# отец отца матери (прадедушка) #}
             <td>
-                {% if litter.mother.mother.father and litter.mother.mother.father.public %}
-                <a href="{% url 'rat' litter.mother.mother.father.id %}" style="color: DarkBlue">
-                    {{ litter.mother.mother.father.full_name }}</a><br/>
-                <span>{{ litter.mother.mother.father.variety }}</span>
+                {% if litter.mother.father.father and litter.mother.father.father.public %}
+                <a href="{% url 'rat' litter.mother.father.father.id %}" style="color: DarkBlue">
+                    {{ litter.mother.father.father.full_name }}</a><br/>
+                <span>{{ litter.mother.father.father.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
             </td>
+
         </tr>
 
         <tr>
+            {# отец #}
             <td rowspan="4">
                 {% if litter.father and litter.father.public %}
                 <a href="{% url 'rat' litter.father.id %}" style="color: DarkBlue">
@@ -254,6 +274,7 @@
                 {% endif %}
             </td>
 
+            {# мать отца (бабушка) #}
             <td rowspan="2">
                 {% if litter.father.mother and litter.father.mother.public %}
                 <a href="{% url 'rat' litter.father.mother.id %}" style="color: DarkRed">
@@ -273,11 +294,12 @@
                 {% endif %}
             </td>
 
+            {# мать матери отца (прабабушка) #}
             <td>
-                {% if litter.father.father.mother and litter.father.father.mother.public %}
-                <a href="{% url 'rat' litter.father.father.mother.id %}" style="color: DarkRed">
-                    {{ litter.father.father.mother.full_name }}</a><br/>
-                <span>{{ litter.father.father.mother.variety }}</span>
+                {% if litter.father.mother.mother and litter.father.mother.mother.public %}
+                <a href="{% url 'rat' litter.father.mother.mother.id %}" style="color: DarkRed">
+                    {{ litter.father.mother.mother.full_name }}</a><br/>
+                <span>{{ litter.father.mother.mother.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
@@ -285,18 +307,21 @@
         </tr>
 
         <tr>
+            {# отец матери отца (прадедушка) #}
             <td>
-                {% if litter.father.father.father and litter.father.father.father.public %}
-                <a href="{% url 'rat' litter.father.father.father.id %}" style="color: DarkBlue">
-                    {{ litter.father.father.father.full_name }}</a><br/>
-                <span>{{ litter.father.father.father.variety }}</span>
+                {% if litter.father.mother.father and litter.father.mother.father.public %}
+                <a href="{% url 'rat' litter.father.mother.father.id %}" style="color: DarkBlue">
+                    {{ litter.father.mother.father.full_name }}</a><br/>
+                <span>{{ litter.father.mother.father.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
             </td>
+
         </tr>
 
         <tr>
+            {# отец отца (дедушка) #}
             <td rowspan="2">
                 {% if litter.father.father and litter.father.father.public %}
                 <a href="{% url 'rat' litter.father.father.id %}" style="color: DarkBlue">
@@ -315,27 +340,32 @@
                 <span>нет данных</span>
                 {% endif %}
             </td>
+
+            {# мать отца отца (прабабушка) #}
             <td>
-                {% if litter.father.mother.mother and litter.father.mother.mother.public %}
-                <a href="{% url 'rat' litter.father.mother.mother.id %}" style="color: DarkRed">
-                    {{ litter.father.mother.mother.full_name }}</a><br/>
-                <span>{{ litter.father.mother.mother.variety }}</span>
+                {% if litter.father.father.mother and litter.father.father.mother.public %}
+                <a href="{% url 'rat' litter.father.father.mother.id %}" style="color: DarkRed">
+                    {{ litter.father.father.mother.full_name }}</a><br/>
+                <span>{{ litter.father.father.mother.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
             </td>
+
         </tr>
 
         <tr>
+            {# отец отца отца (прадедушка) #}
             <td>
-                {% if litter.father.mother.father and litter.father.mother.father.public %}
-                <a href="{% url 'rat' litter.father.mother.father.id %}" style="color: DarkBlue">
-                    {{ litter.father.mother.father.full_name }}</a><br/>
-                <span>{{ litter.father.mother.father.variety }}</span>
+                {% if litter.father.father.father and litter.father.father.father.public %}
+                <a href="{% url 'rat' litter.father.father.father.id %}" style="color: DarkBlue">
+                    {{ litter.father.father.father.full_name }}</a><br/>
+                <span>{{ litter.father.father.father.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}
             </td>
+
         </tr>
         </tbody>
     </table>

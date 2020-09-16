@@ -2,6 +2,8 @@
 
 {% block content %}
 
+                                  {# ОСНОВНАЯ ИНФОРМАЦИЯ #}
+
 <div class="row" style="background-color: #fffff0; box-shadow: #795014 1px 1px 20px -15px; padding-top: 15px;
                         padding-bottom: 15px">
     <div class="col-md-4">
@@ -81,7 +83,7 @@
         </p>
     </div>
 </div>
-
+                                {# ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ #}
 <div class="row" style="margin-top: 1em;">
     {% if rat.information %}
     <div class="col-md-7" style="padding: 5px">
@@ -91,6 +93,9 @@
         </div>
     </div>
     {% endif %}
+
+                                    {# ПОТОМКИ #}
+
     {% if rat.father_litters.exists or rat.mother_litters.exists %}
     <div class="col-md-5" style="padding: 5px">
         <div class="container" style="background-color: #fffff0; box-shadow: #795014 1px 1px 20px -15px; margin-bottom: 1em;
@@ -109,6 +114,7 @@
     {% endif %}
 </div>
 
+                                   {# ФОТОГРАФИИ #}
 {% if rat.photos.exists %}
 <div class="d-none d-sm-block">
     <div class="row" style="background-color: #fffff0; padding-left: 10px; padding-right: 20px; padding-top: 20px;
@@ -121,5 +127,251 @@
     </div>
 </div>
 {% endif %}
+
+                               {# РОДОСЛОВНАЯ #}
+<div style="background-color: #fffff0; padding: 16px; padding-bottom: 1px;  margin-top: 2em;
+            box-shadow: #795014 1px 1px 20px -15px;">
+    <table class="table table-bordered">
+        <thead></thead>
+        <tbody>
+        <tr>
+            {# мать #}
+            <td rowspan="4">
+                {% if rat.mother and rat.mother.public %}
+                <a href="{% url 'rat' rat.mother.id %}" style="color: DarkRed">
+                    {{ rat.mother.full_name }}</a><br/>
+                <span>{{ rat.mother.variety }}</span>
+                {% if rat.mother.date_of_birth %}
+                <br/><span>{{ rat.mother.date_of_birth|date:"d.m.Y" }}</span>
+                {% if rat.mother.date_of_death %}
+                <span>- {{ rat.mother.date_of_death|date:"d.m.Y" }}</span>
+                {% endif %}
+                {% endif %}
+                {% if rat.mother.owner %}
+                <br/><span>Владелец: {{ rat.father.owner.short_name }}</span>
+                {% endif %}
+                {% if rat.mother.breeder %}
+                <br/><span>Заводчик: {{ rat.father.breeder.short_name }}</span>
+                {% endif %}
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+            {# мать матери (бабушка) #}
+            <td rowspan="2">
+                {% if rat.mother.mother and rat.mother.mother.public %}
+                <a href="{% url 'rat' rat.mother.mother.id %}" style="color: DarkRed">
+                    {{ rat.mother.mother.full_name }}</a><br/>
+                <span>{{ rat.mother.mother.variety }}</span>
+                {% if rat.mother.mother.date_of_birth %}
+                <br/><span>{{ rat.mother.mother.date_of_birth|date:"d.m.Y" }}</span>
+                {% if rat.mother.mother.date_of_death %}
+                <span>- {{ rat.mother.mother.date_of_death|date:"d.m.Y" }}</span>
+                {% endif %}
+                {% endif %}
+                {% if rat.mother.mother.owner %}
+                <br/><span>вл. {{ rat.mother.mother.owner.short_name }}</span>
+                {% endif %}
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+            {# мать матери матери (прабабушка) #}
+            <td>
+                {% if rat.mother.mother.mother and rat.mother.mother.mother.public %}
+                <a href="{% url 'rat' rat.mother.mother.mother.id %}" style="color: DarkRed">
+                    {{ rat.mother.mother.mother.full_name }}</a><br/>
+                <span>{{ v.mother.mother.mother.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+
+            {# отец матери матери (прадедушка) #}
+            <td>
+                {% if rat.mother.mother.father and rat.mother.mother.father.public %}
+                <a href="{% url 'rat' rat.mother.mother.father.id %}" style="color: DarkBlue">
+                    {{ rat.mother.mother.father.full_name }}</a><br/>
+                <span>{{ rat.mother.mother.father.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            {# отец матери (дедушка) #}
+            <td rowspan="2">
+                {% if rat.mother.father and rat.mother.father.public %}
+                <a href="{% url 'rat' rat.mother.father.id %}" style="color: DarkBlue">
+                    {{ rat.mother.father.full_name }}</a><br/>
+                <span>{{ rat.mother.father.variety }}</span>
+                {% if rat.mother.father.date_of_birth %}
+                <br/><span>{{ rat.mother.father.date_of_birth|date:"d.m.Y" }}</span>
+                {% if rat.mother.father.date_of_death %}
+                <span>- {{ rat.mother.father.date_of_death|date:"d.m.Y" }}</span>
+                {% endif %}
+                {% endif %}
+                {% if rat.mother.father.owner %}
+                <br/><span>вл. {{ rat.mother.father.owner.short_name }}</span>
+                {% endif %}
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+            {# мать отца матери (прабабушка) #}
+            <td>
+                {% if rat.mother.father.mother and rat.mother.father.mother.public %}
+                <a href="{% url 'rat' rat.mother.father.mother.id %}" style="color: DarkRed">
+                    {{ rat.mother.father.mother.full_name }}</a><br/>
+                <span>{{ rat.mother.father.mother.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+        </tr>
+
+        <tr>
+            {# отец отца матери (прадедушка) #}
+            <td>
+                {% if rat.mother.father.father and rat.mother.father.father.public %}
+                <a href="{% url 'rat' rat.mother.father.father.id %}" style="color: DarkBlue">
+                    {{ rat.mother.father.father.full_name }}</a><br/>
+                <span>{{ rat.mother.father.father.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+        </tr>
+
+        <tr>
+            {# отец #}
+            <td rowspan="4">
+                {% if rat.father and rat.father.public %}
+                <a href="{% url 'rat' rat.father.id %}" style="color: DarkBlue">
+                    {{ rat.father.full_name }}</a><br/>
+                <span>{{ rat.father.variety }}</span>
+                {% if rat.father.date_of_birth %}
+                <br/><span>{{ rat.father.date_of_birth|date:"d.m.Y" }}</span>
+                {% if rat.father.date_of_death %}
+                <span>- {{ rat.father.date_of_death|date:"d.m.Y" }}</span>
+                {% endif %}
+                {% endif %}
+                {% if rat.father.owner %}
+                <br/><span>Владелец: {{ rat.father.owner.short_name }}</span>
+                {% endif %}
+                {% if rat.father.breeder %}
+                <br/><span>Заводчик: {{ rat.father.breeder.short_name }}</span>
+                {% endif %}
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+            {# мать отца (бабушка) #}
+            <td rowspan="2">
+                {% if rat.father.mother and rat.father.mother.public %}
+                <a href="{% url 'rat' rat.father.mother.id %}" style="color: DarkRed">
+                    {{ rat.father.mother.full_name }}</a><br/>
+                <span>{{ rat.father.mother.variety }}</span>
+                {% if rat.father.mother.date_of_birth %}
+                <br/><span>{{ rat.father.mother.date_of_birth|date:"d.m.Y" }}</span>
+                {% if rat.father.mother.date_of_death %}
+                <span>- {{ rat.father.mother.date_of_death|date:"d.m.Y" }}</span>
+                {% endif %}
+                {% endif %}
+                {% if rat.father.mother.owner %}
+                <br/><span>вл. {{ rat.father.mother.owner.short_name }}</span>
+                {% endif %}
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+            {# мать матери отца (прабабушка) #}
+            <td>
+                {% if rat.father.mother.mother and rat.father.mother.mother.public %}
+                <a href="{% url 'rat' rat.father.mother.mother.id %}" style="color: DarkRed">
+                    {{ rat.father.mother.mother.full_name }}</a><br/>
+                <span>{{ rat.father.mother.mother.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            {# отец матери отца (прадедушка) #}
+            <td>
+                {% if rat.father.mother.father and rat.father.mother.father.public %}
+                <a href="{% url 'rat' rat.father.mother.father.id %}" style="color: DarkBlue">
+                    {{ rat.father.mother.father.full_name }}</a><br/>
+                <span>{{ rat.father.mother.father.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+        </tr>
+
+        <tr>
+            {# отец отца (дедушка) #}
+            <td rowspan="2">
+                {% if rat.father.father and rat.father.father.public %}
+                <a href="{% url 'rat' rat.father.father.id %}" style="color: DarkBlue">
+                    {{ rat.father.father.full_name }}</a><br/>
+                <span>{{ rat.father.father.variety }}</span>
+                {% if rat.father.father.date_of_birth %}
+                <br/><span>{{ rat.father.father.date_of_birth|date:"d.m.Y" }}</span>
+                {% if rat.father.father.date_of_death %}
+                <span>- {{ rat.father.father.date_of_death|date:"d.m.Y" }}</span>
+                {% endif %}
+                {% endif %}
+                {% if rat.father.father.owner %}
+                <br/><span>вл. {{ rat.father.father.owner.short_name }}</span>
+                {% endif %}
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+            {# мать отца отца (прабабушка) #}
+            <td>
+                {% if rat.father.father.mother and rat.father.father.mother.public %}
+                <a href="{% url 'rat' rat.father.father.mother.id %}" style="color: DarkRed">
+                    {{ rat.father.father.mother.full_name }}</a><br/>
+                <span>{{ rat.father.father.mother.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+        </tr>
+
+        <tr>
+            {# отец отца отца (прадедушка) #}
+            <td>
+                {% if rat.father.father.father and rat.father.father.father.public %}
+                <a href="{% url 'rat' rat.father.father.father.id %}" style="color: DarkBlue">
+                    {{ rat.father.father.father.full_name }}</a><br/>
+                <span>{{ rat.father.father.father.variety }}</span>
+                {% else %}
+                <span>нет данных</span>
+                {% endif %}
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 {% endblock content %}
