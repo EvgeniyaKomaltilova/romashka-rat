@@ -77,6 +77,8 @@ def get_entry_name(obj):
         return f'Новости: {obj.title}'
     elif obj.topic == 'about':
         return f'О питомнике: {obj.title}'
+    elif obj.topic == 'contract':
+        return f'Договор: {obj.title}'
     elif obj.topic == 'varieties':
         return f'Разновидности: {obj.title}'
     elif obj.topic == 'colors':

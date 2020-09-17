@@ -64,6 +64,6 @@ class LitterPageTest(TestCase):
 
     def test_litter_returns_correct_html(self):
         """тест: используется шаблон litter"""
-        Litter.objects.create(year=2020)
-        response = self.client.get('/rats/litters/2020/1/')
+        litter = Litter.objects.create(year=2020)
+        response = self.client.get(f'/rats/litters/2020/{litter.id}/')
         self.assertTemplateUsed(response, 'rattery/litter.html')
