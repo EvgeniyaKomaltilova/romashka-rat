@@ -47,9 +47,13 @@
 </div>
 
 {% if dead_rats %}
-<p>--- за радугой ---</p>
-
-<div class="row">
+<p align="center">
+<button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapse_rainbow"
+        aria-expanded="false" aria-controls="collapse_rainbow" style="color: white">
+    за радугой
+</button>
+</p>
+<div class="row collapse" id="collapse_rainbow">
     {% for rat in dead_rats %}
     <div class="col-md-6">
 
@@ -60,7 +64,7 @@
                 {% if rat.main_photo %}
                 <img src="/static{{ rat.main_photo }}" alt="фото" style="width: 100%; max-width: 400px">
                 {% else %}
-                <img src="/static/images/default.png" alt="фото" width="60%">
+                <img src="/static/images/default.jpg" alt="фото" width="100%">
                 {% endif %}
             </div>
             <div class="col-md-8">

@@ -59,12 +59,20 @@ class Rat(models.Model):
         verbose_name_plural = 'Крысы'
 
     def save(self, *args, **kwargs):
+        """изменение базовых правил сохранения крысы"""
+        # если крыса добавляется из админки "литеры", то ей присваиваются значения полей литеры
         if self.litter:
             self.date_of_birth = self.litter.date_of_birth
             self.prefix = self.litter.prefix
             self.mother = self.litter.mother
             self.father = self.litter.father
             self.breeder = self.litter.breeder
+        # если у крысы есть дата смерти, она считается мертвой
+        if self.date_of_death:
+            self.alive = False
+        # если со дня рождения крысы прошло больше 4х лет, она считается мертвой
+        if (date.today() - self.date_of_birth).total_seconds() > 126144000:
+            self.alive = False
         super(Rat, self).save(*args, **kwargs)
 
     def main_photo(self):
