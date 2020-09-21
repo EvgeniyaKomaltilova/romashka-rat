@@ -2,7 +2,6 @@ from django.contrib import admin
 from romashka.services.photo import get_image_to_admin
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-
 from website.models.Entry import Entry
 from website.models.Image import Image
 

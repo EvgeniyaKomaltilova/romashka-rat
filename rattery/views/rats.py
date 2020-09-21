@@ -2,6 +2,9 @@ from django.shortcuts import render
 from rattery.models.Litter import Litter
 from rattery.models.Rat import Rat
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 
 def available(request):
     """Страница со свободными крысятами"""

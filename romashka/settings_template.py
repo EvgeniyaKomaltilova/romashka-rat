@@ -18,8 +18,10 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'rattery.apps.RatteryConfig',
     'pdf_generator.apps.PdfGeneratorConfig',
+    'api.apps.ApiConfig',
 
     'ckeditor',
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',
