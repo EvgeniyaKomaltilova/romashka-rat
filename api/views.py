@@ -13,6 +13,12 @@ class RatView(APIView):
         serializer = RatSerializer(rats, many=True)
         return Response({"rats": serializer.data})
 
+    def post(self, request):
+        rat = request.data.get('rat')
+        serializer = RatSerializer(data=rat)
+        if serializer.is_valid(raise_exception=True):
+            rat_saved = serializer.save()
+        return Response({"success": "Rat '{}' created successfully".format(rat_saved.title)})
 
 class LitterView(APIView):
 

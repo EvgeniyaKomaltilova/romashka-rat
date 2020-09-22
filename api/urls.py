@@ -4,6 +4,7 @@ from api.views import RatView, LitterView
 app_name = "api"
 
 urlpatterns = [
-    path('rats/', RatView.as_view(), name='rat_api'),
+    path('rats/', RatView.as_view(), name='rats_api'),
+    path('rats/<int:pk>', RatView.as_view(), name='rat_api'),
     path('litters/', LitterView.as_view(), name='litter_api'),
 ]
