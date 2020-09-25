@@ -1,28 +1,32 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from api.serializers import RatSerializer, LitterSerializer
+from rest_framework import viewsets
+from api.serializers import RatSerializer, LitterSerializer, LocationSerializer, PersonSerializer, PrefixSerializer
 from rattery.models.Litter import Litter
+from rattery.models.Location import Location
+from rattery.models.Person import Person
+from rattery.models.Prefix import Prefix
 from rattery.models.Rat import Rat
 
 
-class RatView(APIView):
+class RatViewSet(viewsets.ModelViewSet):
+    queryset = Rat.objects.filter(public=True)
+    serializer_class = RatSerializer
 
-    def get(self, request):
-        rats = Rat.objects.filter(public=True)
-        serializer = RatSerializer(rats, many=True)
-        return Response({"rats": serializer.data})
 
-    def post(self, request):
-        rat = request.data.get('rat')
-        serializer = RatSerializer(data=rat)
-        if serializer.is_valid(raise_exception=True):
-            rat_saved = serializer.save()
-        return Response({"success": "Rat '{}' created successfully".format(rat_saved.title)})
+class LitterViewSet(viewsets.ModelViewSet):
+    queryset = Litter.objects.filter(public=True)
+    serializer_class = LitterSerializer
 
-class LitterView(APIView):
 
-    def get(self, request):
-        litters = Litter.objects.filter(public=True)
-        serializer = LitterSerializer(litters, many=True)
-        return Response({"litters": serializer.data})
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+
+class LocationViewSet(viewsets.ModelViewSet):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+
+
+class PrefixViewSet(viewsets.ModelViewSet):
+    queryset = Prefix.objects.all()
+    serializer_class = PrefixSerializer

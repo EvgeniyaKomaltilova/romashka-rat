@@ -1,10 +1,13 @@
-from django.urls import path
-from api.views import RatView, LitterView
+from rest_framework.routers import DefaultRouter
+
+from api.views import LocationViewSet, LitterViewSet, RatViewSet, PersonViewSet, PrefixViewSet
 
 app_name = "api"
 
-urlpatterns = [
-    path('rats/', RatView.as_view(), name='rats_api'),
-    path('rats/<int:pk>', RatView.as_view(), name='rat_api'),
-    path('litters/', LitterView.as_view(), name='litter_api'),
-]
+router = DefaultRouter()
+router.register(r'locations', LocationViewSet, basename='location')
+router.register(r'persons', PersonViewSet, basename='persons')
+router.register(r'litters', LitterViewSet, basename='litters')
+router.register(r'rats', RatViewSet, basename='rats')
+router.register(r'prefix', PrefixViewSet, basename='prefix')
+urlpatterns = router.urls

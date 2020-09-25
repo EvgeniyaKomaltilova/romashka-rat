@@ -12,7 +12,9 @@
     </head>
 
     <body>
-        <div class="row" style="height: 14em; background: radial-gradient(ellipse, yellow, orange 70%);
+        <div>
+            <!-- шапка с крыской -->
+        <div class="row" style="width:101%; height: 14em; background: radial-gradient(ellipse, yellow, orange 70%);
             text-align: center">
             <div class="col-lg-4 col-md-2 d-none d-sm-none d-md-block"></div>
 
@@ -32,7 +34,10 @@
             </div>
         </div>
 
-        <nav class="navbar navbar-expand-sm sticky-top" style="background-color: #ffa500; margin-bottom: 2em">
+<div class="row" style="width:101%;">
+            <!-- меню -->
+        <nav class="navbar navbar-expand-sm sticky-top"
+             style="background-color: #ffa500; margin-bottom: 2em; width:100%;">
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
                   data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                   aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +46,7 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-sm-center" id="navbarSupportedContent">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" style="margin-left:1em">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'index' %}" id="main">главная</a>
                     </li>
@@ -78,11 +83,13 @@
                 </ul>
             </div>
         </nav>
-
+</div>
+            <!-- контент -->
         <div class="container">
             {% block content %} {% endblock content %}
         </div>
 
+            <!-- футер -->
         <footer class="footer">
             <div class="container" style="margin-top: 3em">
             </div>
@@ -93,7 +100,5 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script type="text/javascript" src='/static/js/romashka.js'></script>
-
     </body>
-
 </html>
