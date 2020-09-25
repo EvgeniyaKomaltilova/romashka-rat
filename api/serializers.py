@@ -28,7 +28,6 @@ class RatSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
 
-        instance.old_id = validated_data.get('old_id', instance.old_id)
         instance.name = validated_data.get('name', instance.name)
         instance.prefix_id = validated_data.get('prefix_id', instance.prefix_id)
         instance.variety = validated_data.get('variety', instance.variety)

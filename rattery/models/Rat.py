@@ -28,7 +28,6 @@ class Rat(models.Model):
         ('owned', 'у владельца')
     ]
 
-    old_id = models.PositiveSmallIntegerField(verbose_name='старый id', null=True, blank=True)
     public = models.BooleanField(verbose_name='опубликовать', default=True)
     alive = models.BooleanField(verbose_name='жив(а)', default=True)
     in_rattery = models.BooleanField(verbose_name='производитель', default=False)

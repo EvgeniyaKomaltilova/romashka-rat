@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from rattery.models.Litter import Litter
 from rattery.models.Location import Location
 from rattery.models.Person import Person
@@ -54,6 +53,13 @@ class RatAdmin(admin.ModelAdmin):
         ),
     )
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "mother":
+            kwargs["queryset"] = Rat.objects.filter(gender='female')
+        if db_field.name == "father":
+            kwargs["queryset"] = Rat.objects.filter(gender='male')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class RatInline(admin.TabularInline):
     model = Rat
@@ -63,12 +69,19 @@ class RatInline(admin.TabularInline):
 
 @admin.register(Litter)
 class LitterAdmin(admin.ModelAdmin):
-    list_display = ('id', 'full_name', 'number', 'date_of_birth', 'father', 'mother')
+    list_display = ('id', 'full_name', 'number', 'date_of_birth', 'mother', 'father')
     list_display_links = ('full_name',)
     list_filter = ('year', 'breeder')
-    search_fields = ('name', 'number', 'father__name', 'mother__name')
+    search_fields = ('name', 'number', 'mother__name', 'father__name')
     inlines = [RatInline]
     save_on_top = True
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "mother":
+            kwargs["queryset"] = Rat.objects.filter(gender='female')
+        if db_field.name == "father":
+            kwargs["queryset"] = Rat.objects.filter(gender='male')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(Person)
