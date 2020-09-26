@@ -71,7 +71,7 @@ class RatInline(admin.TabularInline):
 class LitterAdmin(admin.ModelAdmin):
     list_display = ('id', 'full_name', 'number', 'date_of_birth', 'mother', 'father')
     list_display_links = ('full_name',)
-    list_filter = ('year', 'breeder')
+    list_filter = ('year',)
     search_fields = ('name', 'number', 'mother__name', 'father__name')
     inlines = [RatInline]
     save_on_top = True

@@ -14,7 +14,7 @@
             {% if litter.mother.main_photo %}
             <img src="/static{{ litter.mother.main_photo }}" alt="фото матери" style="width: 100%; max-width: 400px">
             {% else %}
-            <img src="/static/images/default.jpg" alt="photo" width="100%">
+            <img src="/static/images/default.jpg" alt="фото матери" style="width: 100%; max-width: 400px">
             {% endif %}
             <p>
                 <b style="color: darkred">{{ litter.mother.full_name }} </b><br/>
@@ -34,7 +34,7 @@
             {% if litter.father.main_photo %}
             <img src="/static{{ litter.father.main_photo }}" alt="фото отца" style="width: 100%; max-width: 400px">
             {% else %}
-            <img src="/static/images/default.jpg" alt="photo" width="60%">
+            <img src="/static/images/default.jpg" alt="фото отца" style="width: 100%; max-width: 400px">
             {% endif %}
             <p class="center">
                 <b style="color: darkblue">{{ litter.father.full_name }}</b><br/>

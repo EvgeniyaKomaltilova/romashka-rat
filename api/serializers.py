@@ -11,6 +11,7 @@ class RatSerializer(serializers.ModelSerializer):
         model = Rat
         fields = (
             'id',
+            'in_rattery',
             'litter',
             'name',
             'prefix',
