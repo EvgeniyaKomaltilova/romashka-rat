@@ -1,9 +1,7 @@
 from django.shortcuts import render
-
 from rattery.models.Rat import Rat
 from website.models.Image import Image
 from website.models.Entry import Entry
-from itertools import chain
 
 
 def main_page(request):

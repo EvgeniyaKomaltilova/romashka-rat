@@ -1,6 +1,5 @@
 from datetime import date
 from django.db import models
-
 from romashka.services.litters_string import get_litters_as_string
 from romashka.services.photo import get_main_photo
 from romashka.services.status import get_status_based_on_gender
@@ -10,6 +9,11 @@ from romashka.services.absolute_urls import get_rat_url
 
 
 class Rat(models.Model):
+    """Модель крысы"""
+
+    class Meta:
+        verbose_name = 'Крысу'
+        verbose_name_plural = 'Крысы'
 
     GENDER = [
         ('male', 'самец'),
@@ -54,12 +58,8 @@ class Rat(models.Model):
                                null=True, blank=True)
     information = models.TextField(verbose_name='информация', max_length=2048, null=True, blank=True)
 
-    class Meta:
-        verbose_name = 'крысу'
-        verbose_name_plural = 'Крысы'
-
     def save(self, *args, **kwargs):
-        """изменение базовых правил сохранения крысы"""
+        """Изменение базовых правил сохранения крысы"""
         # если крыса добавляется из админки "литеры", то ей присваиваются значения полей литеры
         if self.litter:
             self.date_of_birth = self.litter.date_of_birth
@@ -76,24 +76,31 @@ class Rat(models.Model):
         super(Rat, self).save(*args, **kwargs)
 
     def main_photo(self):
+        """Главное фото: последнее добавленное"""
         return get_main_photo(self)
 
     def status_based_on_gender(self):
+        """Статус крысы с учетом окончания -а в женском роде"""
         return get_status_based_on_gender(self)
 
     def full_name(self):
+        """Полное имя: кличка и приставка питомника"""
         return get_full_rat_name(self)
 
     def lifespan(self):
+        """Продолжительность жизни умершей крысы"""
         return get_rat_lifespan(self)
 
     def current_age(self):
+        """Возраст крысы на данный момент времени"""
         return get_rat_current_age(self)
 
     def litters(self):
+        """Все пометы, рожденные крысой"""
         return get_litters_as_string(self)
 
     def url(self):
+        """Ссылка на крысу"""
         return get_rat_url(self)
 
     def __str__(self):

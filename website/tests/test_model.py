@@ -7,6 +7,7 @@ class ImageModelTest(TestCase):
     """Тестирование модели Image"""
 
     def test_can_saving_and_retrieving_images(self):
+        """тест: объект изображения сохраняется"""
         entry = Entry.objects.create()
         Image.objects.create(main_page=True, name='first', entry=entry)
         Image.objects.create(name='second')
@@ -22,6 +23,7 @@ class EntryModelTest(TestCase):
     """Тестирование модели Entry"""
 
     def test_can_saving_and_retrieving_entries(self):
+        """тест: объект записи сохраняется"""
         Entry.objects.create(public=True, topic='test_topic', title='test_title', text='first')
         Entry.objects.create(text='second')
         entries = Entry.objects.all()

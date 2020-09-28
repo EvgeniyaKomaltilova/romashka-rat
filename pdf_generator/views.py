@@ -7,18 +7,17 @@ from rattery.models.Rat import Rat
 
 
 def litter_pedigree_view(request, data):
-    pass
-
-
-def rat_pedigree_view(request, data):
+    """Генерация PDF родословной помета"""
     pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
 
     rat = Rat.objects.get(id=data)
     print('RAT:', rat.variety)
 
     response = HttpResponse(content_type='application/pdf')
+
     # файл для скачивания
     # response['Content-Disposition'] = 'attachment; filename="rat_pedigree.pdf"'
+
     # файл для чтения
     response['Content-Disposition'] = 'filename="rat_pedigree.pdf"'
 

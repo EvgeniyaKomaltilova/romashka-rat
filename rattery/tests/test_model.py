@@ -1,6 +1,5 @@
 from datetime import date
 from django.test import TestCase
-
 from rattery.models.Litter import Litter
 from rattery.models.Location import Location
 from rattery.models.Person import Person

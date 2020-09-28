@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-
 from rattery.forms import QuestionnaireForm
 
 
 def questionnaire_form(request):
+    """Форма для заполнения анкеты"""
     if request.method != 'POST':
         form = QuestionnaireForm()
     else:
@@ -15,4 +15,5 @@ def questionnaire_form(request):
 
 
 def questionnaire_success(request):
+    """Отображение страницы успешного заполнения анкеты"""
     return render(request, 'rattery/questionnaire_success.html')

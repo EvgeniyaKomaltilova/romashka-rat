@@ -148,10 +148,10 @@
                 {% endif %}
                 {% endif %}
                 {% if rat.mother.owner %}
-                <br/><span>Владелец: {{ rat.father.owner.short_name }}</span>
+                <br/><span>Владелец: {{ rat.mother.owner.short_name }}</span>
                 {% endif %}
                 {% if rat.mother.breeder %}
-                <br/><span>Заводчик: {{ rat.father.breeder.short_name }}</span>
+                <br/><span>Заводчик: {{ rat.mother.breeder.short_name }}</span>
                 {% endif %}
                 {% else %}
                 <span>нет данных</span>
@@ -183,7 +183,7 @@
                 {% if rat.mother.mother.mother and rat.mother.mother.mother.public %}
                 <a href="{% url 'rat' rat.mother.mother.mother.id %}" style="color: DarkRed">
                     {{ rat.mother.mother.mother.full_name }}</a><br/>
-                <span>{{ v.mother.mother.mother.variety }}</span>
+                <span>{{ rat.mother.mother.mother.variety }}</span>
                 {% else %}
                 <span>нет данных</span>
                 {% endif %}

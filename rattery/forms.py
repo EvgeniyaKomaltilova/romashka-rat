@@ -1,9 +1,9 @@
 from django import forms
-
 from rattery.models.Questionnaire import Questionnaire
 
 
 class QuestionnaireForm(forms.ModelForm):
+    """Форма анкеты для потенциального владельца"""
 
     class Meta:
         model = Questionnaire

@@ -10,18 +10,21 @@ admin.site.site_header = 'Панель администратора'
 
 
 class ImageInline(admin.TabularInline):
+    """Встроенная панель изображений для отображения на странице записи"""
     model = Image
     extra = 0
     fields = ('name', 'picture', 'get_image')
     readonly_fields = ('get_image',)
 
     def get_image(self, obj):
+        """Получение изображения"""
         return get_image_to_admin(obj)
 
     get_image.short_description = 'изображение'
 
 
 class EntryAdminForm(forms.ModelForm):
+    """Добавление текстового редактора на страницу записи"""
     text = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
@@ -31,6 +34,7 @@ class EntryAdminForm(forms.ModelForm):
 
 @admin.register(Entry)
 class EntryAdmin(admin.ModelAdmin):
+    """Отображение записей в админке"""
     list_display = ('id', 'title', 'topic', 'date', 'public')
     list_display_links = ('title',)
     inlines = [ImageInline]
@@ -43,15 +47,17 @@ class EntryAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
+    """Отображение изображений в админке"""
     list_display = ('id', 'name', 'entry', 'picture', 'main_page')
     list_display_links = ('name',)
     search_fields = ('name',)
     save_on_top = True
     readonly_fields = ('get_image',)
     list_editable = ('main_page',)
-
+    autocomplete_fields = ['entry']
 
     def get_image(self, obj):
+        """Получение изображения"""
         return get_image_to_admin(obj)
 
     get_image.short_description = 'изображение'

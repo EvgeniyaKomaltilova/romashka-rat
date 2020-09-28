@@ -2,11 +2,13 @@ from rest_framework import serializers
 from rattery.models.Litter import Litter
 from rattery.models.Location import Location
 from rattery.models.Person import Person
+from rattery.models.Photo import Photo
 from rattery.models.Prefix import Prefix
 from rattery.models.Rat import Rat
 
 
 class RatSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Rat"""
     class Meta:
         model = Rat
         fields = (
@@ -28,6 +30,7 @@ class RatSerializer(serializers.ModelSerializer):
 
 
 class LitterSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Litter"""
     class Meta:
         model = Litter
         fields = (
@@ -43,6 +46,7 @@ class LitterSerializer(serializers.ModelSerializer):
 
 
 class PersonSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Person"""
     class Meta:
         model = Person
         fields = (
@@ -54,6 +58,7 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class LocationSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Location"""
     class Meta:
         model = Location
         fields = (
@@ -63,6 +68,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class PrefixSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Prefix"""
     class Meta:
         model = Prefix
         fields = (

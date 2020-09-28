@@ -28,7 +28,6 @@ class ContractPageTest(TestCase):
         self.assertTemplateUsed(response, 'website/contract.html')
 
 
-
 class VarietiesPageTest(TestCase):
     """Тестирование отображения страницы информации о разновидностях крыс"""
 

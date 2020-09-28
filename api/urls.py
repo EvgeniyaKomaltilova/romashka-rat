@@ -1,5 +1,4 @@
 from rest_framework.routers import DefaultRouter
-
 from api.views import LocationViewSet, LitterViewSet, RatViewSet, PersonViewSet, PrefixViewSet
 
 app_name = "api"
