@@ -8,12 +8,12 @@ class QuestionnaireForm(forms.ModelForm):
     class Meta:
         model = Questionnaire
 
-        fields = ['name', 'email', 'age', 'location', 'which_baby_rat', 'allergy', 'know_how', 'pet_or_breed',
+        fields = ['name', 'contact', 'age', 'location', 'which_baby_rat', 'allergy', 'know_how', 'pet_or_breed',
                   'friend', 'contract', 'recommendation', 'additionally']
 
         labels = {
             'name': 'Ваше имя',
-            'email': 'E-mail для связи',
+            'contact': 'Страница вКонтакте или e-mail для связи',
             'age': 'Сколько вам полных лет?',
             'location': 'Где вы проживаете?',
             'which_baby_rat': 'Какой крысенок (крысята) вас интересует?',

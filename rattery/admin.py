@@ -163,13 +163,13 @@ class PrefixAdmin(admin.ModelAdmin):
 @admin.register(Questionnaire)
 class QuestionnaireAdmin(admin.ModelAdmin):
     """Отображение анкет в админке"""
-    list_display = ('id', 'name', 'age', 'location', 'email', 'date', 'read', 'approved',)
+    list_display = ('id', 'name', 'age', 'location', 'contact', 'date', 'read', 'approved',)
     list_display_links = ('name',)
     list_filter = ('read', 'approved')
     search_fields = ('name',)
     save_on_top = True
     list_editable = ('read', 'approved',)
-    readonly_fields = ('date', 'name', 'email', 'age', 'location', 'which_baby_rat', 'allergy', 'know_how',
+    readonly_fields = ('date', 'name', 'contact', 'age', 'location', 'which_baby_rat', 'allergy', 'know_how',
                        'pet_or_breed', 'friend', 'contract', 'recommendation', 'additionally')
     fieldsets = (
         (None, {
