@@ -184,7 +184,7 @@ class QuestionnaireAdmin(admin.ModelAdmin):
                 ('name',),
                 ('age',),
                 ('location',),
-                ('email',),
+                ('contact',),
             )
         }
          ),
