@@ -2,7 +2,6 @@ from rest_framework import serializers
 from rattery.models.Litter import Litter
 from rattery.models.Location import Location
 from rattery.models.Person import Person
-from rattery.models.Photo import Photo
 from rattery.models.Prefix import Prefix
 from rattery.models.Rat import Rat
 
