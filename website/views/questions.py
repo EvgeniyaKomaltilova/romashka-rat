@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-
+from django.http import HttpResponseRedirect
 from website.forms import QuestionForm
 
 
@@ -11,4 +10,4 @@ def question_form(request):
     if q_form.is_valid():
         q_form.save()
 
-    return redirect('../')
+    return HttpResponseRedirect('../')

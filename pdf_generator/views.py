@@ -3,15 +3,14 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
-from rattery.models.Rat import Rat
+from rattery.models.Litter import Litter
 
 
 def litter_pedigree_view(request, data):
     """Генерация PDF родословной помета"""
     pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
 
-    rat = Rat.objects.get(id=data)
-    print('RAT:', rat.variety)
+    litter = Litter.objects.get(id=data)
 
     response = HttpResponse(content_type='application/pdf')
 
@@ -25,13 +24,12 @@ def litter_pedigree_view(request, data):
 
     pdf = canvas.Canvas(response)
     pdf.setFont("Verdana", 8)
-    pdf.drawString(10, 820, f'Имя: {rat.name} {rat.prefix}')
-    pdf.drawString(10, 810, f'Тип: {rat.variety}')
-    pdf.drawString(10, 800, f'Дата рождения: {rat.date_of_birth}')
-    if rat.father:
-        pdf.drawString(10, 780, f'Отец: {rat.father.name} {rat.father.prefix} ({rat.father.variety})')
-    if rat.mother:
-        pdf.drawString(10, 770, f'Мать: {rat.mother.name} {rat.mother.prefix} ({rat.mother.variety})')
+    pdf.drawString(10, 820, f'Имя: {litter.name} {litter.prefix}')
+    pdf.drawString(10, 810, f'Дата рождения: {litter.date_of_birth}')
+    if litter.father:
+        pdf.drawString(10, 780, f'Отец: {litter.father.name} {litter.father.prefix} ({litter.father.variety})')
+    if litter.mother:
+        pdf.drawString(10, 770, f'Мать: {litter.mother.name} {litter.mother.prefix} ({litter.mother.variety})')
     pdf.showPage()
     pdf.save()
 

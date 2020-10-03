@@ -104,11 +104,10 @@
             <div class="chat-popup" id="myForm">
                 <form action="{% url 'website:question' %}" class="form-container" method="post">
                     {% csrf_token %}
-{{ form.email}}
-                    {{form.text}}
-<!--                    <input type="text" placeholder="Введите e-mail для связи" id="email" name="email" required class="inp">-->
 
-<!--                    <textarea placeholder="Введите ваш вопрос" id="text" name="text" required></textarea>-->
+                    {{ form.email }}
+
+                    {{ form.text }}
 
                     <button type="submit" class="btn">Отправить</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
