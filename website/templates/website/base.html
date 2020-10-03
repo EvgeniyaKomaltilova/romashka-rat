@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load question_extra %}
 
 <html lang="en">
 <head>
@@ -47,11 +48,11 @@
         <div class="collapse navbar-collapse justify-content-sm-center" id="navbarSupportedContent">
             <ul class="navbar-nav" style="margin-left:1em">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}" id="main">главная</a>
+                    <a class="nav-link" href="{% url 'website:index' %}" id="main">главная</a>
                 </li>
                 <li class="nav-link d-none"><span>|</span></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">о нас</a>
+                    <a class="nav-link" href="{% url 'website:about' %}">о нас</a>
                 </li>
                 <li class="nav-link d-none"><span>|</span></li>
                 <li class="nav-item dropdown">
@@ -74,9 +75,9 @@
                         стандарт
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: lightyellow">
-                        <a class="dropdown-item" href="{% url 'varieties' %}" style="color: orange">разновидности</a>
-                        <a class="dropdown-item" href="{% url 'colors' %}" style="color: orange">окрасы</a>
-                        <a class="dropdown-item" href="{% url 'markings' %}" style="color: orange">маркировки</a>
+                        <a class="dropdown-item" href="{% url 'website:varieties' %}" style="color: orange">разновидности</a>
+                        <a class="dropdown-item" href="{% url 'website:colors' %}" style="color: orange">окрасы</a>
+                        <a class="dropdown-item" href="{% url 'website:markings' %}" style="color: orange">маркировки</a>
                     </div>
                 </li>
             </ul>
@@ -96,15 +97,18 @@
 <footer class="footer"></footer>
 
 <!-- Форма обратной связи -->
+{% question_form as form %}
 
             <button type="button" class="open-button" onclick="openForm()">Задать вопрос</button>
 
             <div class="chat-popup" id="myForm">
-                <form action="../action_page.php" class="form-container">
+                <form action="{% url 'website:question' %}" class="form-container" method="post">
+                    {% csrf_token %}
+{{ form.email}}
+                    {{form.text}}
+<!--                    <input type="text" placeholder="Введите e-mail для связи" id="email" name="email" required class="inp">-->
 
-                    <input type="text" placeholder="Введите e-mail для связи" name="email" required class="inp">
-
-                    <textarea placeholder="Введите ваш вопрос" name="msg" required></textarea>
+<!--                    <textarea placeholder="Введите ваш вопрос" id="text" name="text" required></textarea>-->
 
                     <button type="submit" class="btn">Отправить</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>

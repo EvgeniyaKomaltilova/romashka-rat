@@ -4,6 +4,7 @@ from ckeditor.widgets import CKEditorWidget
 from django import forms
 from website.models.Entry import Entry
 from website.models.Image import Image
+from website.models.Question import Question
 
 admin.site.site_title = 'Панель администратора'
 admin.site.site_header = 'Панель администратора'
@@ -61,3 +62,11 @@ class ImageAdmin(admin.ModelAdmin):
         return get_image_to_admin(obj)
 
     get_image.short_description = 'изображение'
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    """Отображение вопросов в админке"""
+    list_display = ('id', 'email')
+    list_display_links = ('email',)
+    readonly_fields = ('email', 'text')
