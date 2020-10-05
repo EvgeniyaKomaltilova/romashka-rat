@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+
 from rattery.models.Litter import Litter
 from rattery.models.Location import Location
 from rattery.models.Person import Person
@@ -87,13 +89,23 @@ class RatAdmin(admin.ModelAdmin):
 @admin.register(Litter)
 class LitterAdmin(admin.ModelAdmin):
     """Отображение пометов в админке"""
-    list_display = ('id', 'full_name', 'number', 'date_of_birth', 'mother', 'father')
+    list_display = ('id', 'get_pdf', 'get_csv', 'full_name', 'number', 'date_of_birth', 'mother', 'father',)
     list_display_links = ('full_name',)
     list_filter = ('year',)
     search_fields = ('name', 'number', 'mother__name', 'father__name')
     autocomplete_fields = ['father', 'mother', 'breeder']
     inlines = [RatToLitterInline]
     save_on_top = True
+
+    def get_pdf(self, obj):
+        return mark_safe(f'<a href="/pdf/litter/{obj.id}" class="button">PDF</a>')
+
+    get_pdf.short_description = ''
+
+    def get_csv(self, obj):
+        return mark_safe(f'<a href="/rats/litters/{obj.year}/{obj.id}/csv" class="button">CSV</a>')
+
+    get_csv.short_description = ''
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         """Фильтр по полу при выборе отца и матери"""

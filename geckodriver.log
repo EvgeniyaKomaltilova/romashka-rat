@@ -262,3 +262,11 @@ console.warn: services.settings: main/cfr sync interrupted by shutdown
 console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
 1601720410980	Marionette	INFO	Listening on port 54969
 1601720445960	Marionette	INFO	Stopped listening on port 54969
+1601876399847	geckodriver	INFO	Listening on 127.0.0.1:60632
+1601876400847	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofilean0YeC"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1601876409416	Marionette	INFO	Listening on port 60643
+1601876409522	Marionette	WARN	TLS certificate errors will be ignored for this session
+1601876410648	Marionette	INFO	Stopped listening on port 60643
+console.error: services.settings: 
+  main/whats-new-panel Signature failed  TypeError: NetworkError when attempting to fetch resource.

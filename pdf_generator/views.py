@@ -4,6 +4,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from rattery.models.Litter import Litter
+from romashka.services.pdf import get_pedigree_pdf
 
 
 def litter_pedigree_view(request, data):
@@ -15,23 +16,15 @@ def litter_pedigree_view(request, data):
     response = HttpResponse(content_type='application/pdf')
 
     # файл для скачивания
-    # response['Content-Disposition'] = 'attachment; filename="rat_pedigree.pdf"'
+    # response['Content-Disposition'] = 'attachment; filename="pedigree.pdf"'
 
     # файл для чтения
-    response['Content-Disposition'] = 'filename="rat_pedigree.pdf"'
+    response['Content-Disposition'] = 'filename="pedigree"'
 
     buffer = BytesIO()
-
     pdf = canvas.Canvas(response)
-    pdf.setFont("Verdana", 8)
-    pdf.drawString(10, 820, f'Имя: {litter.name} {litter.prefix}')
-    pdf.drawString(10, 810, f'Дата рождения: {litter.date_of_birth}')
-    if litter.father:
-        pdf.drawString(10, 780, f'Отец: {litter.father.name} {litter.father.prefix} ({litter.father.variety})')
-    if litter.mother:
-        pdf.drawString(10, 770, f'Мать: {litter.mother.name} {litter.mother.prefix} ({litter.mother.variety})')
-    pdf.showPage()
-    pdf.save()
+
+    get_pedigree_pdf(litter, pdf)
 
     pdf = buffer.getvalue()
     buffer.close()

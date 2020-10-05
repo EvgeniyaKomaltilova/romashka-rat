@@ -1,6 +1,10 @@
+import csv
+
+from django.http import HttpResponse
 from django.shortcuts import render
 from rattery.models.Litter import Litter
 from rattery.models.Rat import Rat
+from romashka.services.csv import get_csv_pedigree
 
 
 def available(request):
@@ -53,3 +57,11 @@ def litter(request, litter_year, litter_id):
     females = litter_object.children.filter(gender='female')
     context = {'litter': litter_object, 'males': males, 'females': females}
     return render(request, 'rattery/litter.html', context)
+
+
+def csv_pedigree(request, litter_year, litter_id):
+    """Генератор родословной в xls"""
+    litter = Litter.objects.get(year=litter_year, id=litter_id)
+    response = get_csv_pedigree(litter)
+
+    return response

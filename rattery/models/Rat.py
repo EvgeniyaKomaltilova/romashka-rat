@@ -83,6 +83,7 @@ class Rat(models.Model):
         """Статус крысы с учетом окончания -а в женском роде"""
         return get_status_based_on_gender(self)
 
+    @property
     def full_name(self):
         """Полное имя: кличка и приставка питомника"""
         return get_full_rat_name(self)
@@ -104,4 +105,4 @@ class Rat(models.Model):
         return get_rat_url(self)
 
     def __str__(self):
-        return self.full_name()
+        return self.full_name

@@ -10,6 +10,7 @@ urlpatterns = [
     # пометы
     path('litters/<int:litter_year>/', rats.litters, name='litters'),
     path('litters/<int:litter_year>/<int:litter_id>/', rats.litter, name='litter'),
+    path('litters/<int:litter_year>/<int:litter_id>/csv', rats.csv_pedigree, name='csv_pedigree'),
     # анкета
     path('questionnaire/', questionnaire.questionnaire_form, name='questionnaire_form'),
     path('questionnaire/success/', questionnaire.questionnaire_success, name='questionnaire_success'),
