@@ -36,20 +36,20 @@ def contract(request):
 
 def varieties(request):
     """Страница с информацией о разновидностях крыс"""
-    entries = Entry.objects.filter(public=True).filter(topic='varieties')
+    entries = Entry.objects.filter(public=True).filter(topic='varieties').order_by('date')
     context = {'entries': entries}
     return render(request, 'website/varieties.html', context)
 
 
 def colors(request):
     """Страница с информацией о разновидностях крыс"""
-    entries = Entry.objects.filter(public=True).filter(topic='colors')
+    entries = Entry.objects.filter(public=True).filter(topic='colors').order_by('date')
     context = {'entries': entries}
     return render(request, 'website/colors.html', context)
 
 
 def markings(request):
     """Страница с информацией о разновидностях крыс"""
-    entries = Entry.objects.filter(public=True).filter(topic='markings')
+    entries = Entry.objects.filter(public=True).filter(topic='markings').order_by('date')
     context = {'entries': entries}
     return render(request, 'website/markings.html', context)
