@@ -10,9 +10,6 @@ def get_csv_pedigree(litter):
     response.write(u'\ufeff'.encode('utf8'))
     writer = csv.writer(response)
 
-    writer.writerow(['Питомник декоративных крыс "Ромашка" (г. Санкт-Петербург)'])
-    writer.writerow(['Родословная декоративной крысы'])
-
     try:
         writer.writerow([
             f'Литера {litter.name} {litter.prefix}',
@@ -1137,7 +1134,7 @@ def get_csv_pedigree(litter):
             ])
             writer.writerow([
                 '',
-                '',
+                'нет данных',
                 '',
                 '',
             ])
