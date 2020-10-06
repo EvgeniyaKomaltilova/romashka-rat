@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load question_extra %}
+{% load current_year %}
 
 <html lang="en">
 <head>
@@ -68,7 +69,8 @@
                 </li>
                 <li class="nav-link d-none"><span>|</span></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'litters' 2020 %}">крысята</a>
+                    {% current_year as year %}
+                    <a class="nav-link" href="{% url 'litters' year %}">крысята</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button"
@@ -95,7 +97,9 @@
 </div>
 
 <!-- футер -->
-<footer class="footer"></footer>
+<footer class="footer">
+    <p></p>
+</footer>
 
 <!-- Форма обратной связи -->
 {% question_form as form %}

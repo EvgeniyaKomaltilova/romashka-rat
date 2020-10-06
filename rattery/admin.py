@@ -8,6 +8,7 @@ from rattery.models.Photo import Photo
 from rattery.models.Prefix import Prefix
 from rattery.models.Questionnaire import Questionnaire
 from rattery.models.Rat import Rat
+
 from romashka.services.count import get_owned_rat_count
 from romashka.services.naming import get_person_short_name
 from romashka.services.photo import get_image_to_admin
@@ -89,23 +90,23 @@ class RatAdmin(admin.ModelAdmin):
 @admin.register(Litter)
 class LitterAdmin(admin.ModelAdmin):
     """Отображение пометов в админке"""
-    list_display = ('id', 'get_pdf', 'get_csv', 'full_name', 'number', 'date_of_birth', 'mother', 'father',)
-    list_display_links = ('full_name',)
+    list_display = ('id', 'get_csv', 'name', 'number', 'date_of_birth', 'mother', 'father',)
+    list_display_links = ('name',)
     list_filter = ('year',)
     search_fields = ('name', 'number', 'mother__name', 'father__name')
     autocomplete_fields = ['father', 'mother', 'breeder']
     inlines = [RatToLitterInline]
     save_on_top = True
 
-    def get_pdf(self, obj):
-        return mark_safe(f'<a href="/pdf/litter/{obj.id}" class="button">PDF</a>')
-
-    get_pdf.short_description = ''
+    # def get_pdf(self, obj):
+    #     return mark_safe(f'<a href="/pdf/litter/{obj.id}" class="button">PDF</a>')
+    #
+    # get_pdf.short_description = ''
 
     def get_csv(self, obj):
-        return mark_safe(f'<a href="/rats/litters/{obj.year}/{obj.id}/csv" class="button">CSV</a>')
+        return mark_safe(f'<a href="/rats/litters/{obj.year}/{obj.id}/csv" download class="button">CSV</a>')
 
-    get_csv.short_description = ''
+    get_csv.short_description = 'Родословная'
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         """Фильтр по полу при выборе отца и матери"""
