@@ -270,3 +270,21 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 1601876410648	Marionette	INFO	Stopped listening on port 60643
 console.error: services.settings: 
   main/whats-new-panel Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1603089855494	geckodriver	INFO	Listening on 127.0.0.1:50248
+1603089856506	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofileAjvJZ6"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1603089865006	Marionette	INFO	Listening on port 50255
+1603089880703	geckodriver	INFO	Listening on 127.0.0.1:50289
+1603089881709	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofileuCwNUO"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1603089885197	Marionette	INFO	Listening on port 50296
+1603089885221	Marionette	WARN	TLS certificate errors will be ignored for this session
+1603089886763	Marionette	INFO	Stopped listening on port 50296
+console.error: services.settings: 
+  main/cfr Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1603089977979	geckodriver	INFO	Listening on 127.0.0.1:50368
+1603089978989	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/z5/pg2_brc95fbfp67c66ty88pw0000gn/T/rust_mozprofileLGscvH"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1603089982942	Marionette	INFO	Listening on port 50375
+1603089983004	Marionette	WARN	TLS certificate errors will be ignored for this session
+1603089984012	Marionette	INFO	Stopped listening on port 50375

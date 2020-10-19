@@ -17,7 +17,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'rattery.apps.RatteryConfig',
-    'pdf_generator.apps.PdfGeneratorConfig',
     'api.apps.ApiConfig',
 
     'ckeditor',
