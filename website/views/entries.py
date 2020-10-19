@@ -15,7 +15,7 @@ def main_page(request):
 
 def about(request):
     """Страница с информацией о питомнике"""
-    entries = Entry.objects.filter(public=True).filter(topic='about')
+    entries = Entry.objects.filter(public=True).filter(topic='about').order_by('date')
     context = {'entries': entries}
     return render(request, 'website/about.html', context)
 
@@ -29,7 +29,7 @@ def archive(request):
 
 def contract(request):
     """Страница с договором на продажу крысенка"""
-    entries = Entry.objects.filter(public=True).filter(topic='contract')
+    entries = Entry.objects.filter(public=True).filter(topic='contract').order_by('date')
     context = {'entries': entries}
     return render(request, 'website/contract.html', context)
 
