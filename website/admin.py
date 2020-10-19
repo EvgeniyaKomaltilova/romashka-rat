@@ -39,6 +39,7 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'topic', 'date', 'public')
     list_display_links = ('title',)
     inlines = [ImageInline]
+    list_filter = ['topic',]
     search_fields = ('title',)
     form = EntryAdminForm
     save_on_top = True

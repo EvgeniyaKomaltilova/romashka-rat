@@ -288,3 +288,4 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 1603089982942	Marionette	INFO	Listening on port 50375
 1603089983004	Marionette	WARN	TLS certificate errors will be ignored for this session
 1603089984012	Marionette	INFO	Stopped listening on port 50375
+1603090376191	Marionette	INFO	Stopped listening on port 50255
