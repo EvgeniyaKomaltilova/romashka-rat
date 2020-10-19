@@ -105,6 +105,19 @@ STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../static/media')
 
+EMAIL_HOST = 'smtp.romashka-rat.ru'
+EMAIL_HOST_USER = 'admin@romashka-rat.ru'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'admin@romashka-rat.ru'
+DEFAULT_TO_EMAIL = 'romashka-rat@yandex.ru'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+if DEBUG == True:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "/static/uploads/"
 
