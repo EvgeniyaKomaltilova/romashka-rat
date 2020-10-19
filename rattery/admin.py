@@ -98,11 +98,6 @@ class LitterAdmin(admin.ModelAdmin):
     inlines = [RatToLitterInline]
     save_on_top = True
 
-    # def get_pdf(self, obj):
-    #     return mark_safe(f'<a href="/pdf/litter/{obj.id}" class="button">PDF</a>')
-    #
-    # get_pdf.short_description = ''
-
     def get_csv(self, obj):
         return mark_safe(f'<a href="/rats/litters/{obj.year}/{obj.id}/csv" download class="button">CSV</a>')
 

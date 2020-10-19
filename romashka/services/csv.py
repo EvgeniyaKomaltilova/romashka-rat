@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 
 def get_csv_pedigree(litter):
+    """Составляет родословную помета"""
     response = HttpResponse(content_type='text/csv')
     # response['Content-Disposition'] = f'attachment; filename="pedigree-{litter_id}.csv"'
     response['Content-Disposition'] = f'filename="pedigree-{litter.id}.csv"'
@@ -820,12 +821,13 @@ def get_csv_pedigree(litter):
                             f'Male: {litter.father.mother.father.full_name}',
                             f'Fem.: {litter.father.mother.father.mother.full_name}',
                         ])
-                    writer.writerow([
-                        '',
-                        f'Зав.: нет данных',
-                        f'Male: {litter.father.mother.father.full_name}',
-                        f'Fem.: {litter.father.mother.father.mother.full_name}',
-                    ])
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Зав.: нет данных',
+                            f'Male: {litter.father.mother.father.full_name}',
+                            f'Fem.: {litter.father.mother.father.mother.full_name}',
+                        ])
                     writer.writerow([
                         '',
                         f'Д.р.: {litter.father.mother.date_of_birth.strftime("%d.%m.%Y")}',
