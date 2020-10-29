@@ -9,8 +9,10 @@ from romashka.services.csv import get_csv_pedigree
 
 def available(request):
     """Страница со свободными крысятами"""
-    available_rats = Rat.objects.filter(public='True', status='available')
-    context = {'rats': available_rats}
+    available_rats = Rat.objects.filter(public='True', status='available').order_by('date_of_birth')
+    males = available_rats.filter(gender='male')
+    females = available_rats.filter(gender='female')
+    context = {'males': males, 'females': females}
     return render(request, 'rattery/available.html', context)
 
 

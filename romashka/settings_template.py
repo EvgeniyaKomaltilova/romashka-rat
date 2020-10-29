@@ -113,7 +113,7 @@ DEFAULT_TO_EMAIL = 'romashka-rat@yandex.ru'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
-if DEBUG == True:
+if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

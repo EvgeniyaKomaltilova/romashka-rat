@@ -15,7 +15,7 @@ def question_form(request):
             subject='На сайте питомника появился новый вопрос!',
             message='https://romashka-rat.ru/admin/website/question/',
             from_email='admin@romashka-rat.ru',
-            recipient_list=['splendidcat@yandex.ru', 'romashka-rat@yandex.ru'],
+            recipient_list=['romashka-rat@yandex.ru'],
         )
 
     return HttpResponseRedirect('../')
