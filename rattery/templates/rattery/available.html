@@ -15,8 +15,8 @@
 
 <div class="row">
 
-    <div class="col-md-6"  align="center" style="margin-top: 2em">
-        <p style="color: darkred">девочки</p>
+    <div class="col-md-6" style="margin-top: 2em">
+        <p align="center" style="color: darkred">девочки</p>
         {% for rat in females %}
             <div class="row container" style="margin-top: 1em; background-color: #fffff0;
                                                 box-shadow: #795014 1px 1px 20px -15px; padding: 20px">
@@ -40,11 +40,13 @@
                     </p>
                 </div>
             </div>
+        {% empty %}
+        <p>Нет свободных девочек.</p>
         {% endfor %}
     </div>
 
-    <div class="col-md-6"  align="center" style="margin-top: 2em">
-        <p style="color: darkblue">мальчики</p>
+    <div class="col-md-6" style="margin-top: 2em">
+        <p align="center" style="color: darkblue">мальчики</p>
         {% for rat in males %}
             <div class="row container" style="margin-top: 1em; background-color: #fffff0;
                                                 box-shadow: #795014 1px 1px 20px -15px; padding: 20px">
@@ -68,6 +70,8 @@
                     </p>
                 </div>
             </div>
+        {% empty %}
+        <p>Нет свободных мальчиков.</p>
         {% endfor %}
     </div>
 
