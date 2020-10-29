@@ -15,34 +15,8 @@
 
 <div class="row">
 
-    <div class="col-md-6">
-        {% for rat in males %}
-            <div class="row container" style="margin-top: 1em; background-color: #fffff0;
-                                                box-shadow: #795014 1px 1px 20px -15px; padding: 20px">
-                <div class="col-sm-5 col-md-4">
-                    {% if rat.main_photo %}
-                    <img src="/static{{ rat.main_photo }}" alt="photo" width="100%">
-                    {% else %}
-                    <img src="/static/images/default.jpg" alt="photo" width="100%">
-                    {% endif %}
-                </div>
-
-                <div class="col-xs-12 d-block d-sm-none" style="margin: 5px"></div>
-
-                <div class="col-sm-7 col-md-8">
-                    <p>
-                        <span class="{{rat.gender}}"><b><a href="{{ rat.url }}">{{ rat.name }}</a></b></span>
-                        <span>({{ rat.gender }})</span><br />
-                        <span>{{ rat.variety }}</span><br />
-                        <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
-                        <span style="color: green">{{ rat.status_based_on_gender }}</span>
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="col-md-6">
+    <div class="col-md-6"  align="center" style="margin-top: 2em">
+        <p style="color: darkred">девочки</p>
         {% for rat in females %}
             <div class="row container" style="margin-top: 1em; background-color: #fffff0;
                                                 box-shadow: #795014 1px 1px 20px -15px; padding: 20px">
@@ -69,6 +43,33 @@
         {% endfor %}
     </div>
 
+    <div class="col-md-6"  align="center" style="margin-top: 2em">
+        <p style="color: darkblue">мальчики</p>
+        {% for rat in males %}
+            <div class="row container" style="margin-top: 1em; background-color: #fffff0;
+                                                box-shadow: #795014 1px 1px 20px -15px; padding: 20px">
+                <div class="col-sm-5 col-md-4">
+                    {% if rat.main_photo %}
+                    <img src="/static{{ rat.main_photo }}" alt="photo" width="100%">
+                    {% else %}
+                    <img src="/static/images/default.jpg" alt="photo" width="100%">
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-12 d-block d-sm-none" style="margin: 5px"></div>
+
+                <div class="col-sm-7 col-md-8">
+                    <p>
+                        <span class="{{rat.gender}}"><b><a href="{{ rat.url }}">{{ rat.name }}</a></b></span>
+                        <span>({{ rat.gender }})</span><br />
+                        <span>{{ rat.variety }}</span><br />
+                        <span>{{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
+                        <span style="color: green">{{ rat.status_based_on_gender }}</span>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 </div>
 
