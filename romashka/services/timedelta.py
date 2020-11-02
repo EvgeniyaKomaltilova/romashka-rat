@@ -22,10 +22,8 @@ def _get_timedelta_as_string(seconds):
 
     if years == 0 and months == 0:
         return 'меньше месяца'
-    elif years == 0 and months != 0:
-        return _get_months_as_string(months)
     else:
-        return _get_years_as_string(years) + ' ' + _get_months_as_string(months)
+        return f'{_get_years_as_string(years)} {_get_months_as_string(months)}'
 
 
 def _count_years(seconds):
@@ -44,7 +42,9 @@ def _count_months(seconds):
 
 def _get_years_as_string(years):
     """Возвращает строку с количеством лет в правильной форме"""
-    if years == 1:
+    if years == 0:
+        return ''
+    elif years == 1:
         return f'{years} год'
     elif 2 <= years <= 4:
         return f'{years} года'
@@ -54,8 +54,10 @@ def _get_years_as_string(years):
 
 def _get_months_as_string(months):
     """Возвращает строку с количеством месяцев в правильной форме"""
-    if months == 1:
-        return f'{months} месяц'
+    if months == 0:
+        return ''
+    elif months == 1:
+            return f'{months} месяц'
     elif 2 <= months <= 4:
         return f'{months} месяца'
     else:

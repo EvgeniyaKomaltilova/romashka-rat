@@ -15,76 +15,94 @@
     </div>
     <div class="d-block d-md-none" style="margin: 5px"></div>
     <div class="col-md-8">
-        <h4 style="color: darkblue; margin: 5px; margin-left: 0px;">{{ rat.full_name }}</h4>
+        {% if rat.gender == 'male' %}
+            <h4 style="color: darkblue; margin: 5px; margin-left: 0px;">{{ rat.full_name }}</h4>
+        {% elif rat.gender == 'female' %}
+            <h4 style="color: darkred; margin: 5px; margin-left: 0px;">{{ rat.full_name }}</h4>
+        {% endif %}
         <p>
-            <span>Тип: {{ rat.variety }}</span><br />
+            <span>Тип: {{ rat.variety }}</span>
+            <br />
             {% if rat.gender == 'male' %}
-            <span>Пол: самец</span>
-            {% else %}
-            <span>Пол: самка</span>
-            {% endif %}
-            {% if rat.castrate %}
-            {% if rat.gender == 'male' %}
-            <span> (кастрирован)</span>
-            {% else %}
-            <span> (кастрирована)</span>
-            {% endif %}
+                <span>Пол: самец</span>
+                {% if rat.castrate %}
+                    <span> (кастрирован)</span>
+                {% endif %}
+            {% elif rat.gender == 'female' %}
+                <span>Пол: самка</span>
+                {% if rat.castrate %}
+                    <span> (кастрирована)</span>
+                {% endif %}
             {% endif %}
             <br />
-            {% if rat.title == 'champion' %}
-            <span>Титул: чемпион</span><br />
-            {% elif rat.title == 'grandchampion' %}
-            <span>Титул: грандчемпион</span><br />
-            {% endif %}
-            <span>Дата рождения: {{ rat.date_of_birth|date:'d.m.Y' }}</span><br />
-            {% if not rat.alive %}
-            {% if rat.date_of_death %}
-            <span>Дата смерти: {{ rat.date_of_death|date:'d.m.Y' }}</span><br />
-            <span>Продолжительность жизни: {{ rat.lifespan }}</span><br />
-            {% else %}
-            <span>Дата смерти: неизвестна</span><br />
-            {% endif %}
-            {% else %}
-            {% if not date_of_death %}
-            <span>Возраст: {{ rat.current_age }}</span><br />
-            {% endif %}
-            {% endif %}
-            {% if rat.breeder %}
-            <span>Заводчик: {{ rat.breeder.short_name }}, {{ rat.breeder.location.city }}</span><br />
-            {% else %}
-            <span>Заводчик: неизвестен</span><br />
-            {% endif %}
-            {% if rat.owner %}
-            <span>Владелец: {{ rat.owner.short_name }}, {{ rat.owner.location.city }}</span><br />
-            {% else %}
-            {% if not rat.status == 'у владельца' %}
-            <span>Владелец: пока нет</span><br />
-            {% else %}
-            <span>Владелец: неизвестен</span><br />
-            {% endif %}
-            {% endif %}
-            {% if rat.father and rat.mother %}
-            <span>Мать: <a style="color: darkred" href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
-            <span>({{ rat.mother.variety }})</span><br />
-            <span>Отец: <a style="color: darkblue" href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
-            <span>({{ rat.father.variety }})</span><br />
-            {% elif rat.father and not rat.mother %}
-            <span>Мать: неизвестна</span>
-            <span>Отец: <a style="color: darkblue" href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
-            <span>({{ rat.father.variety }})</span><br />
-            {% elif not rat.father and rat.mother %}
-            <span>Мать: <a style="color: darkred" href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
-            <span>({{ rat.mother.variety }})</span><br />
-            <span>Отец: неизвестен</span><br />
-            {% else %}
-            <span>Происхождение неизвестно.</span>
 
+            {% if rat.title == 'champion' %}
+                <span>Титул: чемпион</span>
+                <br />
+            {% elif rat.title == 'grandchampion' %}
+                <span>Титул: грандчемпион</span>
+                <br />
+            {% endif %}
+
+            <span>Дата рождения: {{ rat.date_of_birth|date:'d.m.Y' }}</span>
+            <br />
+
+            {% if not rat.alive %}
+                {% if rat.date_of_death %}
+                    <span>Дата смерти: {{ rat.date_of_death|date:'d.m.Y' }}</span>
+                    <br />
+                    <span>Продолжительность жизни: {{ rat.lifespan }}</span>
+                {% else %}
+                    <span>Дата смерти: неизвестна</span>
+                {% endif %}
+                <br />
+            {% else %}
+                <span>Возраст: {{ rat.current_age }}</span>
+                <br />
+            {% endif %}
+
+            {% if rat.breeder %}
+                <span>Заводчик: {{ rat.breeder.short_name }}, {{ rat.breeder.location.city }}</span>
+            {% else %}
+                <span>Заводчик: неизвестен</span>
+            {% endif %}
+            <br />
+
+            {% if rat.owner %}
+                <span>Владелец: {{ rat.owner.short_name }}, {{ rat.owner.location.city }}</span>
+            {% else %}
+                {% if not rat.status == 'у владельца' %}
+                    <span>Владелец: пока нет</span>
+                {% else %}
+                    <span>Владелец: неизвестен</span>
+                {% endif %}
+            {% endif %}
+            <br />
+
+            {% if rat.father and rat.mother %}
+                <span>Мать: <a style="color: darkred" href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
+                <span>({{ rat.mother.variety }})</span>
+                <br />
+                <span>Отец: <a style="color: darkblue" href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
+                <span>({{ rat.father.variety }})</span>
+            {% elif rat.father and not rat.mother %}
+                <span>Мать: неизвестна</span>
+                <span>Отец: <a style="color: darkblue" href="{{ rat.father.url }}">{{ rat.father.full_name }}</a> </span>
+                <span>({{ rat.father.variety }})</span>
+            {% elif not rat.father and rat.mother %}
+                <span>Мать: <a style="color: darkred" href="{{ rat.mother.url }}">{{ rat.mother.full_name }}</a> </span>
+                <span>({{ rat.mother.variety }})</span>
+                <br />
+                <span>Отец: неизвестен</span>
+            {% else %}
+                <span>Происхождение неизвестно.</span>
             {% endif %}
         </p>
     </div>
 </div>
 
                                 {# ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ #}
+
 <div class="row" style="margin-top: 1em;">
     {% if rat.information %}
     <div class="col-md-7" style="padding: 5px">
