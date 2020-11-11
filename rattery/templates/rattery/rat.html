@@ -71,10 +71,10 @@
             {% if rat.owner %}
                 <span>Владелец: {{ rat.owner.short_name }}, {{ rat.owner.location.city }}</span>
             {% else %}
-                {% if not rat.status == 'у владельца' %}
-                    <span>Владелец: пока нет</span>
-                {% else %}
+                {% if rat.status == 'owned' %}
                     <span>Владелец: неизвестен</span>
+                {% else %}
+                    <span>Владелец: пока нет</span>
                 {% endif %}
             {% endif %}
             <br />

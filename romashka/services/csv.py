@@ -46,14 +46,40 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.mother.mother.variety}',
                         f'{litter.mother.mother.mother.mother.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.mother.mother.owner} '
-                        f'({litter.mother.mother.mother.owner.location.city})',
-                        f'Вл.: {litter.mother.mother.mother.mother.owner} '
-                        f'({litter.mother.mother.mother.mother.owner.location.city})',
-                    ])
+                    if litter.mother.mother.mother.owner:
+                        if litter.mother.mother.mother.mother.owner:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.mother.mother.owner} '
+                                f'({litter.mother.mother.mother.owner.location.city})',
+                                f'Вл.: {litter.mother.mother.mother.mother.owner} '
+                                f'({litter.mother.mother.mother.mother.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.mother.mother.owner} '
+                                f'({litter.mother.mother.mother.owner.location.city})',
+                                f'Вл.:',
+                            ])
+                    elif litter.mother.mother.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.: {litter.mother.mother.mother.mother.owner} '
+                            f'({litter.mother.mother.mother.mother.owner.location.city})',
+                        ])
+
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.:',
+                        ])
                 else:
                     writer.writerow([
                         '',
@@ -67,13 +93,21 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.mother.mother.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.mother.mother.owner} '
-                        f'({litter.mother.mother.mother.owner.location.city})',
-                        '',
-                    ])
+                    if litter.mother.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.mother.mother.mother.owner} '
+                            f'({litter.mother.mother.mother.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
         else:
             writer.writerow([
                 '',
@@ -119,13 +153,38 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.mother.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.mother.mother.mother.father.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.mother.mother.owner} ({litter.mother.mother.owner.location.city})',
-                        '',
-                        f'Вл.: {litter.mother.mother.mother.father.owner} '
-                        f'({litter.mother.mother.mother.father.owner.location.city})',
-                    ])
+                    if litter.mother.mother.owner:
+                        if litter.mother.mother.mother.father.owner:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.mother.mother.owner} ({litter.mother.mother.owner.location.city})',
+                                '',
+                                f'Вл.: {litter.mother.mother.mother.father.owner} '
+                                f'({litter.mother.mother.mother.father.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.mother.mother.owner} ({litter.mother.mother.owner.location.city})',
+                                '',
+                                f'Вл.:',
+                            ])
+                    elif litter.mother.mother.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.: {litter.mother.mother.mother.father.owner} '
+                            f'({litter.mother.mother.mother.father.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.mother.mother.mother.breeder:
                         writer.writerow([
@@ -148,12 +207,20 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.mother.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.mother.mother.owner} ({litter.mother.mother.owner.location.city})',
-                        '',
-                        '',
-                    ])
+                    if litter.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.: {litter.mother.mother.owner} ({litter.mother.mother.owner.location.city})',
+                            '',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            '',
+                        ])
         else:
             writer.writerow([
                 '',
@@ -198,14 +265,39 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.mother.father.variety}',
                         f'{litter.mother.mother.father.mother.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.mother.father.owner} '
-                        f'({litter.mother.mother.father.owner.location.city})',
-                        f'Вл.: {litter.mother.mother.father.mother.owner} '
-                        f'({litter.mother.mother.father.mother.owner.location.city})',
-                    ])
+                    if litter.mother.mother.father.owner:
+                        if litter.mother.mother.father.mother.owner:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.mother.father.owner} '
+                                f'({litter.mother.mother.father.owner.location.city})',
+                                f'Вл.: {litter.mother.mother.father.mother.owner} '
+                                f'({litter.mother.mother.father.mother.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.mother.father.owner} '
+                                f'({litter.mother.mother.father.owner.location.city})',
+                                f'Вл.:',
+                            ])
+                    elif litter.mother.mother.father.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.: {litter.mother.mother.father.mother.owner} '
+                            f'({litter.mother.mother.father.mother.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.:',
+                        ])
                 else:
                     if litter.mother.mother.breeder:
                         writer.writerow([
@@ -227,13 +319,21 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.mother.father.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.mother.father.owner} '
-                        f'({litter.mother.mother.father.owner.location.city})',
-                        '',
-                    ])
+                    if litter.mother.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.mother.mother.father.owner} '
+                            f'({litter.mother.mother.father.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
         else:
             writer.writerow([
                 '',
@@ -279,13 +379,38 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.mother.father.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.mother.mother.father.father.variety}',
                     ])
-                    writer.writerow([
-                        f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.mother.father.father.owner} '
-                        f'({litter.mother.mother.father.father.owner.location.city})',
-                    ])
+                    if litter.mother.owner:
+                        if litter.mother.mother.father.father.owner:
+                            writer.writerow([
+                                f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.mother.father.father.owner} '
+                                f'({litter.mother.mother.father.father.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
+                                '',
+                                '',
+                                f'Вл.:',
+                            ])
+                    elif litter.mother.mother.father.father.owner:
+                        writer.writerow([
+                            f'Вл.:',
+                            '',
+                            '',
+                            f'Вл.: {litter.mother.mother.father.father.owner} '
+                            f'({litter.mother.mother.father.father.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            f'Вл.:',
+                            '',
+                            '',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.mother.mother.father.breeder:
                         writer.writerow([
@@ -308,12 +433,20 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.mother.father.date_of_birth.strftime("%d.%m.%Y")}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
-                        '',
-                        '',
-                        '',
-                    ])
+                    if litter.mother.owner:
+                        writer.writerow([
+                            f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
+                            '',
+                            '',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            f'Вл.:',
+                            '',
+                            '',
+                            '',
+                        ])
         else:
             writer.writerow([
                 f'Fem.: {litter.mother.full_name}',
@@ -327,12 +460,20 @@ def get_csv_pedigree(litter):
                 '',
                 'нет данных',
             ])
-            writer.writerow([
-                f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
-                '',
-                '',
-                '',
-            ])
+            if litter.mother.owner:
+                writer.writerow([
+                    f'Вл.: {litter.mother.owner} ({litter.mother.owner.location.city})',
+                    '',
+                    '',
+                    '',
+                ])
+            else:
+                writer.writerow([
+                    f'Вл.:',
+                    '',
+                    '',
+                    '',
+                ])
 
         # 5 мать - отец матери - М O М - М М О М
         if litter.mother.father:
@@ -358,14 +499,41 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.father.mother.variety}',
                         f'{litter.mother.father.mother.mother.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.father.mother.owner} '
-                        f'({litter.mother.father.mother.owner.location.city})',
-                        f'Вл.: {litter.mother.father.mother.mother.owner} '
-                        f'({litter.mother.father.mother.mother.owner.location.city})',
-                    ])
+                    if litter.mother.father.mother.owner:
+                        if litter.mother.father.mother.mother.owner:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.father.mother.owner} '
+                                f'({litter.mother.father.mother.owner.location.city})',
+                                f'Вл.: {litter.mother.father.mother.mother.owner} '
+                                f'({litter.mother.father.mother.mother.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.mother.father.mother.owner} '
+                                f'({litter.mother.father.mother.owner.location.city})',
+                                f'Вл.:',
+                            ])
+
+                    elif litter.mother.father.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.: {litter.mother.father.mother.mother.owner} '
+                            f'({litter.mother.father.mother.mother.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.mother.breeder:
                         writer.writerow([
@@ -387,13 +555,22 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.father.mother.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.father.mother.owner} '
-                        f'({litter.mother.father.mother.owner.location.city})',
-                        '',
-                    ])
+                    if litter.mother.father.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.mother.father.mother.owner} '
+                            f'({litter.mother.father.mother.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
+
         else:
             if litter.mother.breeder:
                 writer.writerow([
@@ -447,13 +624,41 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.father.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.mother.father.mother.father.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.mother.father.owner} ({litter.mother.father.owner.location.city})',
-                        '',
-                        f'Вл.: {litter.mother.father.mother.father.owner} '
-                        f'({litter.mother.father.mother.father.owner.location.city})',
-                    ])
+
+                    if litter.mother.father.owner:
+                        if litter.mother.father.mother.father.owner:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.mother.father.owner} ({litter.mother.father.owner.location.city})',
+                                '',
+                                f'Вл.: {litter.mother.father.mother.father.owner} '
+                                f'({litter.mother.father.mother.father.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.mother.father.owner} ({litter.mother.father.owner.location.city})',
+                                '',
+                                f'Вл.:',
+                            ])
+
+                    elif litter.mother.father.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.: {litter.mother.father.mother.father.owner} '
+                            f'({litter.mother.father.mother.father.owner.location.city})',
+                        ])
+
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.mother.father.mother.breeder:
                         writer.writerow([
@@ -476,12 +681,21 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.father.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.mother.father.owner} ({litter.mother.father.owner.location.city})',
-                        '',
-                        '',
-                    ])
+                    if litter.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.: {litter.mother.father.owner} ({litter.mother.father.owner.location.city})',
+                            '',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            '',
+                        ])
+
         else:
             writer.writerow([
                 '',
@@ -557,13 +771,22 @@ def get_csv_pedigree(litter):
                         f'{litter.mother.father.father.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.father.father.owner} '
-                        f'({litter.mother.father.father.owner.location.city})',
-                        '',
-                    ])
+                    if litter.mother.father.father.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.mother.father.father.owner} '
+                            f'({litter.mother.father.father.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: ',
+                            '',
+                        ])
+
         else:
             writer.writerow([
                 '',
@@ -609,13 +832,22 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.mother.father.father.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.mother.father.father.father.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        '',
-                        f'Вл.: {litter.mother.father.father.father.owner}'
-                        f'({litter.mother.father.father.father.owner.location.city})',
-                    ])
+                    if litter.mother.father.father.father.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            '',
+                            f'Вл.: {litter.mother.father.father.father.owner}'
+                            f'({litter.mother.father.father.father.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            '',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.mother.father.father.breeder:
                         writer.writerow([
@@ -682,14 +914,42 @@ def get_csv_pedigree(litter):
                         f'{litter.father.mother.mother.variety}',
                         f'{litter.father.mother.mother.mother.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.mother.mother.owner} '
-                        f'({litter.father.mother.mother.owner.location.city})',
-                        f'Вл.: {litter.father.mother.mother.mother.owner} '
-                        f'({litter.father.mother.mother.mother.owner.location.city})',
-                    ])
+                    if litter.father.mother.mother.owner:
+                        if litter.father.mother.mother.mother.owner:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.father.mother.mother.owner} '
+                                f'({litter.father.mother.mother.owner.location.city})',
+                                f'Вл.: {litter.father.mother.mother.mother.owner} '
+                                f'({litter.father.mother.mother.mother.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.father.mother.mother.owner} '
+                                f'({litter.father.mother.mother.owner.location.city})',
+                                f'Вл.:',
+                            ])
+
+                    elif litter.father.mother.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.: {litter.father.mother.mother.mother.owner} '
+                            f'({litter.father.mother.mother.mother.owner.location.city})',
+                        ])
+
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.:',
+                        ])
+
                 else:
                     writer.writerow([
                         '',
@@ -703,13 +963,22 @@ def get_csv_pedigree(litter):
                         f'{litter.father.mother.mother.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.mother.mother.owner} '
-                        f'({litter.father.mother.mother.owner.location.city})',
-                        '',
-                    ])
+                    if litter.father.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.father.mother.mother.owner} '
+                            f'({litter.father.mother.mother.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
+
         else:
             writer.writerow([
                 '',
@@ -755,13 +1024,40 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.mother.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.father.mother.mother.father.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.father.mother.owner} ({litter.father.mother.owner.location.city})',
-                        '',
-                        f'Вл.: {litter.father.mother.mother.father.owner} '
-                        f'({litter.father.mother.mother.father.owner.location.city})',
-                    ])
+
+                    if litter.father.mother.owner:
+                        if litter.father.mother.mother.father.owner:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.father.mother.owner} ({litter.father.mother.owner.location.city})',
+                                '',
+                                f'Вл.: {litter.father.mother.mother.father.owner} '
+                                f'({litter.father.mother.mother.father.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.father.mother.owner} ({litter.father.mother.owner.location.city})',
+                                '',
+                                f'Вл.:',
+                            ])
+
+                    elif litter.father.mother.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.: {litter.father.mother.mother.father.owner} '
+                            f'({litter.father.mother.mother.father.owner.location.city})',
+                        ])
+
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.:',
+                        ])
                 else:
                     if litter.father.mother.mother.breeder:
                         writer.writerow([
@@ -784,12 +1080,21 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.mother.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.father.mother.owner} ({litter.father.mother.owner.location.city})',
-                        '',
-                        '',
-                    ])
+                    if litter.father.mother.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.: {litter.father.mother.owner} ({litter.father.mother.owner.location.city})',
+                            '',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            '',
+                        ])
+
         else:
             writer.writerow([
                 '',
@@ -834,14 +1139,39 @@ def get_csv_pedigree(litter):
                         f'{litter.father.mother.father.variety}',
                         f'{litter.father.mother.father.mother.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.mother.father.owner} '
-                        f'({litter.father.mother.father.owner.location.city})',
-                        f'Вл.: {litter.father.mother.father.mother.owner} '
-                        f'({litter.father.mother.father.mother.owner.location.city})',
-                    ])
+                    if litter.father.mother.father.owner:
+                        if litter.father.mother.father.mother.owner:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.father.mother.father.owner} '
+                                f'({litter.father.mother.father.owner.location.city})',
+                                f'Вл.: {litter.father.mother.father.mother.owner} '
+                                f'({litter.father.mother.father.mother.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.father.mother.father.owner} '
+                                f'({litter.father.mother.father.owner.location.city})',
+                                f'Вл.:',
+                            ])
+                    elif litter.father.mother.father.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.: {litter.father.mother.father.mother.owner} '
+                            f'({litter.father.mother.father.mother.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.:',
+                        ])
                 else:
                     if litter.father.mother.breeder:
                         writer.writerow([
@@ -863,13 +1193,21 @@ def get_csv_pedigree(litter):
                         f'{litter.father.mother.father.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.mother.father.owner} '
-                        f'({litter.father.mother.father.owner.location.city})',
-                        '',
-                    ])
+                    if litter.father.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.father.mother.father.owner} '
+                            f'({litter.father.mother.father.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
         else:
             writer.writerow([
                 '',
@@ -915,13 +1253,37 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.mother.father.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.father.mother.father.father.variety}',
                     ])
-                    writer.writerow([
-                        f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
-                        '',
-                        '',
-                        f'Вл.: {litter.father.mother.father.father.owner} '
-                        f'({litter.father.mother.father.father.owner.location.city})',
-                    ])
+                    if litter.father.owner:
+                        if litter.father.mother.father.father.owner:
+                            writer.writerow([
+                                f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
+                                '',
+                                '',
+                                f'Вл.: {litter.father.mother.father.father.owner} '
+                                f'({litter.father.mother.father.father.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
+                                '',
+                                '',
+                                f'Вл.:',
+                            ])
+                    elif litter.father.mother.father.father.owner:
+                        writer.writerow([
+                            f'Вл.:',
+                            '',
+                            '',
+                            f'Вл.: {litter.father.mother.father.father.owner} '
+                            f'({litter.father.mother.father.father.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            f'Вл.:',
+                            '',
+                            '',
+                            f'Вл.:',
+                        ])
                 else:
                     if litter.father.mother.father.breeder:
                         writer.writerow([
@@ -944,12 +1306,20 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.mother.father.date_of_birth.strftime("%d.%m.%Y")}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
-                        '',
-                        '',
-                        '',
-                    ])
+                    if litter.father.owner:
+                        writer.writerow([
+                            f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
+                            '',
+                            '',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            f'Вл.:',
+                            '',
+                            '',
+                            '',
+                        ])
         else:
             writer.writerow([
                 f'Male: {litter.father.full_name}',
@@ -963,12 +1333,20 @@ def get_csv_pedigree(litter):
                 '',
                 'нет данных',
             ])
-            writer.writerow([
-                f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
-                '',
-                '',
-                '',
-            ])
+            if litter.father.owner:
+                writer.writerow([
+                    f'Вл.: {litter.father.owner} ({litter.father.owner.location.city})',
+                    '',
+                    '',
+                    '',
+                ])
+            else:
+                writer.writerow([
+                    f'Вл.:',
+                    '',
+                    '',
+                    '',
+                ])
 
         # 13 отец - отец отца - М O О - М М О О
         if litter.father.father:
@@ -994,14 +1372,42 @@ def get_csv_pedigree(litter):
                         f'{litter.father.father.mother.variety}',
                         f'{litter.father.father.mother.mother.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.father.mother.owner} '
-                        f'({litter.father.father.mother.owner.location.city})',
-                        f'Вл.: {litter.father.father.mother.mother.owner} '
-                        f'({litter.father.father.mother.mother.owner.location.city})',
-                    ])
+                    if litter.father.father.mother.owner:
+                        if litter.father.father.mother.mother.owner:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.father.father.mother.owner} '
+                                f'({litter.father.father.mother.owner.location.city})',
+                                f'Вл.: {litter.father.father.mother.mother.owner} '
+                                f'({litter.father.father.mother.mother.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                '',
+                                f'Вл.: {litter.father.father.mother.owner} '
+                                f'({litter.father.father.mother.owner.location.city})',
+                                f'Вл.:',
+                            ])
+
+                    elif litter.father.father.mother.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.: {litter.father.father.mother.mother.owner} '
+                            f'({litter.father.father.mother.mother.owner.location.city})',
+                        ])
+
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.father.breeder:
                         writer.writerow([
@@ -1023,13 +1429,22 @@ def get_csv_pedigree(litter):
                         f'{litter.father.father.mother.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.father.mother.owner} '
-                        f'({litter.father.father.mother.owner.location.city})',
-                        '',
-                    ])
+                    if litter.father.father.mother.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.father.father.mother.owner} '
+                            f'({litter.father.father.mother.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
+
         else:
             if litter.father.breeder:
                 writer.writerow([
@@ -1085,13 +1500,40 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.father.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.father.father.mother.father.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.father.father.owner} ({litter.father.father.owner.location.city})',
-                        '',
-                        f'Вл.: {litter.father.father.mother.father.owner} '
-                        f'({litter.father.father.mother.father.owner.location.city})',
-                    ])
+                    if litter.father.father.owner:
+                        if litter.father.father.mother.father.owner:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.father.father.owner} ({litter.father.father.owner.location.city})',
+                                '',
+                                f'Вл.: {litter.father.father.mother.father.owner} '
+                                f'({litter.father.father.mother.father.owner.location.city})',
+                            ])
+                        else:
+                            writer.writerow([
+                                '',
+                                f'Вл.: {litter.father.father.owner} ({litter.father.father.owner.location.city})',
+                                '',
+                                f'Вл.:',
+                            ])
+
+                    elif litter.father.father.mother.father.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.: {litter.father.father.mother.father.owner} '
+                            f'({litter.father.father.mother.father.owner.location.city})',
+                        ])
+
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.father.father.mother.breeder:
                         writer.writerow([
@@ -1115,12 +1557,20 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.father.mother.date_of_birth.strftime("%d.%m.%Y")}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        f'Вл.: {litter.father.father.owner} ({litter.father.father.owner.location.city})',
-                        '',
-                        '',
-                    ])
+                    if litter.father.father.owner:
+                        writer.writerow([
+                            '',
+                            f'Вл.: {litter.father.father.owner} ({litter.father.father.owner.location.city})',
+                            '',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            f'Вл.:',
+                            '',
+                            '',
+                        ])
         else:
             writer.writerow([
                 '',
@@ -1196,13 +1646,21 @@ def get_csv_pedigree(litter):
                         f'{litter.father.father.father.variety}',
                         'нет данных',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        f'Вл.: {litter.father.father.father.owner} '
-                        f'({litter.father.father.father.owner.location.city})',
-                        '',
-                    ])
+                    if litter.father.father.father.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.: {litter.father.father.father.owner} '
+                            f'({litter.father.father.father.owner.location.city})',
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            f'Вл.:',
+                            '',
+                        ])
         else:
             writer.writerow([
                 '',
@@ -1248,13 +1706,22 @@ def get_csv_pedigree(litter):
                         f'Д.р.: {litter.father.father.father.date_of_birth.strftime("%d.%m.%Y")}',
                         f'{litter.father.father.father.father.variety}',
                     ])
-                    writer.writerow([
-                        '',
-                        '',
-                        '',
-                        f'Вл.: {litter.father.father.father.father.owner}'
-                        f'({litter.father.father.father.father.owner.location.city})',
-                    ])
+                    if litter.father.father.father.father.owner:
+                        writer.writerow([
+                            '',
+                            '',
+                            '',
+                            f'Вл.: {litter.father.father.father.father.owner}'
+                            f'({litter.father.father.father.father.owner.location.city})',
+                        ])
+                    else:
+                        writer.writerow([
+                            '',
+                            '',
+                            '',
+                            f'Вл.:',
+                        ])
+
                 else:
                     if litter.father.father.father.breeder:
                         writer.writerow([
