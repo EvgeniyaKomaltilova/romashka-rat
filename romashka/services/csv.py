@@ -573,26 +573,26 @@ def get_csv_pedigree(litter):
                     writer.writerow([
                         f'Зав.: {litter.mother.breeder} ({litter.mother.breeder.location.city})',
                         '',
-                        f'Fem.: {litter.mother.father.mother.full_name}',
+                        '',
                         '',
                     ])
                 else:
                     writer.writerow([
                         f'Зав.: нет данных',
                         '',
-                        f'Fem.: {litter.mother.father.mother.full_name}',
+                        '',
                         '',
                     ])
                 writer.writerow([
                     f'Д.р.: {litter.mother.date_of_birth.strftime("%d.%m.%Y")}',
                     '',
-                    f'{litter.mother.father.mother.variety}',
+                    '',
                     'нет данных',
                 ])
                 writer.writerow([
                         '',
                         '',
-                        f'Вл.:',
+                        f'нет данных',
                         '',
                     ])
 
