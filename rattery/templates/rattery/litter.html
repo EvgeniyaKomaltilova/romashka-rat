@@ -87,7 +87,7 @@
                     <p style="color: red">{{ child.status_based_on_gender }}</p>
                     {% endif %}
                     {% if child.status == 'owned' and child.owner %}
-                    <p>Владелец: {{ child.owner.short_name }} (child.owner.location.city)</p>
+                    <p>Владелец: {{ child.owner.short_name }} ({{child.owner.location.city}})</p>
                     {% endif %}
                 </div>
             </div>
