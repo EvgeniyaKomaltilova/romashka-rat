@@ -2,6 +2,16 @@
 
 {% block content %}
 
+{% if rats %}
+<div class="container d-none d-sm-block" style="margin-bottom: 1em; padding-top: 1em">
+    <h4>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</h4>
+</div>
+<div class="container d-block d-sm-none" style="margin-bottom: 1em; padding-top: 1em">
+    <p><b>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</b></p>
+</div>
+
+        {% endif %}
+
 <div class="container" style="text-align: center; margin-bottom: 2em">
     <h4>РОЖДЕННЫЕ ПОМЕТЫ</h4>
 </div>

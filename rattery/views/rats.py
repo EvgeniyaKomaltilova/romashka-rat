@@ -48,7 +48,8 @@ def litters(request, litter_year):
     for litter in Litter.objects.order_by('date_of_birth'):
         if litter.year not in litter_years:
             litter_years.append(litter.year)
-    context = {'litters': litters_list, 'years': litter_years}
+    available_rats = Rat.objects.filter(public='True').filter(status='available')
+    context = {'litters': litters_list, 'years': litter_years, 'rats': available_rats}
     return render(request, 'rattery/litters.html', context)
 
 
