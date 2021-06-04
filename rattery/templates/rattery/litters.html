@@ -3,11 +3,11 @@
 {% block content %}
 
 {% if rats %}
-<div class="container d-none d-sm-block" style="margin-bottom: 1em; padding-top: 1em">
-    <h4>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</h4>
+<div class="container d-none d-sm-block" style="text-align: center; margin-bottom: 1em; padding-top: 1em">
+    <h4><a href="{% url 'available' %}">СВОБОДНЫЕ КРЫСЯТА</a></h4>
 </div>
-<div class="container d-block d-sm-none" style="margin-bottom: 1em; padding-top: 1em">
-    <p><b>У нас есть <a href="{% url 'available' %}">свободные крысята</a>!</b></p>
+<div class="container d-block d-sm-none" style="text-align: center; margin-bottom: 1em; padding-top: 1em">
+    <p><b><a href="{% url 'available' %}">СВОБОДНЫЕ КРЫСЯТА</a></b></p>
 </div>
 
         {% endif %}
